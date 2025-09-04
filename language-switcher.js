@@ -47,7 +47,7 @@ class LanguageSwitcher {
             this.loadCzechInterface();
             this.loadCzechConverter();
         } else {
-            this.loadEnglishInterface();
+            // For English, load converter first, then interface
             this.loadEnglishConverter();
         }
     }
@@ -152,8 +152,10 @@ class LanguageSwitcher {
         const script = document.createElement('script');
         script.src = 'converter-en.js';
         script.onload = () => {
-            // Create English instance
+            // Create English instance first
             window.converter = new UnitConverter(); 
+            // Then update interface after converter is ready
+            this.loadEnglishInterface();
         };
         document.body.appendChild(script);
     }
