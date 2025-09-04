@@ -137,9 +137,16 @@ class LanguageSwitcher {
             window.UnitConverterEN = false;
         }
         
-        // Reinitialize Czech converter (from converter.js)
+        // Ensure Czech converter is initialized
         if (window.UnitConverter) {
             window.converter = new UnitConverter();
+        } else {
+            // If UnitConverter class is not available, wait a bit
+            setTimeout(() => {
+                if (window.UnitConverter) {
+                    window.converter = new UnitConverter();
+                }
+            }, 50);
         }
     }
     
