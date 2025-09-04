@@ -29,7 +29,7 @@ class UnitConverter {
                     'mi': { name: 'mile', factor: 1609.344 },
                     'nmi': { name: 'nautical mile', factor: 1852 },
                     
-                    // Astronomical
+                    // Astronomical  
                     'au': { name: 'astronomical unit', factor: 149597870700 },
                     'ly': { name: 'light year', factor: 9460730472580800 },
                     

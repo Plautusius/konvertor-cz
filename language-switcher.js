@@ -86,6 +86,10 @@ class LanguageSwitcher {
         // Footer
         document.getElementById('footer-text').textContent = '© 2025 Konvertor.cz - Bezplatný převodník jednotek';
         document.getElementById('footer-subtitle').textContent = 'Podporováno reklamou • Vytvořeno s láskou pro české uživatele';
+        
+        // Clear input value
+        document.getElementById('input-value').value = '';
+        document.getElementById('output-value').value = '';
     }
     
     loadEnglishInterface() {
@@ -120,6 +124,10 @@ class LanguageSwitcher {
         // Footer
         document.getElementById('footer-text').textContent = '© 2025 Konvertor.cz - Free Unit Converter';
         document.getElementById('footer-subtitle').textContent = 'Supported by ads • Made with love for global users';
+        
+        // Clear input value
+        document.getElementById('input-value').value = '';
+        document.getElementById('output-value').value = '';
     }
     
     loadCzechConverter() {
@@ -135,19 +143,19 @@ class LanguageSwitcher {
     }
     
     loadEnglishConverter() {
-        // Dynamically load English converter
-        if (!window.UnitConverterEN) {
-            const script = document.createElement('script');
-            script.src = 'converter-en.js';
-            script.onload = () => {
-                // Create English instance
-                window.converter = new UnitConverter(); 
-            };
-            document.body.appendChild(script);
-        } else {
-            // English converter already loaded, create new instance
-            window.converter = new UnitConverter();
+        // Always reload the English converter to ensure fresh instance
+        const existingScript = document.querySelector('script[src="converter-en.js"]');
+        if (existingScript) {
+            existingScript.remove();
         }
+        
+        const script = document.createElement('script');
+        script.src = 'converter-en.js';
+        script.onload = () => {
+            // Create English instance
+            window.converter = new UnitConverter(); 
+        };
+        document.body.appendChild(script);
     }
     
     updateMetaTags(lang) {
