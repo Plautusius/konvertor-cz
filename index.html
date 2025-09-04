@@ -98,9 +98,9 @@
         
         .conversion-row {
             display: grid;
-            grid-template-columns: 1fr 50px 1fr;
+            grid-template-columns: 1fr 60px 1fr;
             gap: 15px;
-            align-items: end;
+            align-items: stretch;
             margin-bottom: 20px;
         }
         
@@ -152,13 +152,14 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             cursor: pointer;
             font-size: 18px;
             transition: all 0.3s ease;
             align-self: end;
-            margin-bottom: 2px;
+            justify-self: center;
+            margin-bottom: 0px;
         }
         
         .swap-btn:hover {
@@ -287,7 +288,7 @@
                     <div class="input-group">
                         <label for="input-value">Hodnota</label>
                         <div class="input-wrapper">
-                            <input type="number" id="input-value" placeholder="Zadejte hodnotu" step="any">
+                            <input type="number" id="input-value" placeholder="Zadejte číslo" step="any">
                             <select id="from-unit">
                                 <!-- Jednotky se naplní JavaScriptem -->
                             </select>
@@ -299,7 +300,7 @@
                     <div class="input-group">
                         <label for="output-value">Výsledek</label>
                         <div class="input-wrapper">
-                            <input type="number" id="output-value" placeholder="Výsledek" readonly>
+                            <input type="number" id="output-value" placeholder="Výsledek převodu" readonly>
                             <select id="to-unit">
                                 <!-- Jednotky se naplní JavaScriptem -->
                             </select>
