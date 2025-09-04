@@ -154,12 +154,36 @@ class LanguageSwitcher {
         script.src = 'converter-en.js';
         const self = this;
         script.onload = () => {
+            // Remove old event listeners by cloning elements
+            self.removeOldEventListeners();
             // Create English instance first
             window.converter = new UnitConverter(); 
             // Then update interface after converter is ready
             self.loadEnglishInterface();
         };
         document.body.appendChild(script);
+    }
+    
+    removeOldEventListeners() {
+        // Clone elements to remove all event listeners
+        const elementsToClone = [
+            'input-value',
+            'from-unit', 
+            'to-unit',
+            'swap-btn'
+        ];
+        
+        elementsToClone.forEach(id => {
+            const oldElement = document.getElementById(id);
+            const newElement = oldElement.cloneNode(true);
+            oldElement.parentNode.replaceChild(newElement, oldElement);
+        });
+        
+        // Also clone category buttons
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            const newBtn = btn.cloneNode(true);
+            btn.parentNode.replaceChild(newBtn, btn);
+        });
     }
     
     updateMetaTags(lang) {
