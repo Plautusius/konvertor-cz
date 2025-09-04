@@ -139,6 +139,8 @@ class LanguageSwitcher {
         // Reinitialize Czech converter (from converter.js)
         if (window.UnitConverter) {
             window.converter = new UnitConverter();
+            // Set default Czech text
+            document.getElementById('result-display').textContent = 'Zadejte hodnotu pro převod';
         }
     }
     
