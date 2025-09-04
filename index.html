@@ -97,16 +97,16 @@
         }
         
         .conversion-row {
-            display: flex;
-            align-items: end;
+            display: grid;
+            grid-template-columns: calc(50% - 30px) auto calc(50% - 30px);
             gap: 15px;
+            align-items: end;
             margin-bottom: 20px;
         }
         
         .input-group {
             display: flex;
             flex-direction: column;
-            flex: 1;
         }
         
         .input-group label {
@@ -150,10 +150,10 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
             transition: all 0.3s ease;
         }
         
