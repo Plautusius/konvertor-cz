@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta id="page-description" name="description" content="Bezplatný převodník měřicích jednotek - délka, hmotnost, objem, teplota, rychlost, tlak, plocha, energie. České i mezinárodní jednotky včetně astronomických a historických.">
-    <meta id="page-keywords" name="keywords" content="převod jednotek, převodník, délka, hmotnost, objem, teplota, palce na centimetry, libry na kilogramy, hektar na ary, kWh na jouly, rychlost světla">
-    <title id="page-title">Konvertor.cz - Převodník jednotek | Bezplatný online kalkulátor</title>
+    <meta name="description" content="Bezplatný převodník měřicích jednotek - délka, hmotnost, objem, teplota, rychlost, tlak, plocha, energie. České i mezinárodní jednotky včetně astronomických a historických.">
+    <meta name="keywords" content="převod jednotek, převodník, délka, hmotnost, objem, teplota, palce na centimetry, libry na kilogramy, hektar na ary, kWh na jouly, rychlost světla">
+    <title>Konvertor.cz - Převodník jednotek | Bezplatný online kalkulátor</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#3498db">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -293,30 +293,26 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="lang-switcher">
-                <button class="lang-btn active" id="lang-cs">🇨🇿 CZ</button>
-                <button class="lang-btn" id="lang-en">🇺🇸 EN</button>
-            </div>
-            <h1 id="main-title">Konvertor.cz</h1>
-            <p id="main-subtitle">Rychlý a přesný převod všech měřicích jednotek</p>
+            <h1>Konvertor.cz</h1>
+            <p>Rychlý a přesný převod všech měřicích jednotek</p>
         </div>
         
         <div class="content">
             <div class="category-selector">
-                <div class="category-btn active" data-category="length" id="cat-length">Délka</div>
-                <div class="category-btn" data-category="weight" id="cat-weight">Hmotnost</div>
-                <div class="category-btn" data-category="volume" id="cat-volume">Objem</div>
-                <div class="category-btn" data-category="temperature" id="cat-temperature">Teplota</div>
-                <div class="category-btn" data-category="speed" id="cat-speed">Rychlost</div>
-                <div class="category-btn" data-category="pressure" id="cat-pressure">Tlak</div>
-                <div class="category-btn" data-category="area" id="cat-area">Plocha</div>
-                <div class="category-btn" data-category="energy" id="cat-energy">Energie</div>
+                <div class="category-btn active" data-category="length">Délka</div>
+                <div class="category-btn" data-category="weight">Hmotnost</div>
+                <div class="category-btn" data-category="volume">Objem</div>
+                <div class="category-btn" data-category="temperature">Teplota</div>
+                <div class="category-btn" data-category="speed">Rychlost</div>
+                <div class="category-btn" data-category="pressure">Tlak</div>
+                <div class="category-btn" data-category="area">Plocha</div>
+                <div class="category-btn" data-category="energy">Energie</div>
             </div>
             
             <div class="converter-section">
                 <div class="conversion-row">
                     <div class="input-group">
-                        <label for="input-value" id="label-input">Hodnota</label>
+                        <label for="input-value">Hodnota</label>
                         <div class="input-wrapper">
                             <input type="number" id="input-value" placeholder="Zadejte číslo" step="any">
                             <select id="from-unit">
@@ -328,7 +324,7 @@
                     <button class="swap-btn" id="swap-btn">⇄</button>
                     
                     <div class="input-group">
-                        <label for="output-value" id="label-output">Výsledek</label>
+                        <label for="output-value">Výsledek</label>
                         <div class="input-wrapper">
                             <input type="number" id="output-value" placeholder="Výsledek převodu" readonly>
                             <select id="to-unit">
@@ -339,7 +335,7 @@
                 </div>
                 
                 <div class="result-display" id="result-display">
-                    <!-- Text will be set by JavaScript -->
+                    Zadejte hodnotu pro převod
                 </div>
             </div>
             
@@ -356,12 +352,11 @@
         </div>
         
         <div class="footer">
-            <p id="footer-text">&copy; 2025 Konvertor.cz - Bezplatný převodník jednotek</p>
-            <p id="footer-subtitle">Podporováno reklamou • Vytvořeno s láskou pro české uživatele</p>
+            <p>&copy; 2025 Konvertor.cz - Bezplatný převodník jednotek</p>
+            <p>Podporováno reklamou • Vytvořeno s láskou pro české uživatele</p>
         </div>
     </div>
     
     <script src="converter.js"></script>
-    <script src="language-switcher.js"></script>
 </body>
 </html>

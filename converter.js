@@ -429,4 +429,7 @@ class UnitConverter {
     }
 }
 
-// Inicializace bude řízena language-switcherem
+// Inicializace po načtení stránky
+document.addEventListener('DOMContentLoaded', () => {
+    window.converter = new UnitConverter();
+});
