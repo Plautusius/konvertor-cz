@@ -8,7 +8,10 @@ class LanguageSwitcher {
     
     init() {
         this.bindEvents();
-        this.loadLanguage(this.currentLanguage);
+        // Don't load language on init if converter already exists
+        if (!window.converter) {
+            this.loadLanguage(this.currentLanguage);
+        }
     }
     
     bindEvents() {
@@ -120,36 +123,26 @@ class LanguageSwitcher {
     }
     
     loadCzechConverter() {
-        // Remove existing converter script
-        this.removeExistingScript();
-        
-        // Load Czech converter
-        const script = document.createElement('script');
-        script.src = 'converter.js';
-        script.onload = () => {
-            // Converter will auto-initialize
-        };
-        document.head.appendChild(script);
+        // Ensure Czech converter is properly initialized
+        if (window.UnitConverter && !window.converter) {
+            window.converter = new UnitConverter();
+        }
     }
     
     loadEnglishConverter() {
-        // Remove existing converter script
-        this.removeExistingScript();
-        
-        // Load English converter
-        const script = document.createElement('script');
-        script.src = 'converter-en.js';
-        script.onload = () => {
-            // Converter will auto-initialize
-        };
-        document.head.appendChild(script);
-    }
-    
-    removeExistingScript() {
-        const existingScripts = document.querySelectorAll('script[src*="converter"]');
-        existingScripts.forEach(script => {
-            script.remove();
-        });
+        // Dynamically load English converter
+        if (!window.UnitConverterEN) {
+            const script = document.createElement('script');
+            script.src = 'converter-en.js';
+            script.onload = () => {
+                // Create new English converter instance
+                window.converter = new UnitConverter(); 
+            };
+            document.body.appendChild(script);
+        } else {
+            // English converter already loaded, create new instance
+            window.converter = new UnitConverter();
+        }
     }
     
     updateMetaTags(lang) {
@@ -167,5 +160,8 @@ class LanguageSwitcher {
 
 // Initialize language switcher
 document.addEventListener('DOMContentLoaded', () => {
-    new LanguageSwitcher();
+    // Wait a moment for converter.js to initialize
+    setTimeout(() => {
+        new LanguageSwitcher();
+    }, 100);
 });
