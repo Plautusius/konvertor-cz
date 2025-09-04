@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bezplatný převodník měřicích jednotek - délka, hmotnost, objem, teplota, rychlost, tlak, plocha, energie. České i mezinárodní jednotky včetně astronomických a historických.">
+    <meta name="keywords" content="převod jednotek, převodník, délka, hmotnost, objem, teplota, palce na centimetry, libry na kilogramy, hektar na ary, kWh na jouly, rychlost světla">
+    <title>Konvertor.cz - Převodník jednotek | Bezplatný online kalkulátor</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Konvertor.cz">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .category-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .category-btn {
+            padding: 15px 10px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .category-btn:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+        
+        .category-btn.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .converter-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .conversion-row {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: end;
+            margin-bottom: 20px;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .input-wrapper {
+            display: flex;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+        }
+        
+        .input-wrapper input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+        
+        .input-wrapper select {
+            padding: 12px;
+            border: none;
+            outline: none;
+            background: #f8f9fa;
+            font-size: 14px;
+            min-width: 100px;
+            cursor: pointer;
+        }
+        
+        .swap-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .swap-btn:hover {
+            background: #2980b9;
+            transform: rotate(180deg);
+        }
+        
+        .result-display {
+            background: white;
+            border: 2px solid #27ae60;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #27ae60;
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .quick-converts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .quick-convert-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-convert-card:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+        
+        /* AdSense prostor */
+        .adsense-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .adsense-placeholder {
+            background: #e9ecef;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        
+        /* Mobilní optimalizace */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .conversion-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .swap-btn {
+                justify-self: center;
+                transform: rotate(90deg);
+            }
+            
+            .category-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Konvertor.cz</h1>
+            <p>Rychlý a přesný převod všech měřicích jednotek</p>
+        </div>
+        
+        <div class="content">
+            <div class="category-selector">
+                <div class="category-btn active" data-category="length">Délka</div>
+                <div class="category-btn" data-category="weight">Hmotnost</div>
+                <div class="category-btn" data-category="volume">Objem</div>
+                <div class="category-btn" data-category="temperature">Teplota</div>
+                <div class="category-btn" data-category="speed">Rychlost</div>
+                <div class="category-btn" data-category="pressure">Tlak</div>
+                <div class="category-btn" data-category="area">Plocha</div>
+                <div class="category-btn" data-category="energy">Energie</div>
+            </div>
+            
+            <div class="converter-section">
+                <div class="conversion-row">
+                    <div class="input-group">
+                        <label for="input-value">Hodnota</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="input-value" placeholder="Zadejte hodnotu" step="any">
+                            <select id="from-unit">
+                                <!-- Jednotky se naplní JavaScriptem -->
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button class="swap-btn" id="swap-btn">⇄</button>
+                    
+                    <div class="input-group">
+                        <label for="output-value">Výsledek</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="output-value" placeholder="Výsledek" readonly>
+                            <select id="to-unit">
+                                <!-- Jednotky se naplní JavaScriptem -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-display" id="result-display">
+                    Zadejte hodnotu pro převod
+                </div>
+            </div>
+            
+            <!-- Google AdSense prostor -->
+            <div class="adsense-container">
+                <div class="adsense-placeholder">
+                    Místo pro Google AdSense reklamu (728×90)
+                </div>
+            </div>
+            
+            <div class="quick-converts" id="quick-converts">
+                <!-- Rychlé převody se naplní JavaScriptem -->
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 Konvertor.cz - Bezplatný převodník jednotek</p>
+            <p>Podporováno reklamou • Vytvořeno s láskou pro české uživatele</p>
+        </div>
+    </div>
+    
+    <script src="converter.js"></script>
+</body>
+</html>
