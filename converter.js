@@ -15,9 +15,9 @@ class UnitConverter {
                     // Metrické jednotky
                     'nm': { name: 'nanometr', factor: 0.000000001 },
                     'μm': { name: 'mikrometr', factor: 0.000001 },
-                    'mm': { name: 'milimetr', factor: 0.001 },
-                    'cm': { name: 'centimetr', factor: 0.01 },
-                    'dm': { name: 'decimetr', factor: 0.1 },
+                    'mm': { name: 'mm', factor: 0.001 },
+                    'cm': { name: 'cm', factor: 0.01 },
+                    'dm': { name: 'dm', factor: 0.1 },
                     'm': { name: 'metr', factor: 1 },
                     'km': { name: 'kilometr', factor: 1000 },
                     

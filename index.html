@@ -132,13 +132,17 @@
         }
         
         .input-wrapper select {
-            padding: 12px;
+            padding: 12px 8px;
             border: none;
             outline: none;
             background: #f8f9fa;
-            font-size: 14px;
-            min-width: 100px;
+            font-size: 13px;
+            min-width: 120px;
+            max-width: 140px;
             cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .swap-btn {
