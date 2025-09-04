@@ -98,9 +98,9 @@
         
         .conversion-row {
             display: grid;
-            grid-template-columns: 1fr 60px 1fr;
-            gap: 15px;
-            align-items: stretch;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: end;
             margin-bottom: 20px;
         }
         
@@ -139,12 +139,10 @@
             outline: none;
             background: #f8f9fa;
             font-size: 13px;
-            width: 110px;
+            min-width: 90px;
+            max-width: 110px;
             flex-shrink: 0;
             cursor: pointer;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
         
         .swap-btn {
@@ -152,14 +150,11 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 16px;
             transition: all 0.3s ease;
-            align-self: end;
-            justify-self: center;
-            margin-bottom: 0px;
         }
         
         .swap-btn:hover {
