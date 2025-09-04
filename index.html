@@ -363,14 +363,5 @@
     
     <script src="converter.js"></script>
     <script src="language-switcher.js"></script>
-    <script>
-        // Initialize converter after DOM and scripts are loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            // Create initial converter if not already created by language switcher
-            if (!window.converter) {
-                window.converter = new UnitConverter();
-            }
-        });
-    </script>
 </body>
 </html>

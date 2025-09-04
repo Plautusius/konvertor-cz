@@ -8,10 +8,8 @@ class LanguageSwitcher {
     
     init() {
         this.bindEvents();
-        // Don't load language on init if converter already exists
-        if (!window.converter) {
-            this.loadLanguage(this.currentLanguage);
-        }
+        // Always initialize Czech language on startup
+        this.loadLanguage(this.currentLanguage);
     }
     
     bindEvents() {
@@ -138,8 +136,10 @@ class LanguageSwitcher {
             window.UnitConverterEN = false;
         }
         
-        // Reinitialize Czech converter
-        window.converter = new UnitConverter();
+        // Reinitialize Czech converter (from converter.js)
+        if (window.UnitConverter) {
+            window.converter = new UnitConverter();
+        }
     }
     
     loadEnglishConverter() {
