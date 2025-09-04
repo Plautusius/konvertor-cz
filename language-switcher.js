@@ -123,9 +123,10 @@ class LanguageSwitcher {
         document.getElementById('footer-text').textContent = '© 2025 Konvertor.cz - Free Unit Converter';
         document.getElementById('footer-subtitle').textContent = 'Supported by ads • Made with love for global users';
         
-        // Clear input value
+        // Clear input values and set English result text
         document.getElementById('input-value').value = '';
         document.getElementById('output-value').value = '';
+        document.getElementById('result-display').textContent = 'Enter a value to convert';
     }
     
     loadCzechConverter() {
@@ -139,8 +140,6 @@ class LanguageSwitcher {
         // Reinitialize Czech converter (from converter.js)
         if (window.UnitConverter) {
             window.converter = new UnitConverter();
-            // Set default Czech text
-            document.getElementById('result-display').textContent = 'Zadejte hodnotu pro převod';
         }
     }
     
@@ -153,11 +152,12 @@ class LanguageSwitcher {
         
         const script = document.createElement('script');
         script.src = 'converter-en.js';
+        const self = this;
         script.onload = () => {
             // Create English instance first
             window.converter = new UnitConverter(); 
             // Then update interface after converter is ready
-            this.loadEnglishInterface();
+            self.loadEnglishInterface();
         };
         document.body.appendChild(script);
     }
