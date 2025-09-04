@@ -173,8 +173,5 @@ class LanguageSwitcher {
 
 // Initialize language switcher
 document.addEventListener('DOMContentLoaded', () => {
-    // Wait a moment for converter.js to initialize
-    setTimeout(() => {
-        new LanguageSwitcher();
-    }, 100);
+    new LanguageSwitcher();
 });
