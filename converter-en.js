@@ -1,4 +1,5 @@
 // Unit Converter - English Version
+window.UnitConverterEN = true;
 class UnitConverter {
     constructor() {
         this.currentCategory = 'length';
@@ -79,7 +80,7 @@ class UnitConverter {
                     'm3': { name: 'm³', factor: 1000 },
                     
                     // Imperial
-                    'fl_oz': { name: 'fl. ounce', factor: 0.0295735 },
+                    'fl_oz': { name: 'fluid ounce', factor: 0.0295735 },
                     'cup': { name: 'cup', factor: 0.236588 },
                     'pt': { name: 'pint', factor: 0.473176 },
                     'qt': { name: 'quart', factor: 0.946353 },

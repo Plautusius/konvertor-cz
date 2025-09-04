@@ -123,10 +123,15 @@ class LanguageSwitcher {
     }
     
     loadCzechConverter() {
-        // Ensure Czech converter is properly initialized
-        if (window.UnitConverter && !window.converter) {
-            window.converter = new UnitConverter();
+        // Remove any existing English script
+        const existingEnScript = document.querySelector('script[src="converter-en.js"]');
+        if (existingEnScript) {
+            existingEnScript.remove();
+            window.UnitConverterEN = false;
         }
+        
+        // Reinitialize Czech converter
+        window.converter = new UnitConverter();
     }
     
     loadEnglishConverter() {
@@ -135,7 +140,7 @@ class LanguageSwitcher {
             const script = document.createElement('script');
             script.src = 'converter-en.js';
             script.onload = () => {
-                // Create new English converter instance
+                // Create English instance
                 window.converter = new UnitConverter(); 
             };
             document.body.appendChild(script);
