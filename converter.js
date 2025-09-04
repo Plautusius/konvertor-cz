@@ -431,5 +431,8 @@ class UnitConverter {
 
 // Inicializace po načtení stránky
 document.addEventListener('DOMContentLoaded', () => {
-    window.converter = new UnitConverter();
+    // Malá pauza pro jistotu, že DOM je připraven
+    setTimeout(() => {
+        window.converter = new UnitConverter();
+    }, 10);
 });
