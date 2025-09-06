@@ -62,21 +62,27 @@
 
         .category-selector {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 8px;
             margin-bottom: 30px;
+            max-width: 100%;
         }
 
         .category-btn {
-            padding: 15px 10px;
+            padding: 12px 8px;
             background: #f8f9fa;
             border: 2px solid #e9ecef;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
             text-align: center;
             transition: all 0.3s ease;
             font-weight: 600;
             color: #495057;
+            font-size: 13px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
             .category-btn:hover {
@@ -188,19 +194,30 @@
             margin-top: 20px;
         }
 
-        .quick-convert-card {
+        .unit-info-card {
             background: white;
             border: 1px solid #e9ecef;
             border-radius: 8px;
             padding: 15px;
-            text-align: center;
-            cursor: pointer;
+            text-align: left;
             transition: all 0.3s ease;
         }
 
-            .quick-convert-card:hover {
+            .unit-info-card:hover {
                 background: #f8f9fa;
-                transform: translateY(-2px);
+                border-color: #3498db;
+            }
+            
+            .unit-info-card .unit-name {
+                font-weight: 600;
+                color: #2c3e50;
+                margin-bottom: 5px;
+            }
+            
+            .unit-info-card .unit-description {
+                color: #6c757d;
+                font-size: 13px;
+                line-height: 1.4;
             }
 
         /* AdSense prostor */
@@ -231,6 +248,7 @@
             text-align: center;
             font-size: 0.9em;
         }
+
 
         /* Language switcher (ponecháno) */
         .lang-switcher {
@@ -300,7 +318,14 @@
             }
 
             .category-selector {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+            
+            .category-btn {
+                font-size: 11px;
+                padding: 10px 6px;
+                min-height: 38px;
             }
         }
     </style>
@@ -322,6 +347,17 @@
                 <div class="category-btn" data-category="pressure">Tlak</div>
                 <div class="category-btn" data-category="area">Plocha</div>
                 <div class="category-btn" data-category="energy">Energie</div>
+                <div class="category-btn" data-category="time">Čas</div>
+                <div class="category-btn" data-category="data">Data</div>
+                <div class="category-btn" data-category="power">Výkon</div>
+                <div class="category-btn" data-category="angle">Úhel</div>
+                <div class="category-btn" data-category="frequency">Frekvence</div>
+                <div class="category-btn" data-category="force">Síla</div>
+                <div class="category-btn" data-category="electric_voltage">Napětí</div>
+                <div class="category-btn" data-category="electric_current">Proud</div>
+                <div class="category-btn" data-category="electric_resistance">Odpor</div>
+                <div class="category-btn" data-category="electric_charge">Náboj</div>
+                <div class="category-btn" data-category="fuel">Palivo</div>
             </div>
 
             <div class="converter-section">
@@ -339,7 +375,7 @@
                     <div class="input-group">
                         <label for="output-value">Výsledek</label>
                         <div class="input-wrapper">
-                            <input type="number" id="output-value" placeholder="Výsledek převodu" readonly>
+                            <input type="text" id="output-value" placeholder="Výsledek převodu" readonly>
                             <select id="to-unit"></select>
                         </div>
                     </div>
@@ -357,7 +393,7 @@
                 </div>
             </div>
 
-            <div class="quick-converts" id="quick-converts"></div>
+            <div class="quick-converts" id="unit-info"></div>
         </div>
 
         <div class="footer">
