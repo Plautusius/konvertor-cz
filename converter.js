@@ -481,7 +481,8 @@ class UnitConverter {
     
     init() {
         this.bindEvents();
-        this.updateCategory('length');
+        this.hydrateFromUrl();
+        this.updateCategory(this.currentCategory || 'length');
     }
     
     bindEvents() {
@@ -629,6 +630,15 @@ class UnitConverter {
             const toName = this.conversions[this.currentCategory].units[toUnit].name;
             
             resultDisplay.innerHTML = `<strong>${inputValue} ${fromName} = ${rounded} ${toName}</strong>`;
+            
+            // Update URL parameters for sharing
+            const params = new URLSearchParams({
+                cat: this.currentCategory,
+                from: fromUnit,
+                to: toUnit,
+                v: inputValue || ''
+            });
+            history.replaceState(null, '', '?' + params.toString());
         } else {
             outputElement.value = '';
             resultDisplay.textContent = 'Chyba při převodu';
@@ -736,6 +746,22 @@ class UnitConverter {
             
             container.appendChild(card);
         });
+    }
+    
+    hydrateFromUrl() {
+        const p = new URLSearchParams(location.search);
+        const cat = p.get('cat'), from = p.get('from'), to = p.get('to'), v = p.get('v');
+        if (cat && this.conversions[cat]) this.currentCategory = cat;
+        
+        setTimeout(() => {
+            this.populateUnits();
+            const fs = document.getElementById('from-unit');
+            const ts = document.getElementById('to-unit');
+            if (from) fs.value = from;
+            if (to) ts.value = to;
+            if (v !== null) document.getElementById('input-value').value = v;
+            this.convert();
+        }, 50);
     }
 }
 
