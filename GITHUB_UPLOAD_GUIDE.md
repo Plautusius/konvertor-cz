@@ -1,16 +1,19 @@
-# 🚀 NÁVOD NA NAHRÁNÍ DO GITHUB
+# 🚀 NÁVOD NA NAHRÁNÍ DO GITHUB - OPRAVENÁ VERZE
+
+## ⚠️ DŮLEŽITÉ: VERZE JE OPRAVENÁ!
+
+Právě jsem opravil chybějící tlačítka a vysvětlivky. Pokud jsi už nahrál na GitHub, **smaž to a nahraj znovu** tuto opravenou verzi!
 
 ## 📁 KTEROU SLOŽKU NAHRÁT
 
-**Nahraj celou složku:** `konvertor-cz-v2.0-full-20categories-explanations/`
+**Nahraj celou složku:** `konvertor-cz-v2.0-full-20categories-explanations/` ✅ OPRAVENO
 
-Obsahuje všechny potřebné soubory:
-- ✅ `index.html` - hlavní stránka
-- ✅ `converter.js` - kompletní logika (39 KB)
-- ✅ `manifest.json` - PWA podpora
-- ✅ `robots.txt` + `sitemap.xml` - SEO
-- ✅ `DEPLOYMENT_GUIDE.md` - návod na deploy
-- ✅ `VERSION_INFO.md` - dokumentace verze
+**Co je teď opravené:**
+- ✅ `index.html` - všech 20 tlačítek kategorií (407 řádků)
+- ✅ `converter.js` - kompletní logika s vysvětlivkami (747 řádků)  
+- ✅ Všechny kategorie: Čas, Data, Výkon, Úhel, Frekvence, Síla, Napětí, Proud, Odpor, Náboj, Palivo
+- ✅ 120 vysvětlivek jednotek (6 na kategorii)
+- ✅ Funkční spodní informační karty
 
 ---
 
