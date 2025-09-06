@@ -20,6 +20,10 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Převodník jednotek | Konvertor.cz">
     <meta name="twitter:description" content="Okamžitý převod: palce na cm, libry na kilogramy, galony na litry a víc.">
+    <meta name="twitter:image" content="https://konvertor.cz/og-image.png">
+    
+    <!-- Color scheme -->
+    <meta name="color-scheme" content="light dark">
 
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#3498db">
@@ -296,6 +300,13 @@
                 border-color: rgba(255,255,255,0.6);
             }
 
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .swap-btn { transition: none; }
+            .category-btn { transition: none; }
+            .unit-info-card { transition: none; }
+        }
+        
         /* 📱 Mobilní optimalizace */
         @media (max-width: 768px) {
             body {
@@ -391,26 +402,26 @@
         </div>
 
         <div class="content">
-            <div class="category-selector">
-                <div class="category-btn active" data-category="length">Délka</div>
-                <div class="category-btn" data-category="weight">Hmotnost</div>
-                <div class="category-btn" data-category="volume">Objem</div>
-                <div class="category-btn" data-category="temperature">Teplota</div>
-                <div class="category-btn" data-category="speed">Rychlost</div>
-                <div class="category-btn" data-category="pressure">Tlak</div>
-                <div class="category-btn" data-category="area">Plocha</div>
-                <div class="category-btn" data-category="energy">Energie</div>
-                <div class="category-btn" data-category="time">Čas</div>
-                <div class="category-btn" data-category="data">Data</div>
-                <div class="category-btn" data-category="power">Výkon</div>
-                <div class="category-btn" data-category="angle">Úhel</div>
-                <div class="category-btn" data-category="frequency">Frekvence</div>
-                <div class="category-btn" data-category="force">Síla</div>
-                <div class="category-btn" data-category="electric_voltage">Napětí</div>
-                <div class="category-btn" data-category="electric_current">Proud</div>
-                <div class="category-btn" data-category="electric_resistance">Odpor</div>
-                <div class="category-btn" data-category="electric_charge">Náboj</div>
-                <div class="category-btn" data-category="fuel">Palivo</div>
+            <div class="category-selector" role="tablist" aria-label="Kategorie převodů">
+                <button type="button" class="category-btn active" data-category="length" aria-pressed="true" title="Převody délky (m, cm, mm, palce, míle)">Délka</button>
+                <button type="button" class="category-btn" data-category="weight" aria-pressed="false" title="Převody hmotnosti (kg, g, lb, oz)">Hmotnost</button>
+                <button type="button" class="category-btn" data-category="volume" aria-pressed="false" title="Převody objemu (l, ml, galony)">Objem</button>
+                <button type="button" class="category-btn" data-category="temperature" aria-pressed="false" title="Převody teploty (°C, °F, K)">Teplota</button>
+                <button type="button" class="category-btn" data-category="speed" aria-pressed="false" title="Převody rychlosti (km/h, m/s, mph)">Rychlost</button>
+                <button type="button" class="category-btn" data-category="pressure" aria-pressed="false" title="Převody tlaku (Pa, bar, psi)">Tlak</button>
+                <button type="button" class="category-btn" data-category="area" aria-pressed="false" title="Převody plochy (m², cm², ha)">Plocha</button>
+                <button type="button" class="category-btn" data-category="energy" aria-pressed="false" title="Převody energie (J, kWh, cal)">Energie</button>
+                <button type="button" class="category-btn" data-category="time" aria-pressed="false" title="Převody času (s, min, hod, dny)">Čas</button>
+                <button type="button" class="category-btn" data-category="data" aria-pressed="false" title="Převody dat (B, KB, MB, GB)">Data</button>
+                <button type="button" class="category-btn" data-category="power" aria-pressed="false" title="Převody výkonu (W, kW, HP)">Výkon</button>
+                <button type="button" class="category-btn" data-category="angle" aria-pressed="false" title="Převody úhlů (°, rad, grad)">Úhel</button>
+                <button type="button" class="category-btn" data-category="frequency" aria-pressed="false" title="Převody frekvence (Hz, kHz, MHz)">Frekvence</button>
+                <button type="button" class="category-btn" data-category="force" aria-pressed="false" title="Převody síly (N, kN, lbf)">Síla</button>
+                <button type="button" class="category-btn" data-category="electric_voltage" aria-pressed="false" title="Převody napětí (V, kV, mV)">Napětí</button>
+                <button type="button" class="category-btn" data-category="electric_current" aria-pressed="false" title="Převody proudu (A, mA, kA)">Proud</button>
+                <button type="button" class="category-btn" data-category="electric_resistance" aria-pressed="false" title="Převody odporu (Ω, kΩ, MΩ)">Odpor</button>
+                <button type="button" class="category-btn" data-category="electric_charge" aria-pressed="false" title="Převody náboje (C, mAh, Ah)">Náboj</button>
+                <button type="button" class="category-btn" data-category="fuel" aria-pressed="false" title="Převody spotřeby paliva (l/100km, mpg)">Palivo</button>
             </div>
 
             <div class="converter-section">
@@ -418,7 +429,7 @@
                     <div class="input-group">
                         <label for="input-value">Hodnota</label>
                         <div class="input-wrapper">
-                            <input type="number" id="input-value" placeholder="Zadejte číslo" step="any">
+                            <input type="number" id="input-value" inputmode="decimal" placeholder="Zadejte číslo" step="any">
                             <select id="from-unit"></select>
                         </div>
                     </div>
@@ -448,6 +459,15 @@
 
             <div class="quick-converts" id="unit-info"></div>
         </div>
+        
+        <!-- Noscript fallback -->
+        <noscript>
+            <div style="padding:12px;background:#fff3cd;border:1px solid #ffeeba;border-radius:8px;margin:16px 0;">
+                Pro plnou funkčnost převodníku povolte JavaScript. Mezitím můžete použít naše statické převodní tabulky:
+                <a href="/palce-na-centimetry/" style="color:#856404;text-decoration:underline;">Palce na centimetry</a>, 
+                <a href="/libry-na-kilogramy/" style="color:#856404;text-decoration:underline;">Libry na kilogramy</a>...
+            </div>
+        </noscript>
 
         <div class="footer">
             <p>&copy; 2025 Konvertor.cz - Bezplatný převodník jednotek</p>
@@ -456,6 +476,6 @@
         </div>
     </div>
 
-    <script src="converter.js?v=20250906" defer></script>
+    <script src="converter.js?v=20250906-v2" defer></script>
 </body>
 </html>

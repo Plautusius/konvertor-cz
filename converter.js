@@ -317,7 +317,7 @@ class UnitConverter {
                 { name: 'Palec (inch)', description: 'Anglická jednotka délky, používá se ve stavebnictví, průmyslu a elektronice. 1 palec = 2,54 cm' },
                 { name: 'Stopa (foot)', description: 'Anglická jednotka délky, běžná v USA a UK. Používá se v letectví, sportu a stavebnictví. 1 stopa = 30,48 cm' },
                 { name: 'Míle', description: 'Dlouhá vzdálenost v anglo-amerických zemích. Používá se pro měření tras a rychlosti. 1 míle = 1,609 km' },
-                { name: 'Sáh', description: 'Historická česká jednotka, měřila se rozpětím paží. Používala se v zemědělství a lesnictví. 1 sáh = 1,897 m' },
+                { name: 'Sáh', description: 'Historická česká jednotka, měřila se rozpětím paží. Používala se v zemědělství a lesnictví. 1 sáh ≈ 1,8965 m' },
                 { name: 'Yard', description: 'Anglická jednotka, často pro sport (golf, americký fotbal). 1 yard = 3 stopy = 91,44 cm' },
                 { name: 'Námořní míle', description: 'Mezinárodní jednotka vzdálenosti v námořnictví a letectví. 1 nmi = 1852 m' }
             ],
@@ -343,7 +343,7 @@ class UnitConverter {
                 { name: 'Rankine (°R)', description: 'Americká absolutní teplotní stupnice. 0°R = absolutní nula. Používá se v inženýrství' },
                 { name: 'Celsius (°C)', description: 'Nejběžnější teplotní stupnice. 0°C = bod mrazu vody, 100°C = bod varu vody' },
                 { name: 'Absolutní nula', description: 'Nejnižší možná teplota ve vesmíru. 0 K = -273,15°C' },
-                { name: 'Pokojová teplota', description: 'Komfortní teplota v interieru. Obvykle 20-22°C (68-72°F)' }
+                { name: 'Pokojová teplota', description: 'Komfortní teplota v interiéru. Obvykle 20-22°C (68-72°F)' }
             ],
             speed: [
                 { name: 'MPH (míle za hodinu)', description: 'Rychlost v anglo-amerických zemích. Používá se v USA a UK pro auta. 1 mph = 1,609 km/h' },
@@ -355,7 +355,7 @@ class UnitConverter {
             ],
             pressure: [
                 { name: 'Bar', description: 'Jednotka tlaku blízká atmosférickému tlaku. Používá se u pneumatik a hydrauliky. 1 bar ≈ 1 atm' },
-                { name: 'PSI', description: 'Americká jednotka tlaku (libra na čtvereční palec). Používá se u pneumatik v USA. 1 PSI = 6895 Pa' },
+                { name: 'PSI', description: 'Americká jednotka tlaku (libra na čtvereční palec). Používá se u pneumatik v USA. 1 PSI ≈ 6895 Pa' },
                 { name: 'mmHg', description: 'Tlak rtuťového sloupce, používá se v medicíně pro krevní tlak. 1 mmHg = 133 Pa' },
                 { name: 'Atmosféra (atm)', description: 'Standardní atmosférický tlak na hladině moře. 1 atm = 101 325 Pa' },
                 { name: 'Pascal (Pa)', description: 'Základní jednotka tlaku v SI systému. Velmi malý tlak, 1 Pa = 1 N/m²' },
@@ -367,7 +367,7 @@ class UnitConverter {
                 { name: 'Akr (acre)', description: 'Anglo-americká jednotka plochy pro zemědělství. 1 akr = 4047 m² ≈ 0,4 ha' },
                 { name: 'Čtvereční stopa (ft²)', description: 'Malá anglo-americká jednotka plochy pro místnosti. 1 ft² = 929 cm²' },
                 { name: 'Čtvereční metr (m²)', description: 'Základní jednotka plochy. Plocha čtverce o straně 1 metr' },
-                { name: 'Čtvereční kilometr', description: 'Velká jednotka plochy pro města a kráje. 1 km² = 100 hektarů' }
+                { name: 'Čtvereční kilometr', description: 'Velká jednotka plochy pro města a kraje. 1 km² = 100 hektarů' }
             ],
             energy: [
                 { name: 'Kilowatthodina (kWh)', description: 'Jednotka elektrické energie na účtech za elektřinu. 1 kWh = energie 1kW po dobu 1 hodiny' },
@@ -437,16 +437,16 @@ class UnitConverter {
                 { name: 'Kilovolt (kV)', description: 'Vysoké napětí pro vedenia a rozvod elektrické energie. 1 kV = 1000 V' },
                 { name: 'Milivolt (mV)', description: 'Malé napětí v elektronice a senzorech. 1 mV = 0,001 V' },
                 { name: 'Napětí (obecně)', description: 'Elektrický potenciál mezi dvěma body. Měří se voltmetrem' },
-                { name: 'Batterie 12V', description: 'Standardní napětí automobilových baterií a nízkovoltových systémů' },
-                { name: 'Vysokoteplotní vedenia', description: 'Přenos elektrické energie na velké vzdálenosti. 110 kV - 750 kV' }
+                { name: 'Baterie 12V', description: 'Standardní napětí automobilových baterií a nízkovoltových systémů' },
+                { name: 'Vysokonapěťová vedení', description: 'Přenos elektrické energie na velké vzdálenosti. 110 kV - 750 kV' }
             ],
             
             electric_current: [
-                { name: 'Ampér (A)', description: 'Základní jednotka elektrického proudu. Domací pojístkae: 16A, 25A' },
+                { name: 'Ampér (A)', description: 'Základní jednotka elektrického proudu. Domácí pojistky: 16A, 25A' },
                 { name: 'Miliampér (mA)', description: 'Malý proud v elektronice a zařízeních na baterie. 1 mA = 0,001 A' },
                 { name: 'Kiloampér (kA)', description: 'Velký proud v průmyslu a zkratech. 1 kA = 1000 A' },
                 { name: 'Proud (obecně)', description: 'Tok elektrických nábojů vodičem. Měří se ampérmetrem' },
-                { name: 'Mikroampér (μA)', description: 'Velmi malý proud v čipů a přesných přístrojů. 1 μA = 0,000001 A' },
+                { name: 'Mikroampér (μA)', description: 'Velmi malý proud v čipech a přesných přístrojích. 1 μA = 0,000001 A' },
                 { name: 'Domací proud', description: 'Typický proud v domácnosti. Žárovka: 0,4A, mikrovlnka: 10A' }
             ],
             
@@ -481,15 +481,27 @@ class UnitConverter {
     
     init() {
         this.bindEvents();
-        this.hydrateFromUrl();
-        this.updateCategory(this.currentCategory || 'length');
+        const params = this.hydrateFromUrl(); // jen vrátí {cat, from, to, v}
+        // nastav kategorii (nebo 'length')
+        if (params.cat && this.conversions[params.cat]) this.currentCategory = params.cat;
+        this.updateCategory(this.currentCategory || 'length'); // tohle udělá populateUnits atd.
+        
+        // až teď aplikuj from/to/v z URL, pokud jsou
+        if (params && (params.from || params.to || params.v !== null)) {
+            const fs = document.getElementById('from-unit');
+            const ts = document.getElementById('to-unit');
+            if (params.from && this.conversions[this.currentCategory].units[params.from]) fs.value = params.from;
+            if (params.to && this.conversions[this.currentCategory].units[params.to]) ts.value = params.to;
+            if (params.v !== null) document.getElementById('input-value').value = params.v;
+            this.convert();
+        }
     }
     
     bindEvents() {
         // Kategorie
         document.querySelectorAll('.category-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                this.updateCategory(e.target.dataset.category);
+                this.updateCategory(e.currentTarget.dataset.category);
             });
         });
         
@@ -516,11 +528,11 @@ class UnitConverter {
     updateCategory(category) {
         this.currentCategory = category;
         
-        // Aktivní tlačítko
+        // Aktivní tlačítko + ARIA
         document.querySelectorAll('.category-btn').forEach(btn => {
-            btn.classList.remove('active');
+            btn.classList.toggle('active', btn.dataset.category === category);
+            btn.setAttribute('aria-pressed', btn.dataset.category === category ? 'true' : 'false');
         });
-        document.querySelector(`[data-category="${category}"]`).classList.add('active');
         
         // Naplnění jednotek
         this.populateUnits();
@@ -750,18 +762,12 @@ class UnitConverter {
     
     hydrateFromUrl() {
         const p = new URLSearchParams(location.search);
-        const cat = p.get('cat'), from = p.get('from'), to = p.get('to'), v = p.get('v');
-        if (cat && this.conversions[cat]) this.currentCategory = cat;
-        
-        setTimeout(() => {
-            this.populateUnits();
-            const fs = document.getElementById('from-unit');
-            const ts = document.getElementById('to-unit');
-            if (from) fs.value = from;
-            if (to) ts.value = to;
-            if (v !== null) document.getElementById('input-value').value = v;
-            this.convert();
-        }, 50);
+        return {
+            cat: p.get('cat'),
+            from: p.get('from'),
+            to: p.get('to'),
+            v: p.get('v')
+        };
     }
 }
 

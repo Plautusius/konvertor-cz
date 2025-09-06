@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Stránka nenalezena - 404 | Konvertor.cz</title>
+    <meta name="description" content="Hledaná stránka nebyla nalezena. Přejděte na hlavní stránku převodníku jednotek Konvertor.cz">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 40px 30px;
+        }
+
+        .header h1 {
+            font-size: 4em;
+            font-weight: 300;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .header p {
+            opacity: 0.8;
+            font-size: 1.2em;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .content h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .content p {
+            color: #6c757d;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .home-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .suggestions {
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .suggestions h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .suggestions ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .suggestions li {
+            margin: 10px 0;
+        }
+
+        .suggestions a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        .suggestions a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-top: 1px solid #e9ecef;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 3em;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>404</h1>
+            <p>Stránka nenalezena</p>
+        </div>
+
+        <div class="content">
+            <h2>Hups! Tato stránka neexistuje</h2>
+            <p>Omlouváme se, ale stránka kterou hledáte nebyla nalezena. Možná byla přesunuta nebo URL adresa obsahuje překlep.</p>
+
+            <a href="/" class="home-btn">Přejít na hlavní stránku</a>
+
+            <div class="suggestions">
+                <h3>Možná hledáte:</h3>
+                <ul>
+                    <li><a href="/?cat=length&from=in&to=cm">Převod palců na centimetry</a></li>
+                    <li><a href="/?cat=weight&from=lb&to=kg">Převod liber na kilogramy</a></li>
+                    <li><a href="/?cat=temperature&from=f&to=c">Převod Fahrenheitů na Celsia</a></li>
+                    <li><a href="/?cat=volume&from=gal_us&to=l">Převod galonů na litry</a></li>
+                    <li><a href="/?cat=fuel&from=l_100km&to=mpg_us">Převod spotřeby paliva</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 Konvertor.cz - Rychlý převod všech jednotek</p>
+        </div>
+    </div>
+
+    <!-- Google Analytics (bude přidáno při nasazení) -->
+    <script>
+        // Sledování 404 chyb v Google Analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+                'page_title': 'Page Not Found',
+                'page_location': window.location.href,
+                'custom_parameter': 'error_404'
+            });
+        }
+    </script>
+</body>
+</html>
