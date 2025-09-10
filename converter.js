@@ -720,7 +720,12 @@ class UnitConverter {
                         await this.loadCnbRates();
                         this.populateUnits();
                         this.updateCurrencyInfo();
-                        this.convert(); // Prepočítej aktuální převod
+                        
+                        // Přepočítej bez ukládání do historie (jen refresh kurzu)
+                        this.skipHistorySave = true;
+                        this.convert();
+                        this.skipHistorySave = false;
+                        
                         console.log('✅ Kurzy úspěšně obnoveny');
                     } catch (error) {
                         console.error('❌ Chyba při obnovení kurzů:', error);
@@ -1676,7 +1681,11 @@ class UnitConverter {
                 if (this.currentCategory === 'currency') {
                     this.populateUnits();
                     this.updateCurrencyInfo();
+                    
+                    // Přepočítej bez ukládání do historie (jen refresh kurzu)
+                    this.skipHistorySave = true;
                     this.convert();
+                    this.skipHistorySave = false;
                 }
                 
                 console.log('✅ Auto-refresh: Kurzy úspěšně aktualizovány');
