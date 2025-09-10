@@ -4,7 +4,17 @@ class UnitConverter {
         this.currentCategory = 'length';
         this.conversions = this.initializeConversions();
         this.unitInfo = this.initializeUnitInfo();
+        this.unitAliases = this.initializeAliases();
+        this.storageKey = 'konvertor_state';
+        this.historyKey = 'konvertor_history';
+        this.themeKey = 'konvertor_theme';
+        this.skipHistorySave = false; // Flag pro přeskočení historie během rychlých převodů
+        
+        // Vyčistit staré cache při upgradu
+        localStorage.removeItem('cnb_rates_v1');
+        
         this.init();
+        this.setupAutoRefresh(); // Nastav automatické obnovování kurůz
     }
     
     initializeConversions() {
@@ -307,6 +317,18 @@ class UnitConverter {
                     'mpg_us':  { name: 'mpg (US)',  factor: 1.609344 / 3.785411784 }, // ≈0.4251437075 km/l
                     'mpg_imp': { name: 'mpg (Imp.)',factor: 1.609344 / 4.54609 }      // ≈0.354006043 km/l
                 }
+            },
+            
+            currency: {
+                name: 'Měna',
+                units: {
+                    // Naplní se dynamicky z ČNB (EUR, USD, GBP, …)
+                    'CZK': { name: 'česká koruna (CZK)', amount: 1, rateCzk: 1 }
+                },
+                meta: {
+                    source: 'CNB',
+                    lastUpdated: null
+                }
             }
         };
     }
@@ -479,22 +501,81 @@ class UnitConverter {
         };
     }
     
+    initializeAliases() {
+        return {
+            // resistance
+            'ohm': 'Ω', 'kohm': 'kΩ', 'mohm': 'MΩ',
+            // micro-variants
+            'um': 'μm', 'us': 'μs', 'ug': 'μg', 'ul': 'μl',
+            // data (case-insensitive fallbacks)
+            'kb': 'kB', 'mb': 'MB', 'gb': 'GB', 'tb': 'TB',
+            // additional common aliases
+            'micro': 'μ', 'omega': 'Ω'
+        };
+    }
+    
+    normalizeUnitKey(u) {
+        if (!u) return u;
+        const key = u.trim().toLowerCase();
+        return this.unitAliases[key] || u;
+    }
+    
     init() {
+        this.initTheme();
         this.bindEvents();
-        const params = this.hydrateFromUrl(); // jen vrátí {cat, from, to, v}
-        // nastav kategorii (nebo 'length')
-        if (params.cat && this.conversions[params.cat]) this.currentCategory = params.cat;
-        this.updateCategory(this.currentCategory || 'length'); // tohle udělá populateUnits atd.
         
-        // až teď aplikuj from/to/v z URL, pokud jsou
+        // Priorita: URL params > localStorage > default
+        const params = this.hydrateFromUrl();
+        const savedState = this.loadState();
+        
+        // Určit kategorii
+        let targetCategory = 'length';
+        if (params.cat && this.conversions[params.cat]) {
+            targetCategory = params.cat;
+        } else if (savedState && savedState.category && this.conversions[savedState.category]) {
+            targetCategory = savedState.category;
+        }
+        
+        this.currentCategory = targetCategory;
+        this.updateCategory(targetCategory);
+        
+        // Určit jednotky a hodnotu
+        let fromUnit = null, toUnit = null, inputValue = '';
+        
         if (params && (params.from || params.to || params.v !== null)) {
-            const fs = document.getElementById('from-unit');
-            const ts = document.getElementById('to-unit');
-            if (params.from && this.conversions[this.currentCategory].units[params.from]) fs.value = params.from;
-            if (params.to && this.conversions[this.currentCategory].units[params.to]) ts.value = params.to;
-            if (params.v !== null) document.getElementById('input-value').value = params.v;
+            // URL má přednost
+            fromUnit = this.normalizeUnitKey(params.from);
+            toUnit = this.normalizeUnitKey(params.to);
+            inputValue = params.v || '';
+        } else if (savedState) {
+            // Použít uložený stav
+            fromUnit = this.normalizeUnitKey(savedState.fromUnit);
+            toUnit = this.normalizeUnitKey(savedState.toUnit);
+            inputValue = savedState.lastValue || '';
+        }
+        
+        // Aplikovat hodnoty
+        const fs = document.getElementById('from-unit');
+        const ts = document.getElementById('to-unit');
+        const inputEl = document.getElementById('input-value');
+        
+        if (fromUnit && this.conversions[this.currentCategory].units[fromUnit]) {
+            fs.value = fromUnit;
+        }
+        if (toUnit && this.conversions[this.currentCategory].units[toUnit]) {
+            ts.value = toUnit;
+        }
+        if (inputValue) {
+            inputEl.value = inputValue;
+        }
+        
+        // Provést převod pokud máme data
+        if (fromUnit || toUnit || inputValue) {
             this.convert();
         }
+        
+        // Označit jako inicializováno pro analytics
+        this.isInitialized = true;
     }
     
     bindEvents() {
@@ -523,10 +604,32 @@ class UnitConverter {
         document.getElementById('swap-btn').addEventListener('click', () => {
             this.swapUnits();
         });
+        
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                this.toggleTheme();
+            });
+        }
+        
+        // Copy to clipboard
+        const copyBtn = document.getElementById('copy-btn');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', () => {
+                this.copyResult();
+            });
+        }
     }
     
     updateCategory(category) {
+        const oldCategory = this.currentCategory;
         this.currentCategory = category;
+        
+        // Analytics tracking pro změnu kategorie
+        if (oldCategory && oldCategory !== category && typeof window.trackCategorySwitch === 'function') {
+            window.trackCategorySwitch(category, oldCategory);
+        }
         
         // Aktivní tlačítko + ARIA
         document.querySelectorAll('.category-btn').forEach(btn => {
@@ -534,14 +637,102 @@ class UnitConverter {
             btn.setAttribute('aria-pressed', btn.dataset.category === category ? 'true' : 'false');
         });
         
-        // Naplnění jednotek
-        this.populateUnits();
+        // Pro měny načti kurzy ČNB - NEVOLEJ populateUnits() hned
+        if (category === 'currency') {
+            // Zobraz loading stav
+            const fromSelect = document.getElementById('from-unit');
+            const toSelect = document.getElementById('to-unit');
+            if (fromSelect) {
+                fromSelect.innerHTML = '<option>Načítám kurzy ČNB...</option>';
+                fromSelect.disabled = true;
+            }
+            if (toSelect) {
+                toSelect.innerHTML = '<option>Načítám kurzy ČNB...</option>';
+                toSelect.disabled = true;
+            }
+            
+            this.loadCnbRates().then(() => {
+                this.populateUnits();
+                this.updateCurrencyInfo(); // Aktualizuj info o kurzech
+                // Znovu povol selecty
+                if (fromSelect) fromSelect.disabled = false;
+                if (toSelect) toSelect.disabled = false;
+            }).catch(error => {
+                console.error('Chyba při načítání kurzů:', error);
+                this.populateUnits(); // Zkus i bez kurzů
+                this.updateCurrencyInfo(); // Aktualizuj info i při chybě
+                // Znovu povol selecty i při chybě
+                if (fromSelect) fromSelect.disabled = false;
+                if (toSelect) toSelect.disabled = false;
+            });
+            
+            // DŮLEŽITÉ: Nevol populateUnits() zde - počkej na loadCnbRates()
+        } else {
+            // Naplnění jednotek pro ostatní kategorie
+            this.populateUnits();
+        }
         
         // Informace o jednotkách
         this.updateUnitInfo();
         
+        // Currency info (pro měny)
+        this.updateCurrencyInfo();
+        
+        // Historie převodů
+        this.updateHistoryDisplay();
+        
         // Převod
         this.convert();
+    }
+    
+    updateCurrencyInfo() {
+        const currencyInfo = document.getElementById('currency-info');
+        const currencyInfoText = document.getElementById('currency-info-text');
+        const refreshBtn = document.getElementById('refresh-rates-btn');
+        
+        if (!currencyInfo || !currencyInfoText) return;
+        
+        if (this.currentCategory === 'currency') {
+            const meta = this.conversions.currency.meta;
+            let infoText = '';
+            
+            if (meta.lastUpdated === 'starší cache') {
+                infoText = '📅 Kurzy ČNB - starší cache data';
+            } else if (meta.lastUpdated) {
+                infoText = `📅 Kurzy ČNB platné k ${meta.lastUpdated}`;
+            } else {
+                infoText = '📅 Kurzy ČNB';
+            }
+            
+            currencyInfoText.textContent = infoText;
+            currencyInfo.style.display = 'block';
+            
+            // Nastav refresh handler jen jednou
+            if (refreshBtn && !refreshBtn._handlerSet) {
+                refreshBtn._handlerSet = true;
+                refreshBtn.addEventListener('click', async () => {
+                    refreshBtn.disabled = true;
+                    refreshBtn.textContent = '⏳ Načítám...';
+                    
+                    try {
+                        // Vymaž cache a načti fresh data
+                        localStorage.removeItem('cnb_rates_v2');
+                        await this.loadCnbRates();
+                        this.populateUnits();
+                        this.updateCurrencyInfo();
+                        this.convert(); // Prepočítej aktuální převod
+                        console.log('✅ Kurzy úspěšně obnoveny');
+                    } catch (error) {
+                        console.error('❌ Chyba při obnovení kurzů:', error);
+                    } finally {
+                        refreshBtn.disabled = false;
+                        refreshBtn.textContent = '🔄 Obnovit';
+                    }
+                });
+            }
+        } else {
+            currencyInfo.style.display = 'none';
+        }
     }
     
     populateUnits() {
@@ -552,13 +743,15 @@ class UnitConverter {
         fromSelect.innerHTML = '';
         toSelect.innerHTML = '';
         
-        Object.keys(units).forEach(key => {
-            const option1 = new Option(units[key].name, key);
-            const option2 = new Option(units[key].name, key);
-            
-            fromSelect.add(option1);
-            toSelect.add(option2);
-        });
+        Object.keys(units)
+            .sort((a,b) => (units[a].name || a).localeCompare(units[b].name || b, 'cs'))
+            .forEach(key => {
+                const option1 = new Option(units[key].name, key);
+                const option2 = new Option(units[key].name, key);
+                
+                fromSelect.add(option1);
+                toSelect.add(option2);
+            });
         
         // Defaultní výběr
         if (this.currentCategory === 'length') {
@@ -606,55 +799,204 @@ class UnitConverter {
         } else if (this.currentCategory === 'fuel') {
             fromSelect.value = 'l100'; 
             toSelect.value = 'mpg_us';
+        } else if (this.currentCategory === 'currency') {
+            // Kontrluj, zda EUR existuje v selectu
+            const hasEUR = fromSelect.querySelector('option[value="EUR"]');
+            const hasCZK = toSelect.querySelector('option[value="CZK"]');
+            
+            if (hasEUR) fromSelect.value = 'EUR';
+            if (hasCZK) toSelect.value = 'CZK';
+            
+            // Pokud EUR není k dispozici, použij první dostupnou měnu (ne CZK)
+            if (!hasEUR && fromSelect.options.length > 1) {
+                for (let i = 0; i < fromSelect.options.length; i++) {
+                    if (fromSelect.options[i].value !== 'CZK') {
+                        fromSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
         } else {
             toSelect.selectedIndex = 1;
+        }
+        
+        // Po nastavení default hodnot zkus převod pro currency
+        if (this.currentCategory === 'currency') {
+            const inputElement = document.getElementById('input-value');
+            if (inputElement && !inputElement.value) {
+                inputElement.value = '1';
+            }
+            this.convert();
         }
     }
     
     convert() {
-        const inputValue = parseFloat(document.getElementById('input-value').value);
-        const fromUnit = document.getElementById('from-unit').value;
-        const toUnit = document.getElementById('to-unit').value;
-        const outputElement = document.getElementById('output-value');
-        const resultDisplay = document.getElementById('result-display');
+        try {
+            const inputElement = document.getElementById('input-value');
+            const outputElement = document.getElementById('output-value');
+            const resultDisplay = document.getElementById('result-display');
+            
+            // Validace elementů
+            if (!inputElement || !outputElement || !resultDisplay) {
+                console.error('Chybí potřebné DOM elementy');
+                return;
+            }
+            
+            // CZ: tolerantní parsování (1 234,56 i 1,234.56)
+            const inputValue = this.parseAmount(inputElement.value || '');
+            const fromUnit = document.getElementById('from-unit')?.value;
+            const toUnit = document.getElementById('to-unit')?.value;
+            
+            // Rozšířená validace vstupů
+            const validationResult = this.validateInput(inputValue, fromUnit, toUnit);
+            if (!validationResult.isValid) {
+                outputElement.value = '';
+                const resultText = document.getElementById('result-text');
+                const copyBtn = document.getElementById('copy-btn');
+                
+                if (resultText) {
+                    resultText.textContent = validationResult.message;
+                }
+                if (copyBtn) {
+                    copyBtn.style.display = 'none';
+                }
+                
+                resultDisplay.style.borderColor = 'var(--error-color)';
+                return;
+            }
+            
+            let result;
+            
+            if (this.currentCategory === 'temperature') {
+                result = this.convertTemperature(inputValue, fromUnit, toUnit);
+            } else if (this.currentCategory === 'fuel') {
+                result = this.convertFuel(inputValue, fromUnit, toUnit);
+            } else if (this.currentCategory === 'currency') {
+                result = this.convertCurrency(inputValue, fromUnit, toUnit);
+            } else {
+                result = this.convertStandard(inputValue, fromUnit, toUnit);
+            }
+            
+            if (result !== null && isFinite(result)) {
+                const rounded = this.roundResult(result);
+                outputElement.value = rounded;
+                
+                const fromName = this.conversions[this.currentCategory].units[fromUnit]?.name || fromUnit;
+                const toName = this.conversions[this.currentCategory].units[toUnit]?.name || toUnit;
+                
+                const resultText = document.getElementById('result-text');
+                const copyBtn = document.getElementById('copy-btn');
+                
+                if (resultText) {
+                    resultText.innerHTML = `<strong>${inputValue} ${fromName} = ${rounded} ${toName}</strong>`;
+                }
+                if (copyBtn) {
+                    copyBtn.style.display = 'flex';
+                    copyBtn.setAttribute('data-result', `${inputValue} ${fromName} = ${rounded} ${toName}`);
+                }
+                
+                resultDisplay.style.borderColor = 'var(--success-color)';
+                this.currentResult = `${inputValue} ${fromName} = ${rounded} ${toName}`;
+                
+                // Uložit stav a historii (pouze pokud není přeskočeno)
+                this.saveState();
+                if (!this.skipHistorySave) {
+                    this.saveToHistory(inputValue, fromName, rounded, toName, this.currentCategory);
+                    this.updateHistoryDisplay();
+                }
+                
+                // Analytics tracking
+                if (typeof window.trackConversion === 'function') {
+                    window.trackConversion(this.currentCategory, fromName, toName, inputValue);
+                }
+                
+                // Update URL parameters for sharing
+                try {
+                    const params = new URLSearchParams({
+                        cat: this.currentCategory,
+                        from: fromUnit,
+                        to: toUnit,
+                        v: inputValue || ''
+                    });
+                    history.replaceState(null, '', '?' + params.toString());
+                } catch (urlError) {
+                    console.warn('Nepodařilo se aktualizovat URL:', urlError);
+                }
+            } else {
+                outputElement.value = '';
+                const resultText = document.getElementById('result-text');
+                const copyBtn = document.getElementById('copy-btn');
+                
+                if (resultText) {
+                    resultText.textContent = 'Chyba při převodu - neplatný výsledek';
+                }
+                if (copyBtn) {
+                    copyBtn.style.display = 'none';
+                }
+                
+                resultDisplay.style.borderColor = 'var(--error-color)';
+            }
+        } catch (error) {
+            console.error('Chyba při převodu:', error);
+            const outputElement = document.getElementById('output-value');
+            const resultDisplay = document.getElementById('result-display');
+            const resultText = document.getElementById('result-text');
+            const copyBtn = document.getElementById('copy-btn');
+            
+            if (outputElement) outputElement.value = '';
+            if (resultText) {
+                resultText.textContent = 'Nastala neočekávaná chyba';
+            }
+            if (copyBtn) {
+                copyBtn.style.display = 'none';
+            }
+            if (resultDisplay) {
+                resultDisplay.style.borderColor = 'var(--error-color)';
+            }
+        }
+    }
+    
+    validateInput(inputValue, fromUnit, toUnit) {
+        // Kontrola prázdného pole
+        const rawInput = document.getElementById('input-value')?.value?.trim();
+        const normalized = (rawInput || '').replace(',', '.');
+        const candidate = Number(normalized);
         
-        if (isNaN(inputValue) || inputValue === '') {
-            outputElement.value = '';
-            resultDisplay.textContent = 'Zadejte hodnotu pro převod';
-            return;
+        if (!rawInput) {
+            return { isValid: false, message: 'Zadejte hodnotu pro převod' };
         }
         
-        let result;
-        
-        if (this.currentCategory === 'temperature') {
-            result = this.convertTemperature(inputValue, fromUnit, toUnit);
-        } else if (this.currentCategory === 'fuel') {
-            result = this.convertFuel(inputValue, fromUnit, toUnit);
-        } else {
-            result = this.convertStandard(inputValue, fromUnit, toUnit);
+        // Kontrola neplatného čísla
+        if (isNaN(candidate) || !isFinite(candidate)) {
+            return { isValid: false, message: 'Zadejte platné číslo (např. 123 nebo 12,5)' };
         }
         
-        if (result !== null) {
-            const rounded = this.roundResult(result);
-            outputElement.value = rounded;
-            
-            const fromName = this.conversions[this.currentCategory].units[fromUnit].name;
-            const toName = this.conversions[this.currentCategory].units[toUnit].name;
-            
-            resultDisplay.innerHTML = `<strong>${inputValue} ${fromName} = ${rounded} ${toName}</strong>`;
-            
-            // Update URL parameters for sharing
-            const params = new URLSearchParams({
-                cat: this.currentCategory,
-                from: fromUnit,
-                to: toUnit,
-                v: inputValue || ''
-            });
-            history.replaceState(null, '', '?' + params.toString());
-        } else {
-            outputElement.value = '';
-            resultDisplay.textContent = 'Chyba při převodu';
+        // Kontrola jednotek
+        if (!fromUnit || !toUnit) {
+            return { isValid: false, message: 'Vyberte jednotky pro převod' };
         }
+        
+        // Kontrola existence jednotek v aktuální kategorii
+        const units = this.conversions[this.currentCategory]?.units;
+        if (!units || !units[fromUnit] || !units[toUnit]) {
+            return { isValid: false, message: 'Neplatné jednotky pro aktuální kategorii' };
+        }
+        
+        // Kontrola rozumných limitů (zabránění overflow)
+        if (Math.abs(inputValue) > 1e15) {
+            return { isValid: false, message: 'Hodnota je příliš velká (max: 1,000,000,000,000,000)' };
+        }
+        
+        // Kontrola záporných hodnot u specifických kategorií
+        if (inputValue < 0) {
+            const negativeNotAllowed = ['weight', 'volume', 'area', 'energy', 'data', 'power'];
+            if (negativeNotAllowed.includes(this.currentCategory)) {
+                const categoryName = this.conversions[this.currentCategory].name.toLowerCase();
+                return { isValid: false, message: `Záporné hodnoty nejsou povoleny u kategorie ${categoryName}` };
+            }
+        }
+        
+        return { isValid: true };
     }
     
     convertStandard(value, fromUnit, toUnit) {
@@ -711,15 +1053,39 @@ class UnitConverter {
         }
     }
     
+    // Český formát čísel s tolerantním parsováním vstupu
+    parseAmount(str) {
+        if (typeof str === 'number') return str;
+        return Number(String(str).trim().replace(/\s/g, '').replace(',', '.'));
+    }
+    
+    formatNumber(value) {
+        const fmt = new Intl.NumberFormat('cs-CZ', { 
+            maximumFractionDigits: 4,
+            useGrouping: true 
+        });
+        return fmt.format(value);
+    }
+    
+    // Helper metody pro error handling
+    showErrorMessage(message) {
+        // Můžeme přidat toast notifikaci nebo inline error
+        console.warn('Conversion error:', message);
+    }
+    
+    clearErrorMessage() {
+        // Vyčisti případné error zprávy
+    }
+    
     roundResult(value) {
         if (Math.abs(value) >= 1000000) {
             return value.toExponential(3);
         } else if (Math.abs(value) >= 1000) {
-            return Math.round(value * 100) / 100;
+            return this.formatNumber(Math.round(value * 100) / 100);
         } else if (Math.abs(value) >= 1) {
-            return Math.round(value * 10000) / 10000;
+            return this.formatNumber(Math.round(value * 10000) / 10000);
         } else {
-            return parseFloat(value.toFixed(8));
+            return this.formatNumber(parseFloat(value.toFixed(8)));
         }
     }
     
@@ -760,6 +1126,250 @@ class UnitConverter {
         });
     }
     
+    // localStorage metody pro ukládání stavu
+    saveState() {
+        try {
+            const state = {
+                category: this.currentCategory,
+                fromUnit: document.getElementById('from-unit')?.value,
+                toUnit: document.getElementById('to-unit')?.value,
+                lastValue: document.getElementById('input-value')?.value,
+                timestamp: Date.now()
+            };
+            localStorage.setItem(this.storageKey, JSON.stringify(state));
+        } catch (error) {
+            console.warn('Nepodařilo se uložit stav:', error);
+        }
+    }
+    
+    loadState() {
+        try {
+            const saved = localStorage.getItem(this.storageKey);
+            if (saved) {
+                const state = JSON.parse(saved);
+                // Obnovit stav pouze pokud je novější než 24 hodin
+                if (Date.now() - state.timestamp < 24 * 60 * 60 * 1000) {
+                    return state;
+                }
+            }
+        } catch (error) {
+            console.warn('Nepodařilo se načíst stav:', error);
+        }
+        return null;
+    }
+    
+    saveToHistory(fromValue, fromUnit, toValue, toUnit, category) {
+        try {
+            let history = JSON.parse(localStorage.getItem(this.historyKey) || '[]');
+            
+            const conversion = {
+                from: { value: fromValue, unit: fromUnit },
+                to: { value: toValue, unit: toUnit },
+                category: category,
+                timestamp: Date.now(),
+                id: Date.now().toString()
+            };
+            
+            // Přidat na začátek a omezit na 5 záznamů
+            history.unshift(conversion);
+            history = history.slice(0, 5);
+            
+            localStorage.setItem(this.historyKey, JSON.stringify(history));
+        } catch (error) {
+            console.warn('Nepodařilo se uložit do historie:', error);
+        }
+    }
+    
+    getHistory() {
+        try {
+            return JSON.parse(localStorage.getItem(this.historyKey) || '[]');
+        } catch (error) {
+            console.warn('Nepodařilo se načíst historii:', error);
+            return [];
+        }
+    }
+    
+    updateHistoryDisplay() {
+        const history = this.getHistory();
+        const historySection = document.getElementById('history-section');
+        const historyList = document.getElementById('history-list');
+        
+        if (!historySection || !historyList) return;
+        
+        if (history.length === 0) {
+            historySection.style.display = 'none';
+            return;
+        }
+        
+        historySection.style.display = 'block';
+        historyList.innerHTML = '';
+        
+        history.forEach(item => {
+            const timeStr = this.formatTimeAgo(item.timestamp);
+            const categoryName = this.conversions[item.category]?.name || item.category;
+            
+            const historyItem = document.createElement('div');
+            historyItem.className = 'history-item';
+            historyItem.innerHTML = `
+                <div class="history-conversion">
+                    ${item.from.value} ${item.from.unit} → ${item.to.value} ${item.to.unit}
+                    <br><small style="color: #6c757d;">${categoryName}</small>
+                </div>
+                <div class="history-time">${timeStr}</div>
+            `;
+            
+            // Klik pro znovupoužití konverze
+            historyItem.addEventListener('click', () => {
+                this.loadHistoryItem(item);
+            });
+            
+            historyList.appendChild(historyItem);
+        });
+        
+        // Event listener pro vymazání historie
+        const clearBtn = document.getElementById('clear-history');
+        if (clearBtn) {
+            clearBtn.onclick = () => {
+                localStorage.removeItem(this.historyKey);
+                this.updateHistoryDisplay();
+            };
+        }
+    }
+    
+    formatTimeAgo(timestamp) {
+        const now = Date.now();
+        const diff = Math.floor((now - timestamp) / 1000); // sekundy
+        
+        if (diff < 60) return 'právě teď';
+        if (diff < 3600) return `před ${Math.floor(diff / 60)} min`;
+        if (diff < 86400) return `před ${Math.floor(diff / 3600)} h`;
+        return `před ${Math.floor(diff / 86400)} dny`;
+    }
+    
+    loadHistoryItem(item) {
+        // Najít původní klíče jednotek z názvů
+        const units = this.conversions[item.category]?.units;
+        if (!units) return;
+        
+        let fromKey = null, toKey = null;
+        Object.entries(units).forEach(([key, unit]) => {
+            if (unit.name === item.from.unit) fromKey = key;
+            if (unit.name === item.to.unit) toKey = key;
+        });
+        
+        if (!fromKey || !toKey) return;
+        
+        // Přepnout kategorii pokud je potřeba
+        if (this.currentCategory !== item.category) {
+            this.updateCategory(item.category);
+        }
+        
+        // Nastavit jednotky a hodnotu
+        setTimeout(() => {
+            const fromSelect = document.getElementById('from-unit');
+            const toSelect = document.getElementById('to-unit');
+            const inputEl = document.getElementById('input-value');
+            
+            if (fromSelect) fromSelect.value = fromKey;
+            if (toSelect) toSelect.value = toKey;
+            if (inputEl) inputEl.value = item.from.value;
+            
+            this.convert();
+        }, 50);
+    }
+    
+    // Theme management
+    initTheme() {
+        const savedTheme = localStorage.getItem(this.themeKey);
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+        this.setTheme(theme);
+    }
+    
+    toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        this.setTheme(newTheme);
+    }
+    
+    setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem(this.themeKey, theme);
+        
+        const themeIcon = document.querySelector('.theme-icon');
+        const themeToggle = document.getElementById('theme-toggle');
+        
+        if (themeIcon && themeToggle) {
+            if (theme === 'dark') {
+                themeIcon.textContent = '☀️';
+                themeToggle.classList.add('active');
+                themeToggle.title = 'Přepnout na světlý režim';
+            } else {
+                themeIcon.textContent = '🌙';
+                themeToggle.classList.remove('active');
+                themeToggle.title = 'Přepnout na tmavý režim';
+            }
+        }
+        
+        // Analytics tracking pro theme toggle (pouze při manuální změně)
+        if (typeof window.trackThemeToggle === 'function' && this.isInitialized) {
+            window.trackThemeToggle(theme);
+        }
+    }
+    
+    // Copy to clipboard functionality
+    async copyResult() {
+        const copyBtn = document.getElementById('copy-btn');
+        const result = this.currentResult || copyBtn?.getAttribute('data-result');
+        
+        if (!result) return;
+        
+        try {
+            await navigator.clipboard.writeText(result);
+            
+            // Visual feedback
+            copyBtn.textContent = '✅';
+            copyBtn.classList.add('copied');
+            copyBtn.title = 'Zkopírováno!';
+            
+            // Analytics tracking
+            if (typeof window.trackCopyResult === 'function') {
+                window.trackCopyResult();
+            }
+            
+            setTimeout(() => {
+                copyBtn.textContent = '📋';
+                copyBtn.classList.remove('copied');
+                copyBtn.title = 'Kopírovat výsledek';
+            }, 2000);
+            
+        } catch (error) {
+            console.warn('Nepodařilo se zkopírovat:', error);
+            
+            // Fallback pro starší browsery
+            const textArea = document.createElement('textarea');
+            textArea.value = result;
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                copyBtn.textContent = '✅';
+                copyBtn.title = 'Zkopírováno!';
+                
+                setTimeout(() => {
+                    copyBtn.textContent = '📋';
+                    copyBtn.title = 'Kopírovat výsledek';
+                }, 2000);
+            } catch (fallbackError) {
+                console.error('Kopírování selhalo:', fallbackError);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+    }
+    
     hydrateFromUrl() {
         const p = new URLSearchParams(location.search);
         return {
@@ -768,6 +1378,323 @@ class UnitConverter {
             to: p.get('to'),
             v: p.get('v')
         };
+    }
+    
+    // Kompatibilní bridge metoda pro zpětnou kompatibilitu
+    switchCategory(category) {
+        if (typeof this.updateCategory === 'function') {
+            return this.updateCategory(category);
+        }
+        // nouzový fallback, kdyby updateCategory nebyla:
+        this.currentCategory = category;
+        this.populateUnits?.();
+        this.convert?.();
+    }
+    
+    // Metoda pro rychlé převody bez ukládání do historie
+    async applyQuickConversion(category, fromUnit, toUnit) {
+        this.skipHistorySave = true;
+
+        // přepnout kategorii (UI, aria, atd.)
+        this.updateCategory(category);
+
+        // pokud jde o měny, tak nejdřív opravdu načti kurzy a teprve pak plň selecty
+        if (category === 'currency') {
+            try {
+                await this.loadCnbRates();      // dohledá a uloží this.cnbRates + units
+            } catch (e) {
+                console.error('Kurzy ČNB nejsou k dispozici:', e);
+                // pokračujeme – aspoň CZK bude k dispozici
+            }
+        }
+
+        // pro jistotu znovu naplň jednotky po (ne)úspěšném loadu
+        this.populateUnits();
+
+        const fromSelect  = document.getElementById('from-unit');
+        const toSelect    = document.getElementById('to-unit');
+        const inputField  = document.getElementById('input-value');
+
+        // nastav jen pokud daná možnost skutečně existuje
+        if (fromSelect?.querySelector(`option[value="${fromUnit}"]`)) fromSelect.value = fromUnit;
+        if (toSelect?.querySelector(`option[value="${toUnit}"]`))     toSelect.value   = toUnit;
+        if (inputField && !inputField.value) inputField.value = '1';
+
+        // Spustit převod
+        this.convert();
+
+        // Po krátkém zpoždění povolit historii zpět
+        setTimeout(() => {
+            this.skipHistorySave = false;
+            this.updateHistoryDisplay(); // Aktualizovat historii
+            
+            // Posunout pohled úplně nahoru
+            window.scrollTo({ 
+                top: 0, 
+                behavior: 'smooth' 
+            });
+        }, 200);
+    }
+    
+    // Převod měn přes CZK podle ČNB kurzů
+    convertCurrency(value, fromCode, toCode) {
+        const rates = this.cnbRates;
+        if (!rates || !rates[fromCode] || !rates[toCode]) return null;
+
+        // CNB dává: rateCzk = kolik CZK za 'amount' jednotek měny
+        const from = rates[fromCode]; // { amount, rateCzk }
+        const to   = rates[toCode];
+
+        // Převod z 'from' do CZK:
+        // 1 from = (rateCzk / amount) CZK
+        const czkPerFrom = from.rateCzk / from.amount;
+
+        // 1 to = (rateCzk / amount) CZK  =>  1 CZK = amount / rateCzk to-jednotek
+        const toPerCzk = to.amount / to.rateCzk;
+
+        // value[from] -> CZK -> to
+        return value * czkPerFrom * toPerCzk;
+    }
+    
+    // ČNB kurzy - načítání s cache
+    async loadCnbRates(dateStr) {
+        // dateStr volitelně 'YYYY-MM-DD' – když nenecháš, ČNB vrátí poslední dostupný pracovní den
+        const cacheKey = 'cnb_rates_v2';
+        const cache = JSON.parse(localStorage.getItem(cacheKey) || 'null');
+        const today = new Date().toISOString().slice(0,10);
+
+        // použij cache, pokud je z téhož dne vyhlášení
+        if (cache && cache.validFor === today) {
+            this.cnbRates = cache.rates;
+            
+            // DŮLEŽITÉ: I při cache musíme aktualizovat conversions.currency.units
+            this.conversions.currency.units = {};
+            Object.entries(cache.rates).forEach(([code, d]) => {
+                this.conversions.currency.units[code] = {
+                    name: d.name || code,
+                    amount: d.amount,
+                    rateCzk: d.rateCzk
+                };
+            });
+            this.conversions.currency.meta.lastUpdated = cache.validFor || today;
+            
+            return cache.rates;
+        }
+
+        let data; // ← důležité: připravit předem
+
+        try {
+            // CORS Proxy - ČNB API nemá správné CORS hlavičky
+            const baseUrl = dateStr 
+                ? `https://api.cnb.cz/cnbapi/exrates/daily?date=${dateStr}`
+                : 'https://api.cnb.cz/cnbapi/exrates/daily';
+            
+            // Zkusíme několik CORS proxy služeb
+            const proxies = [
+                `https://api.allorigins.win/get?url=${encodeURIComponent(baseUrl)}`,
+                `https://corsproxy.io/?${encodeURIComponent(baseUrl)}`,
+                `https://cors-anywhere.herokuapp.com/${baseUrl}`
+            ];
+            
+            let jsonData = null;
+            let lastError = null;
+            
+            for (const proxyUrl of proxies) {
+                try {
+                    console.log('🏦 Zkouším proxy:', proxyUrl);
+                    
+                    const jsonRes = await fetch(proxyUrl, { 
+                        cache: 'no-store',
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    console.log('🏦 Proxy response status:', jsonRes.status);
+                    
+                    if (!jsonRes.ok) throw new Error(`Proxy failed: ${jsonRes.status}`);
+                    
+                    const proxyResponse = await jsonRes.json();
+                    
+                    // allorigins.win wrappuje data v contents
+                    if (proxyResponse.contents) {
+                        jsonData = JSON.parse(proxyResponse.contents);
+                    } else {
+                        jsonData = proxyResponse;
+                    }
+                    
+                    console.log('✅ Úspěch přes proxy!');
+                    break;
+                    
+                } catch (error) {
+                    console.log('❌ Proxy selhala:', error.message);
+                    lastError = error;
+                    continue;
+                }
+            }
+            
+            if (!jsonData) {
+                throw lastError || new Error('Všechny proxy selhaly');
+            }
+            
+            console.log('🏦 ČNB API data:', jsonData);
+            
+            // Parse nového JSON formátu ČNB
+            const rates = [];
+            if (jsonData.rates && Array.isArray(jsonData.rates)) {
+                jsonData.rates.forEach(rate => {
+                    rates.push({
+                        country: rate.country,
+                        currency: rate.currency,
+                        amount: Number(rate.amount),       // např. JPY 100
+                        code: rate.currencyCode,
+                        rate: Number(rate.rate)            // CZK za 'amount' jednotek
+                    });
+                });
+            }
+            
+            // datum vyhlášení (kdy kurz platí) – pokud chybí, spadni na today
+            const validFor = (jsonData.rates && jsonData.rates[0] && jsonData.rates[0].validFor) || today;
+            data = { rates, validFor };
+
+            // map na { code: { amount, rateCzk, name, ... } }
+            const map = { CZK: { amount: 1, rateCzk: 1, name: 'česká koruna (CZK)' } };
+            data.rates.forEach(r => {
+                map[r.code] = {
+                    amount: r.amount,
+                    rateCzk: r.rate,                       // POZOR: je to CZK za 'amount'; ve výpočtu dělíme 'amount'
+                    name: `${r.currency} (${r.code})`,
+                    country: r.country
+                };
+            });
+
+            this.cnbRates = map;
+            
+            // propsat do UI slovníku měn
+            this.conversions.currency.units = {};
+            Object.entries(map).forEach(([code, d]) => {
+                this.conversions.currency.units[code] = {
+                    name: d.name || code,
+                    amount: d.amount,
+                    rateCzk: d.rateCzk
+                };
+            });
+            this.conversions.currency.meta.lastUpdated = data.validFor;
+
+            // uložit cache podle skutečného data kurzu
+            localStorage.setItem(cacheKey, JSON.stringify({
+                date: today,        // kdy jsme to načetli
+                validFor: data.validFor, // kdy platí kurz ČNB
+                rates: map
+            }));
+
+            console.log('✅ ČNB kurzy úspěšně načteny:', Object.keys(map).length, 'měn');
+            console.log('💰 EUR kurz:', map.EUR?.rateCzk, 'CZK');
+
+            return map;
+        } catch (error) {
+            console.error('❌ Chyba při načítání ČNB kurzů:', error);
+            console.error('🔄 Používám fallback...');
+            // Fallback na cache, i když je starší
+            if (cache && cache.rates) {
+                this.cnbRates = cache.rates;
+                
+                // Aktualizovat conversions.currency.units i při fallback
+                this.conversions.currency.units = {};
+                Object.entries(cache.rates).forEach(([code, data]) => {
+                    this.conversions.currency.units[code] = {
+                        name: data.name || `${code}`,
+                        amount: data.amount,
+                        rateCzk: data.rateCzk
+                    };
+                });
+                this.conversions.currency.meta.lastUpdated = cache.validFor || 'starší cache';
+                
+                return cache.rates;
+            }
+            
+            // Finální fallback - statické kurzy (aproximace)
+            const staticRates = {
+                CZK: { amount: 1, rateCzk: 1, name: 'česká koruna (CZK)' },
+                EUR: { amount: 1, rateCzk: 25.5, name: 'euro (EUR)' },
+                USD: { amount: 1, rateCzk: 23.2, name: 'americký dolar (USD)' },
+                GBP: { amount: 1, rateCzk: 29.8, name: 'britská libra (GBP)' },
+                CHF: { amount: 1, rateCzk: 26.1, name: 'švýcarský frank (CHF)' },
+                JPY: { amount: 100, rateCzk: 15.8, name: 'japonský jen (JPY)' },
+                PLN: { amount: 1, rateCzk: 5.9, name: 'polský zlotý (PLN)' },
+                HUF: { amount: 100, rateCzk: 6.2, name: 'maďarský forint (HUF)' },
+                NOK: { amount: 1, rateCzk: 2.2, name: 'norská koruna (NOK)' },
+                SEK: { amount: 1, rateCzk: 2.3, name: 'švédská koruna (SEK)' },
+                DKK: { amount: 1, rateCzk: 3.4, name: 'dánská koruna (DKK)' }
+            };
+            
+            this.cnbRates = staticRates;
+            this.conversions.currency.units = {};
+            Object.entries(staticRates).forEach(([code, data]) => {
+                this.conversions.currency.units[code] = {
+                    name: data.name,
+                    amount: data.amount,
+                    rateCzk: data.rateCzk
+                };
+            });
+            this.conversions.currency.meta.lastUpdated = today; // Použij dnešní datum
+            
+            return staticRates;
+        }
+    }
+    
+    // Auto-refresh kurzů každý pracovní den ve 14:35 (Evropa/Praha)
+    setupAutoRefresh() {
+        const TZ = 'Europe/Prague';
+        
+        const nextRefreshMs = () => {
+            const now = new Date();
+            const prgNow = new Date(now.toLocaleString('en-CA', { timeZone: TZ }));
+            const target = new Date(prgNow);
+            
+            // Nastav čas na 14:35
+            target.setHours(14, 35, 0, 0);
+            
+            // Pokud už je po 14:35 dnes, nastav zítra
+            if (prgNow > target) {
+                target.setDate(target.getDate() + 1);
+            }
+            
+            // Přeskoč víkendy (0=neděle, 6=sobota)
+            while ([0, 6].includes(target.getDay())) {
+                target.setDate(target.getDate() + 1);
+            }
+            
+            return target.getTime() - prgNow.getTime();
+        };
+        
+        const scheduleRefresh = async () => {
+            try {
+                console.log('🔄 Auto-refresh: Načítám nové ČNB kurzy...');
+                await this.loadCnbRates();
+                
+                if (this.currentCategory === 'currency') {
+                    this.populateUnits();
+                    this.updateCurrencyInfo();
+                    this.convert();
+                }
+                
+                console.log('✅ Auto-refresh: Kurzy úspěšně aktualizovány');
+            } catch (error) {
+                console.error('❌ Auto-refresh: Chyba při aktualizaci kurzů:', error);
+            }
+            
+            // Naplánuj další refresh za 24h (jeden pokus denně)
+            setTimeout(scheduleRefresh, 24 * 60 * 60 * 1000);
+        };
+        
+        // Naplánuj první refresh
+        const msToNext = nextRefreshMs();
+        console.log(`🏦 Auto-refresh naplánován za ${Math.round(msToNext / 1000 / 60)} minut`);
+        
+        setTimeout(() => {
+            scheduleRefresh();
+        }, msToNext);
     }
 }
 
