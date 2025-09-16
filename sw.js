@@ -1,9 +1,9 @@
 // Service Worker pro Konvertor.cz - Offline functionality
-const CACHE_NAME = 'konvertor-v2.3';
+const CACHE_NAME = 'konvertor-v2.4';
 const CACHE_ASSETS = [
     '/',
     '/index.html',
-    '/converter.js?v=20250907-v3', // přidat verzi pro úplnou cache kontrolu
+    '/converter.js?v=20250916-v4', // přidat verzi pro úplnou cache kontrolu
     '/manifest.json',
     '/favicon.ico'
 ];

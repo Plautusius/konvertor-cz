@@ -31,6 +31,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Konvertor.cz">
 
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4014521280729531"
+         crossorigin="anonymous"></script>
+
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
     <script>
@@ -142,38 +146,82 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            background: linear-gradient(135deg, #6c7b8a 0%, #8a9ba8 100%);
             color: white;
-            padding: 30px;
-            text-align: center;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .site-logo {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .site-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .header-text h1 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.1;
+        }
+
+        .header-text p {
+            color: #333;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 2px 0 0 0;
+            line-height: 1.2;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.15);
         }
         
         /* Theme Toggle */
         .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.2);
-            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-right: 10px;
         }
         
         .theme-toggle:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.1);
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
         
         .theme-icon {
-            font-size: 24px;
+            font-size: 18px;
             transition: transform 0.3s ease;
         }
         
@@ -181,16 +229,6 @@
             transform: rotate(180deg);
         }
 
-            .header h1 {
-                font-size: 2.5em;
-                font-weight: 300;
-                margin-bottom: 10px;
-            }
-
-            .header p {
-                opacity: 0.9;
-                font-size: 1.1em;
-            }
 
         .content {
             padding: 30px;
@@ -206,24 +244,27 @@
 
         .category-btn {
             padding: 12px 8px;
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
+            background: #ffffff;
+            border: 2px solid #dee2e6;
             border-radius: 8px;
             cursor: pointer;
             text-align: center;
             transition: all 0.3s ease;
             font-weight: 600;
-            color: #495057;
+            color: #2c3e50;
             font-size: 13px;
             min-height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
             .category-btn:hover {
-                background: #e9ecef;
+                background: #f8f9fa;
                 transform: translateY(-2px);
+                border-color: #3498db;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.15);
             }
 
             .category-btn.active {
@@ -408,9 +449,11 @@
             text-align: center;
             margin: 30px 0;
             padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
+            background: var(--bg-section);
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
         }
 
         .adsense-placeholder {
@@ -471,19 +514,50 @@
             background: #c0392b !important;
         }
 
+        /* Rychlé převody sekce */
+        .quick-conversions-section {
+            background: var(--bg-section);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .quick-conversions-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 20px 0 15px 0;
+            color: #222;
+        }
+
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
         /* Chip komponenty pro rychlé převody */
         .chip {
-            display:inline-block;
-            padding:8px 12px;
-            border-radius:999px;
-            border:1px solid var(--border-color);
-            background:var(--input-bg);
-            color:var(--text-primary);
-            text-decoration:none;
-            font-size:13px;
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid #2563eb;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f3ff 100%);
+            color: #1d4ed8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.15);
         }
+        
         .chip:hover { 
-            border-color:#3498db; 
+            background: #2563eb;
+            color: white;
+            border-color: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
 
         /* Zajistí konzistentní vzhled nativních prvků v dark režimu */
@@ -526,6 +600,27 @@
             background: #34495e !important;
             color: #bdc3c7 !important;
             border-left-color: #3498db !important;
+        }
+
+        /* Dark mode pro rychlé převody */
+        [data-theme="dark"] .quick-conversions-section {
+            background: #34495e !important;
+        }
+
+        [data-theme="dark"] .quick-conversions-title {
+            color: #ecf0f1 !important;
+        }
+
+        [data-theme="dark"] .chip {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
+            color: #74b9ff !important;
+            border-color: #74b9ff !important;
+        }
+
+        [data-theme="dark"] .chip:hover {
+            background: #0984e3 !important;
+            color: white !important;
+            border-color: #0984e3 !important;
         }
 
         .footer {
@@ -575,6 +670,34 @@
             .unit-info-card { transition: none; }
         }
         
+        /* Hide slogan on small screens */
+        @media (max-width: 600px) {
+            .header-text p {
+                display: none;
+            }
+            
+            /* Mobilní optimalizace rychlých převodů */
+            .quick-conversions-section {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            
+            .quick-conversions-title {
+                font-size: 1.1rem;
+                margin: 10px 0 12px 0;
+            }
+            
+            .quick-links {
+                gap: 8px;
+            }
+            
+            .chip {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+                margin: 2px;
+            }
+        }
+
         /* 📱 Mobilní optimalizace */
         @media (max-width: 768px) {
             body {
@@ -582,12 +705,41 @@
             }
 
             .header {
-                padding: 20px;
+                padding: 10px 15px;
+                flex-direction: column;
+                gap: 10px;
             }
 
-                .header h1 {
-                    font-size: 2em;
-                }
+            .header-left {
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .header-text {
+                text-align: center;
+            }
+
+            .header-text h1 {
+                font-size: 1.2rem;
+            }
+
+            .header-text p {
+                font-size: 0.75rem;
+            }
+
+            .site-logo {
+                height: 35px;
+            }
+
+            .theme-toggle {
+                width: 32px;
+                height: 32px;
+                margin-right: 8px;
+            }
+
+            .theme-icon {
+                font-size: 16px;
+            }
 
             .content {
                 padding: 20px;
@@ -647,11 +799,16 @@
 <body>
     <div class="container">
         <div class="header">
+            <div class="header-left">
+                <img src="Lyra.png" alt="Lyra Logo" class="site-logo">
+                <div class="header-text">
+                    <h1>Konvertor.cz</h1>
+                    <p>Rychlý převod jednotek</p>
+                </div>
+            </div>
             <div class="theme-toggle" id="theme-toggle" title="Přepnout tmavý/světlý režim">
                 <span class="theme-icon">🌙</span>
             </div>
-            <h1>Konvertor.cz</h1>
-            <p>Rychlý a přesný převod všech měřicích jednotek</p>
         </div>
 
         <div class="content">
@@ -717,11 +874,32 @@
                 </div>
             </div>
 
+            <!-- Rychlé převody -->
+            <section class="quick-conversions-section">
+              <h3 class="quick-conversions-title">⚡ Rychlé převody</h3>
+              <nav class="quick-links">
+                <a href="#" class="chip quick-link" data-cat="length" data-from="in" data-to="cm">Palce ↔ cm</a>
+                <a href="#" class="chip quick-link" data-cat="weight" data-from="lb" data-to="kg">Libry ↔ kg</a>
+                <a href="#" class="chip quick-link" data-cat="volume" data-from="gal" data-to="l">Galony ↔ l</a>
+                <a href="#" class="chip quick-link" data-cat="speed" data-from="mph" data-to="kmh">mph ↔ km/h</a>
+                <a href="#" class="chip quick-link" data-cat="temperature" data-from="f" data-to="c">°F ↔ °C</a>
+                <a href="#" class="chip quick-link" data-cat="fuel" data-from="l100" data-to="mpg_us">l/100 km ↔ mpg</a>
+                <a href="#" class="chip quick-link" data-cat="currency" data-from="EUR" data-to="CZK">EUR ↔ CZK</a>
+                <a href="#" class="chip quick-link" data-cat="currency" data-from="USD" data-to="CZK">USD ↔ CZK</a>
+              </nav>
+            </section>
+
             <!-- Google AdSense prostor -->
             <div class="adsense-container">
-                <div class="adsense-placeholder">
-                    Místo pro Google AdSense reklamu (728×90)
-                </div>
+                <div aria-hidden="true" style="font-size:12px;color:#6c757d;margin-bottom:6px">Reklama</div>
+                <!-- Header-728x90 -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:728px;height:90px"
+                     data-ad-client="ca-pub-4014521280729531"
+                     data-ad-slot="8858744510"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
 
             <!-- Historie převodů -->
@@ -734,20 +912,6 @@
             </div>
 
             <div class="quick-converts" id="unit-info"></div>
-            
-            <section aria-labelledby="quick-links-heading" class="converter-section" style="margin-top:24px">
-              <h2 id="quick-links-heading" style="font-size:18px;margin-bottom:10px">Rychlé převody</h2>
-              <nav class="quick-links" style="display:flex;flex-wrap:wrap;gap:8px">
-                <a href="#" class="chip quick-link" data-cat="length" data-from="in" data-to="cm">Palce ↔ cm</a>
-                <a href="#" class="chip quick-link" data-cat="weight" data-from="lb" data-to="kg">Libry ↔ kg</a>
-                <a href="#" class="chip quick-link" data-cat="volume" data-from="gal" data-to="l">Galony ↔ l</a>
-                <a href="#" class="chip quick-link" data-cat="speed" data-from="mph" data-to="kmh">mph ↔ km/h</a>
-                <a href="#" class="chip quick-link" data-cat="temperature" data-from="f" data-to="c">°F ↔ °C</a>
-                <a href="#" class="chip quick-link" data-cat="fuel" data-from="l100" data-to="mpg_us">l/100 km ↔ mpg</a>
-                <a href="#" class="chip quick-link" data-cat="currency" data-from="EUR" data-to="CZK">EUR ↔ CZK</a>
-                <a href="#" class="chip quick-link" data-cat="currency" data-from="USD" data-to="CZK">USD ↔ CZK</a>
-              </nav>
-            </section>
         </div>
         
         <!-- Noscript fallback -->
