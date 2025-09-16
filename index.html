@@ -945,7 +945,11 @@
               •
               <a href="/cookie-policy.html" style="color:#74b9ff;text-decoration:none">Zásady cookies</a>
               •
-              <a href="#" onclick="window.showCookieBanner&&window.showCookieBanner(true);return false;" style="color:#74b9ff;text-decoration:none">Nastavení cookies</a>
+              <a href="#"
+   onclick="if(window.googlefc && typeof googlefc.showPreferenceCenter==='function'){ googlefc.showPreferenceCenter(); } else { alert('Ovládací panel souhlasu bude dostupný po načtení CMP. Zkuste to prosím za chvíli.'); } return false;"
+   style="color:#74b9ff;text-decoration:none">
+  Nastavení cookies
+</a>
             </p>
         </div>
     </div>
@@ -1044,54 +1048,5 @@
             });
         }
     </script>
-
-<style>
-  .cookie-banner{position:fixed;inset:auto 0 0 0;background:#1f2937;color:#fff;padding:16px;z-index:9999;box-shadow:0 -6px 20px rgba(0,0,0,.3)}
-  .cookie-wrap{max-width:1100px;margin:0 auto;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-  .cookie-title{font-weight:700;margin-right:auto}
-  .cookie-btn{border:0;padding:10px 14px;border-radius:8px;cursor:pointer}
-  .cb-primary{background:#2563eb;color:#fff}
-  .cb-secondary{background:#374151;color:#fff}
-  .cookie-links a{color:#93c5fd;margin-left:10px}
-</style>
-<div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Nastavení soukromí" hidden>
-  <div class="cookie-wrap">
-    <div class="cookie-title">🍪 Cookies na Konvertor.cz</div>
-    <div class="cookie-text">Používáme cookies pro provoz webu, analytiku a reklamu (Google). Více v
-      <span class="cookie-links">
-        <a href="/privacy-policy.html">Zásady ochrany soukromí</a> •
-        <a href="/cookie-policy.html">Cookies</a>
-      </span>
-    </div>
-    <button id="cb-accept-all" class="cookie-btn cb-primary">Přijmout vše</button>
-    <button id="cb-decline" class="cookie-btn cb-secondary">Pouze nutné</button>
-  </div>
-</div>
-<script>
-  (function(){
-    const KEY='konvertor_cookie_consent_v2';
-    function applyConsent(granted){
-      gtag('consent','update',{
-        ad_storage: granted?'granted':'denied',
-        analytics_storage: granted?'granted':'denied',
-        ad_user_data: granted?'granted':'denied',
-        ad_personalization: granted?'granted':'denied'
-      });
-    }
-    function show(flag){ banner.hidden = !flag; if(flag) banner.focus && banner.focus(); }
-    window.showCookieBanner = show;
-
-    const banner = document.getElementById('cookie-banner');
-    const saved = localStorage.getItem(KEY);
-    if(!saved){ show(true); } else { applyConsent(saved==='granted'); }
-
-    document.getElementById('cb-accept-all').onclick = () => {
-      localStorage.setItem(KEY,'granted'); applyConsent(true); show(false);
-    };
-    document.getElementById('cb-decline').onclick = () => {
-      localStorage.setItem(KEY,'denied'); applyConsent(false); show(false);
-    };
-  })();
-</script>
 </body>
 </html>
