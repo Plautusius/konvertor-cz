@@ -1,50 +1,380 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="utf-8">
-  <title>Zásady používání cookies | Konvertor.cz</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="noindex,follow">
-  <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6;margin:2rem;max-width:900px}
-    h1{margin-bottom:0.5rem} small{color:#666}
-    table{border-collapse:collapse;width:100%;margin:1rem 0}
-    th,td{border:1px solid #e5e7eb;padding:.5rem;text-align:left}
-    a{color:#2563eb}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zásady používání cookies | Konvertor.cz</title>
+    <meta name="description" content="Zásady používání cookies na webu Konvertor.cz. Informace o typech cookies a správě souhlasů.">
+    <meta name="robots" content="index,follow">
+
+    <!-- Consent Mode v2 + Funding Choices CMP -->
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-4014521280729531?ers=1"></script>
+
+    <script>
+  // Consent Mode v2 – výchozí stav (bez souhlasu vše denied)
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    analytics_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    wait_for_update: 500
+  });
+</script>
+
+    <script>
+  // Bezpečný wrapper na preference centrum CMP
+  window.openConsentCenter = function () {
+    try {
+      if (window.googlefc && typeof window.googlefc.showPreferenceCenter === 'function') {
+        window.googlefc.showPreferenceCenter();
+      } else {
+        alert('Ovládací panel souhlasu bude dostupný po načtení CMP. Zkuste to prosím za chvíli.');
+      }
+    } catch (e) { console.warn(e); }
+  };
+</script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4014521280729531"
+         crossorigin="anonymous"></script>
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-61KMPVHQ8L"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-61KMPVHQ8L', {
+            page_title: 'Zásady cookies | Konvertor.cz',
+            custom_map: {'custom_parameter_1': 'cookie_policy'},
+            send_page_view: true,
+            debug_mode: location.hostname === 'localhost'
+        });
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #6c7b8a 0%, #8a9ba8 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .content h2 {
+            color: #2c3e50;
+            margin: 30px 0 15px 0;
+            font-size: 1.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+
+        .content h3 {
+            color: #34495e;
+            margin: 20px 0 10px 0;
+            font-size: 1.2em;
+        }
+
+        .content p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .content ul {
+            margin: 15px 0 15px 30px;
+            color: #555;
+        }
+
+        .content li {
+            margin-bottom: 8px;
+        }
+
+        .cookie-category {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .cookie-category h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background: #3498db;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .consent-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .consent-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .home-link {
+            display: inline-block;
+            color: #3498db;
+            text-decoration: none;
+            padding: 10px 0;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .home-link:hover {
+            border-bottom-color: #3498db;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 30px 20px;
+            }
+
+            .header {
+                padding: 25px 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Zásady používání cookies</h1>
-  <small>Naposledy aktualizováno: 16. 09. 2025</small>
+    <div class="container">
+        <div class="header">
+            <h1>Zásady používání cookies</h1>
+            <p>Konvertor.cz – Převodník jednotek</p>
+        </div>
 
-  <p>Cookies jsou malé soubory ukládané do vašeho prohlížeče. Na Konvertor.cz používáme tyto kategorie:</p>
-  <ul>
-    <li><strong>NUTNÉ</strong> – zajišťují základní funkce webu (např. volba jazyka/režimu).</li>
-    <li><strong>ANALYTICKÉ</strong> – pomáhají nám porozumět používání webu (Google Analytics).</li>
-    <li><strong>REKLAMNÍ</strong> – umožňují zobrazování relevantních reklam (Google AdSense).</li>
-  </ul>
+        <div class="content">
+            <a href="/" class="home-link">← Zpět na hlavní stránku</a>
 
-  <h2>Seznam cookies</h2>
-  <table>
-    <tr><th>Název</th><th>Typ</th><th>Účel</th><th>Životnost</th></tr>
-    <tr><td>konvertor_cookie_consent_v2</td><td>Nutné</td><td>Uložení vašeho souhlasu s cookies</td><td>1 rok</td></tr>
-    <tr><td>_ga, _ga_*</td><td>Analytické</td><td>Google Analytics – anonymní statistiky návštěv</td><td>2 roky</td></tr>
-    <tr><td>__gads, __gpi</td><td>Reklamní</td><td>Google AdSense – doručování reklam</td><td>1 rok</td></tr>
-  </table>
+            <h2>1. Co jsou cookies?</h2>
+            <p>Cookies jsou malé textové soubory, které se ukládají do vašeho prohlížeče při návštěvě webových stránek. Pomáhají webům zapamatovat si informace o vaší návštěvě a zlepšit váš uživatelský zážitek.</p>
 
-  <h2>Správa souhlasu</h2>
-  <p>Souhlas s cookies můžete kdykoliv změnit:</p>
-  <ul>
-    <li>V nastavení prohlížeče (smazání cookies)</li>
-    <li>Kliknutím na <strong>„Nastavení cookies"</strong> v patičce webu</li>
-  </ul>
+            <h2>2. Kategorie cookies</h2>
+            <p>Na webu Konvertor.cz používáme tyto kategorie cookies:</p>
 
-  <h2>Třetí strany</h2>
-  <p><strong>Google</strong> (Analytics, AdSense) – více na <a href="https://policies.google.com/technologies/cookies">policies.google.com/technologies/cookies</a></p>
+            <div class="cookie-category">
+                <h4>🔧 Nezbytné cookies</h4>
+                <p>Tyto cookies jsou nutné pro základní fungování webu. Bez nich web nemůže fungovat správně. Nelze je zakázat.</p>
+            </div>
 
-  <h2>Kontakt</h2>
-  <p>E-mail: <a href="mailto:konvertorcz@gmail.com">konvertorcz@gmail.com</a></p>
+            <div class="cookie-category">
+                <h4>📊 Analytické cookies</h4>
+                <p>Pomáhají nám pochopit, jak návštěvníci používají web. Data jsou anonymní a slouží ke zlepšení webu. <strong>Vyžadují souhlas.</strong></p>
+            </div>
 
-  <p><a href="/">← Zpět na hlavní stránku</a></p>
+            <div class="cookie-category">
+                <h4>📢 Reklamní cookies</h4>
+                <p>Umožňují zobrazení relevantních reklam a měření jejich účinnosti. Mohou sledovat návštěvníky napříč weby. <strong>Vyžadují souhlas.</strong></p>
+            </div>
+
+            <h2>3. Detailní seznam cookies</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Název</th>
+                        <th>Kategorie</th>
+                        <th>Účel</th>
+                        <th>Životnost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>konvertor_theme</td>
+                        <td>Nezbytné</td>
+                        <td>Pamatuje si výběr světlého/tmavého režimu</td>
+                        <td>1 rok</td>
+                    </tr>
+                    <tr>
+                        <td>konvertor_lang</td>
+                        <td>Nezbytné</td>
+                        <td>Pamatuje si výběr jazyka (čeština/angličtina)</td>
+                        <td>1 rok</td>
+                    </tr>
+                    <tr>
+                        <td>_ga, _ga_*</td>
+                        <td>Analytické</td>
+                        <td>Google Analytics – měření návštěvnosti, anonymní statistiky</td>
+                        <td>2 roky</td>
+                    </tr>
+                    <tr>
+                        <td>__gads, __gpi</td>
+                        <td>Reklamní</td>
+                        <td>Google AdSense – zobrazení a měření reklam</td>
+                        <td>1 rok</td>
+                    </tr>
+                    <tr>
+                        <td>__Secure-FPLC</td>
+                        <td>Reklamní</td>
+                        <td>Google Funding Choices – správa souhlasu s cookies</td>
+                        <td>30 dní</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>4. Consent Mode v2</h2>
+            <p>Náš web využívá <strong>Google Consent Mode v2</strong>, což znamená:</p>
+            <ul>
+                <li>Bez vašeho souhlasu jsou analytické a reklamní cookies v režimu <em>"denied"</em></li>
+                <li>Data se sbírají anonymně a v omezené míře</li>
+                <li>Personalizované reklamy fungují pouze se souhlasem</li>
+                <li>Vaše preference se respektují po celou dobu návštěvy</li>
+            </ul>
+
+            <h2>5. Správa souhlasů</h2>
+            <p>Své preference ohledně cookies můžete spravovat několika způsoby:</p>
+
+            <h3>Ovládací panel cookies</h3>
+            <p>Nejjednodušší způsob je použít náš ovládací panel:</p>
+            <button onclick="openConsentCenter()" class="consent-btn">
+                Spravovat souhlasy
+            </button>
+
+            <h3>Nastavení prohlížeče</h3>
+            <p>Cookies můžete také spravovat přímo v nastavení vašeho prohlížeče:</p>
+            <ul>
+                <li><strong>Chrome:</strong> Nastavení → Ochrana soukromí a zabezpečení → Cookies</li>
+                <li><strong>Firefox:</strong> Nastavení → Ochrana osobních údajů → Cookies</li>
+                <li><strong>Safari:</strong> Předvolby → Ochrana soukromí</li>
+                <li><strong>Edge:</strong> Nastavení → Oprávnění webu → Cookies</li>
+            </ul>
+
+            <h2>6. Služby třetích stran</h2>
+            <h3>Google služby</h3>
+            <p>Používáme tyto služby Google:</p>
+            <ul>
+                <li><strong>Google Analytics 4</strong> – měření návštěvnosti</li>
+                <li><strong>Google AdSense</strong> – zobrazení reklam</li>
+                <li><strong>Google Funding Choices</strong> – správa souhlasu</li>
+            </ul>
+            <p>Více o zpracování údajů společností Google: <a href="https://policies.google.com/technologies/partner-sites" target="_blank">policies.google.com/technologies/partner-sites</a></p>
+
+            <h2>7. Vaše práva</h2>
+            <p>V souvislosti s cookies máte právo:</p>
+            <ul>
+                <li>Být informován/a o používání cookies</li>
+                <li>Udělit nebo odepřít souhlas</li>
+                <li>Kdykoli souhlas odvolat</li>
+                <li>Smazat cookies ze svého zařízení</li>
+                <li>Zvolit si, které cookies chcete povolit</li>
+            </ul>
+
+            <h2>8. Kontakt</h2>
+            <p>V případě otázek ohledně používání cookies nás kontaktujte prostřednictvím této webové stránky.</p>
+
+            <p><em>Poslední aktualizace: září 2025</em></p>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 Konvertor.cz – Rychlý převod všech jednotek</p>
+            <p>
+                <a href="/privacy-policy.html" style="color:#74b9ff;text-decoration:none">Zásady ochrany soukromí</a>
+                •
+                <a href="#" onclick="openConsentCenter(); return false;" style="color:#74b9ff;text-decoration:none">Nastavení cookies</a>
+            </p>
+        </div>
+    </div>
 </body>
 </html>

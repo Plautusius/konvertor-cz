@@ -47,6 +47,19 @@
   });
 </script>
 
+    <script>
+  // Bezpečný wrapper na preference centrum CMP
+  window.openConsentCenter = function () {
+    try {
+      if (window.googlefc && typeof window.googlefc.showPreferenceCenter === 'function') {
+        window.googlefc.showPreferenceCenter();
+      } else {
+        alert('Ovládací panel souhlasu bude dostupný po načtení CMP. Zkuste to prosím za chvíli.');
+      }
+    } catch (e) { console.warn(e); }
+  };
+</script>
+
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4014521280729531"
          crossorigin="anonymous"></script>
@@ -59,7 +72,9 @@
         gtag('js', new Date());
         gtag('config', 'G-61KMPVHQ8L', {
             page_title: 'Převodník jednotek | Konvertor.cz',
-            custom_map: {'custom_parameter_1': 'conversion_category'}
+            custom_map: {'custom_parameter_1': 'conversion_category'},
+            send_page_view: true,
+            debug_mode: location.hostname === 'localhost'
         });
         
         // Custom events for conversions
@@ -916,6 +931,22 @@
                 <script>
                      (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
+
+                <!--
+                Responzivní in-article (volitelné – zapnout až po schválení a stabilní návštěvnosti)
+                <p style="text-align:center;margin:20px 0;">
+                  <ins class="adsbygoogle"
+                       style="display:block"
+                       data-ad-client="ca-pub-4014521280729531"
+                       data-ad-slot="8858744510"
+                       data-ad-format="fluid"
+                       data-ad-layout="in-article"
+                       data-full-width-responsive="true"></ins>
+                </p>
+                <script>
+                  // (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                -->
             </div>
 
             <!-- Historie převodů -->
@@ -948,9 +979,7 @@
               •
               <a href="/cookie-policy.html" style="color:#74b9ff;text-decoration:none">Zásady cookies</a>
               •
-              <a href="#"
-   onclick="if(window.googlefc && typeof googlefc.showPreferenceCenter==='function'){ googlefc.showPreferenceCenter(); } else { alert('Ovládací panel souhlasu bude dostupný po načtení CMP. Zkuste to prosím za chvíli.'); } return false;"
-   style="color:#74b9ff;text-decoration:none">
+              <a href="#" onclick="openConsentCenter(); return false;" style="color:#74b9ff;text-decoration:none">
   Nastavení cookies
 </a>
             </p>
