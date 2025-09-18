@@ -22,6 +22,28 @@
     <meta name="twitter:description" content="Okamžitý převod: palce na cm, libry na kilogramy, galony na litry a víc.">
     <meta name="twitter:image" content="https://konvertor.cz/og-image.png">
     
+    <!-- Google Consent Mode v2 – defaults (must be FIRST in <head>) -->
+    <script>
+      // defaultně (před souhlasem) nic neukládat a neměřit
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+
+      // Consent Mode v2 – default denied + krátké čekání na update z CMP
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied',
+        'wait_for_update': 500   // malý buffer, ať se GA/Ads chytí po udělení souhlasu
+      });
+    </script>
+
+    <!-- 1) Funding Choices (Google CMP) – loader -->
+    <script
+      async
+      src="https://fundingchoicesmessages.google.com/i/pub-4014521280729531?region=eea,uk&domain=konvertor.cz&ers=1">
+    </script>
+
     <!-- Color scheme -->
     <meta name="color-scheme" content="light dark">
 
@@ -31,52 +53,39 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Konvertor.cz">
 
-    <!-- Consent Mode v2 (ponech, máš ho) + Funding Choices CMP -->
-    <script async src="https://fundingchoicesmessages.google.com/i/pub-4014521280729531?ers=1"></script>
-
     <script>
-  // Consent Mode v2 – výchozí stav (bez souhlasu vše denied)
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('consent', 'default', {
-    ad_storage: 'denied',
-    analytics_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-    wait_for_update: 500
-  });
-</script>
+      // Bezpečný wrapper na preference centrum CMP
+      window.openConsentCenter = function () {
+        try {
+          if (window.googlefc && typeof window.googlefc.showPreferenceCenter === 'function') {
+            window.googlefc.showPreferenceCenter();
+          } else {
+            alert('Ovládací panel souhlasu bude dostupný po načtení CMP. Zkuste to prosím za chvíli.');
+          }
+        } catch (e) { console.warn(e); }
+      };
+    </script>
 
+    <!-- GA4 loader -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-61KMPVHQ8L"></script>
     <script>
-  // Bezpečný wrapper na preference centrum CMP
-  window.openConsentCenter = function () {
-    try {
-      if (window.googlefc && typeof window.googlefc.showPreferenceCenter === 'function') {
-        window.googlefc.showPreferenceCenter();
-      } else {
-        alert('Ovládací panel souhlasu bude dostupný po načtení CMP. Zkuste to prosím za chvíli.');
-      }
-    } catch (e) { console.warn(e); }
-  };
-</script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
 
-    <!-- Google AdSense -->
+      // Consent Mode default je VÝŠE, to nech tak jak je
+      gtag('js', new Date());
+      gtag('config', 'G-61KMPVHQ8L', {
+        page_title: 'Převodník jednotek | Konvertor.cz',
+        send_page_view: true
+      });
+    </script>
+
+    <!-- AdSense (za Consent Mode) -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4014521280729531"
          crossorigin="anonymous"></script>
 
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-61KMPVHQ8L"></script>
+    <!-- Custom tracking events -->
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-61KMPVHQ8L', {
-            page_title: 'Převodník jednotek | Konvertor.cz',
-            custom_map: {'custom_parameter_1': 'conversion_category'},
-            send_page_view: true,
-            debug_mode: location.hostname === 'localhost'
-        });
-        
         // Custom events for conversions
         function trackConversion(category, fromUnit, toUnit, value) {
             if (typeof gtag !== 'undefined') {
@@ -89,7 +98,7 @@
                 });
             }
         }
-        
+
         function trackCategorySwitch(newCategory, oldCategory) {
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'category_switch', {
@@ -98,7 +107,7 @@
                 });
             }
         }
-        
+
         function trackThemeToggle(newTheme) {
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'theme_toggle', {
@@ -106,7 +115,7 @@
                 });
             }
         }
-        
+
         function trackCopyResult() {
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'copy_result', {
@@ -498,6 +507,14 @@
             font-size: 14px;
         }
 
+        /* výběr varianty čistě přes CSS */
+        .ad-desktop{ display:none }
+        .ad-mobile{ display:block }
+        @media (min-width: 769px){
+          .ad-desktop{ display:inline-block }
+          .ad-mobile{ display:none }
+        }
+
         /* Historie převodů */
         .history-section {
             background: #f8f9fa;
@@ -729,6 +746,40 @@
             }
         }
 
+        /* 💻 Desktop - obnovit původní chip styling */
+        @media (min-width: 769px) {
+            .quick-grid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .quick-btn {
+                /* Vynulovat mobilní styl a použít původní chip styling */
+                display: inline-block !important;
+                padding: 8px 16px !important;
+                background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+                color: white !important;
+                border: none !important;
+                border-radius: 25px !important;
+                font-size: 0.9rem !important;
+                font-weight: 500 !important;
+                text-decoration: none !important;
+                cursor: pointer !important;
+                transition: all 0.2s ease !important;
+                line-height: normal !important;
+                gap: 0 !important;
+            }
+            .quick-btn:hover {
+                background: linear-gradient(135deg, #2980b9 0%, #3498db 100%) !important;
+                color: white !important;
+                transform: translateY(-1px) !important;
+                box-shadow: 0 2px 8px rgba(52, 152, 219, 0.25) !important;
+            }
+            .quick-btn .icon {
+                display: none; /* Schovat emoji ikony na desktopu */
+            }
+        }
+
         /* 📱 Mobilní optimalizace */
         @media (max-width: 768px) {
             body {
@@ -737,17 +788,19 @@
 
             .header {
                 padding: 10px 15px;
-                flex-direction: column;
+                flex-direction: row;
+                justify-content: space-between;
                 gap: 10px;
             }
 
             .header-left {
-                justify-content: center;
-                gap: 10px;
+                justify-content: flex-start;
+                gap: 8px;
+                flex: 1;
             }
 
             .header-text {
-                text-align: center;
+                text-align: left;
             }
 
             .header-text h1 {
@@ -804,6 +857,89 @@
                 padding: 10px 6px;
                 min-height: 38px;
             }
+
+            /* === Nová mobilní vylepšení === */
+
+            /* 1) Lepší sticky header - pouze přidat sticky vlastnosti */
+            .header {
+                position: sticky;
+                top: 0;
+                z-index: 50;
+                backdrop-filter: blur(6px);
+            }
+
+            /* 2) Hlavní obsah – příjemnější okraje a vertikální rytmus */
+            .container {
+                padding-left: 14px !important;
+                padding-right: 14px !important;
+            }
+            section {
+                margin-bottom: 18px;
+            }
+
+            /* 3) Inputy a ovládací prvky: větší "touch targets" */
+            input[type="number"], input[type="text"], select {
+                font-size: 18px;
+                padding: 12px 14px;
+                border-radius: 12px;
+            }
+            .swap-btn, .primary-btn {
+                min-height: 44px;
+                padding: 12px 16px;
+                border-radius: 14px;
+                font-size: 16px;
+            }
+
+            /* 4) Výsledek – lépe čitelný box */
+            .result-box {
+                border-radius: 16px;
+                padding: 16px;
+                font-size: 18px;
+                line-height: 1.4;
+            }
+
+            /* 5) Rychlé převody – grid 2 sloupce, větší tlačítka - POUZE MOBIL */
+            .quick-grid {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0,1fr));
+                gap: 12px;
+            }
+            .quick-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                padding: 14px 10px;
+                border: 1px solid rgba(0,0,0,0.08);
+                border-radius: 14px;
+                background: #f7f8fb;
+                font-size: 15px;
+                line-height: 1.2;
+            }
+            .quick-btn .icon {
+                font-size: 18px;
+                opacity: .85;
+            }
+
+
+            /* 7) Reklama – placeholder a rozbití dlouhých řetězců */
+            .ad-container {
+                border: 1px dashed rgba(0,0,0,0.08);
+                border-radius: 12px;
+                padding: 8px;
+                background: #fafbff;
+            }
+            .ad-placeholder {
+                display: grid;
+                place-items: center;
+                min-height: 110px;
+                color: #8a8fa3;
+                font-size: 14px;
+            }
+            .ad-container.loaded .ad-placeholder {
+                display: none;
+            }
+
         }
     </style>
 
@@ -887,11 +1023,13 @@
                     </div>
                 </div>
 
-                <div class="result-display" id="result-display" aria-live="polite">
-                    <span id="result-text">Zadejte hodnotu pro převod</span>
-                    <button class="copy-btn" id="copy-btn" style="display: none;" title="Kopírovat výsledek">
-                        📋
-                    </button>
+                <div class="result-box">
+                    <div class="result-display" id="result-display" aria-live="polite">
+                        <span id="result-text">Zadejte hodnotu pro převod</span>
+                        <button class="copy-btn" id="copy-btn" style="display: none;" title="Kopírovat výsledek">
+                            📋
+                        </button>
+                    </div>
                 </div>
                 
                 <!-- Info o kurzech - zobrazuje se jen pro měny -->
@@ -906,31 +1044,57 @@
             </div>
 
             <!-- Rychlé převody -->
-            <section class="quick-conversions-section">
+            <section class="quick-conversions-section quick-conversions">
               <h3 class="quick-conversions-title">⚡ Rychlé převody</h3>
-              <nav class="quick-links">
-                <a href="#" class="chip quick-link" data-cat="length" data-from="in" data-to="cm">Palce ↔ cm</a>
-                <a href="#" class="chip quick-link" data-cat="weight" data-from="lb" data-to="kg">Libry ↔ kg</a>
-                <a href="#" class="chip quick-link" data-cat="volume" data-from="gal" data-to="l">Galony ↔ l</a>
-                <a href="#" class="chip quick-link" data-cat="speed" data-from="mph" data-to="kmh">mph ↔ km/h</a>
-                <a href="#" class="chip quick-link" data-cat="temperature" data-from="f" data-to="c">°F ↔ °C</a>
-                <a href="#" class="chip quick-link" data-cat="fuel" data-from="l100" data-to="mpg_us">l/100 km ↔ mpg</a>
-                <a href="#" class="chip quick-link" data-cat="currency" data-from="EUR" data-to="CZK">EUR ↔ CZK</a>
-                <a href="#" class="chip quick-link" data-cat="currency" data-from="USD" data-to="CZK">USD ↔ CZK</a>
-              </nav>
+              <div class="quick-grid">
+                <a href="#" class="chip quick-link quick-btn" data-cat="length" data-from="in" data-to="cm">
+                    <span class="icon">📏</span> Palce ↔ cm
+                </a>
+                <a href="#" class="chip quick-link quick-btn" data-cat="weight" data-from="lb" data-to="kg">
+                    <span class="icon">⚖️</span> Libry ↔ kg
+                </a>
+                <a href="#" class="chip quick-link quick-btn" data-cat="volume" data-from="gal" data-to="l">
+                    <span class="icon">🛢️</span> Galony ↔ l
+                </a>
+                <a href="#" class="chip quick-link quick-btn" data-cat="speed" data-from="mph" data-to="kmh">
+                    <span class="icon">🚗</span> mph ↔ km/h
+                </a>
+                <a href="#" class="chip quick-link quick-btn" data-cat="temperature" data-from="f" data-to="c">
+                    <span class="icon">🌡️</span> °F ↔ °C
+                </a>
+                <a href="#" class="chip quick-link quick-btn" data-cat="fuel" data-from="l100" data-to="mpg_us">
+                    <span class="icon">⛽</span> l/100 km ↔ mpg
+                </a>
+                <a href="#" class="chip quick-link quick-btn" data-cat="currency" data-from="EUR" data-to="CZK">
+                    <span class="icon">💶</span> EUR ↔ CZK
+                </a>
+                <a href="#" class="chip quick-link quick-btn" data-cat="currency" data-from="USD" data-to="CZK">
+                    <span class="icon">💵</span> USD ↔ CZK
+                </a>
+              </div>
             </section>
 
-            <!-- Google AdSense prostor -->
+            <!-- 2) Reklama – jeden slot, přepínané varianty -->
             <div class="adsense-container">
-                <div aria-hidden="true" style="font-size:12px;color:#6c757d;margin-bottom:6px">Reklama</div>
-                <!-- Header-728x90 -->
-                <ins class="adsbygoogle"
-                     style="display:inline-block;width:728px;height:90px"
+              <div aria-hidden="true" style="font-size:12px;color:#6c757d;margin-bottom:6px">Reklama</div>
+
+              <div class="ad-container" id="ad-1">
+                <div class="ad-placeholder">Načítám reklamu…</div>
+
+                <!-- Desktop varianta (728x90) -->
+                <ins class="adsbygoogle ad-desktop"
+                     style="display:none;width:728px;height:90px"
                      data-ad-client="ca-pub-4014521280729531"
                      data-ad-slot="8858744510"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+
+                <!-- Mobilní varianta (responzivní) -->
+                <ins class="adsbygoogle ad-mobile"
+                     style="display:none;"
+                     data-ad-client="ca-pub-4014521280729531"
+                     data-ad-slot="8858744510"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+              </div>
 
                 <!--
                 Responzivní in-article (volitelné – zapnout až po schválení a stabilní návštěvnosti)
@@ -970,6 +1134,7 @@
             </div>
         </noscript>
 
+
         <div class="footer">
             <p>&copy; 2025 Konvertor.cz - Bezplatný převodník jednotek</p>
             <p>Podporováno reklamou • Vytvořeno s láskou pro české uživatele</p>
@@ -979,9 +1144,7 @@
               •
               <a href="/cookie-policy.html" style="color:#74b9ff;text-decoration:none">Zásady cookies</a>
               •
-              <a href="#" onclick="openConsentCenter(); return false;" style="color:#74b9ff;text-decoration:none">
-  Nastavení cookies
-</a>
+              <a href="#" onclick="openConsentCenter(); return false;" style="color:#74b9ff;text-decoration:none">Nastavení cookies</a>
             </p>
         </div>
     </div>
@@ -1006,7 +1169,41 @@
             tryApply();
         });
     </script>
-    
+
+    <!-- AdSense placeholder skrýt po načtení + načítání pouze viditelného slotu -->
+    <script>
+        // Načíst pouze viditelný slot (desktop/mobil)
+        (function () {
+            const box = document.getElementById('ad-1');
+            if (!box) return;
+
+            // Zjisti, který slot je viditelný
+            const desktopAd = box.querySelector('.ad-desktop');
+            const mobileAd = box.querySelector('.ad-mobile');
+            const isDesktop = window.innerWidth >= 769;
+
+            // Nastav display pro správný slot a "pushni" ho
+            if (isDesktop && desktopAd) {
+                desktopAd.style.display = 'inline-block';
+                mobileAd.style.display = 'none';
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            } else if (!isDesktop && mobileAd) {
+                mobileAd.style.display = 'block';
+                desktopAd.style.display = 'none';
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }
+
+            // Skryj placeholder, jakmile AdSense něco vykreslí
+            const obs = new MutationObserver(() => {
+                if (box.querySelector('ins.adsbygoogle iframe')) {
+                    box.classList.add('loaded');
+                    obs.disconnect();
+                }
+            });
+            obs.observe(box, { childList: true, subtree: true });
+        })();
+    </script>
+
     <!-- Service Worker Registration -->
     <script>
         // Non-intrusive update notification
