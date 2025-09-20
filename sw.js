@@ -1,10 +1,11 @@
 // Service Worker pro Konvertor.cz - Offline functionality
-const CACHE_NAME = 'konvertor-v2.4';
+const CACHE_NAME = 'konvertor-v2.4-20250920';
 const CACHE_ASSETS = [
     '/',
-    '/index.html',
-    '/converter.js?v=20250916-v4', // přidat verzi pro úplnou cache kontrolu
-    '/manifest.json',
+    '/index.html?v=20250920',
+    '/converter.js?v=20250920',
+    '/manifest.json?v=20250920',
+    '/Lyra.png?v=20250920',
     '/favicon.ico'
 ];
 
@@ -83,7 +84,47 @@ self.addEventListener('fetch', (event) => {
         return;
     }
     
-    // Cache-first pro statické zdroje
+    // Pro versioned assety - strict cache-first
+    if (url.search.includes('v=')) {
+        event.respondWith(
+            caches.match(event.request)
+                .then(cachedResponse => {
+                    if (cachedResponse) {
+                        return cachedResponse;
+                    }
+                    return fetch(event.request)
+                        .then(response => {
+                            if (response && response.status === 200) {
+                                const responseToCache = response.clone();
+                                caches.open(CACHE_NAME)
+                                    .then(cache => cache.put(event.request, responseToCache));
+                            }
+                            return response;
+                        });
+                })
+        );
+        return;
+    }
+
+    // Network-first pro HTML a neversioned assets
+    event.respondWith(
+        fetch(event.request, { cache: 'no-cache' })
+            .then(response => {
+                if (response && response.status === 200) {
+                    const responseToCache = response.clone();
+                    caches.open(CACHE_NAME)
+                        .then(cache => cache.put(event.request, responseToCache));
+                }
+                return response;
+            })
+            .catch(() => {
+                return caches.match(event.request, { ignoreSearch: true });
+            })
+    );
+});
+
+// Fallback fetch handler for legacy assets
+self.addEventListener('fetch-legacy', (event) => {
     event.respondWith(
         caches.match(event.request, { ignoreSearch: true })
             .then(cachedResponse => {

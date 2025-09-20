@@ -47,7 +47,7 @@
     <!-- Color scheme -->
     <meta name="color-scheme" content="light dark">
 
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="manifest.json?v=20250920">
     <meta name="theme-color" content="#3498db">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -967,7 +967,7 @@
     <div class="container">
         <div class="header">
             <div class="header-left">
-                <img src="Lyra.png" alt="Lyra Logo" class="site-logo">
+                <img src="Lyra.png?v=20250920" alt="Lyra Logo" class="site-logo">
                 <div class="header-text">
                     <h1>Konvertor.cz</h1>
                     <p>Rychlý převod jednotek</p>
@@ -1149,7 +1149,10 @@
         </div>
     </div>
 
-    <script src="converter.js?v=20250907-v3" defer></script>
+    <!-- Cache-buster utility -->
+    <script src="cache-buster.js?v=20250920"></script>
+
+    <script src="converter.js?v=20250920" defer></script>
     
     <!-- Rychlé převody - obsluha kliknutí -->
     <script>

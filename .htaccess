@@ -1,0 +1,99 @@
+# Cache-busting strategie pro Konvertor.cz
+# Aktualizováno: 2025-09-20
+
+# ===== GZIP KOMPRESE =====
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+</IfModule>
+
+# ===== CACHE HEADERS PRO RŮZNÉ TYPY SOUBORŮ =====
+
+# HTML files - NO CACHE (vždy fresh)
+<filesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</filesMatch>
+
+# JavaScript a CSS s version query - dlouhé cachování
+<filesMatch "\.(js|css)$">
+    # Pokud má soubor ?v= parametr, cache na 1 rok
+    RewriteCond %{QUERY_STRING} ^v=
+    Header set Cache-Control "public, max-age=31536000, immutable"
+
+    # Bez version parametru - kratší cache
+    RewriteCond %{QUERY_STRING} !^v=
+    Header set Cache-Control "public, max-age=3600"
+</filesMatch>
+
+# Obrázky s version query - dlouhé cachování
+<filesMatch "\.(png|jpg|jpeg|gif|webp|svg|ico)$">
+    # S version parametrem
+    RewriteCond %{QUERY_STRING} ^v=
+    Header set Cache-Control "public, max-age=31536000, immutable"
+
+    # Bez version parametru
+    RewriteCond %{QUERY_STRING} !^v=
+    Header set Cache-Control "public, max-age=86400"
+</filesMatch>
+
+# Manifest a service worker - krátké cachování
+<filesMatch "\.(json|webmanifest)$">
+    RewriteCond %{QUERY_STRING} ^v=
+    Header set Cache-Control "public, max-age=86400"
+
+    RewriteCond %{QUERY_STRING} !^v=
+    Header set Cache-Control "public, max-age=3600"
+</filesMatch>
+
+# Service Worker - NIKDY necachovat
+<filesMatch "sw\.js$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</filesMatch>
+
+# ===== FORCE RELOAD PRO HLAVNÍ ASSETY =====
+# Redirect starých verzí na nové s version tag
+
+RewriteEngine On
+
+# Redirect starých JS/CSS bez version na nové s version
+RewriteCond %{QUERY_STRING} !v=
+RewriteRule ^converter\.js$ /converter.js?v=20250920 [R=301,L]
+
+RewriteCond %{QUERY_STRING} !v=
+RewriteRule ^Lyra\.png$ /Lyra.png?v=20250920 [R=301,L]
+
+RewriteCond %{QUERY_STRING} !v=
+RewriteRule ^manifest\.json$ /manifest.json?v=20250920 [R=301,L]
+
+# ===== SECURITY HEADERS =====
+Header always set X-Content-Type-Options nosniff
+Header always set X-Frame-Options DENY
+Header always set X-XSS-Protection "1; mode=block"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+# ===== CORS PRO API VOLÁNÍ =====
+<FilesMatch "\.(js|json)$">
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type"
+</FilesMatch>
+
+# ===== FORCE HTTPS =====
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ===== INDEX FALLBACK =====
+DirectoryIndex index.html
