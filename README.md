@@ -1,33 +1,67 @@
-# Konvertor.cz - Převodník jednotek
+# Konvertor.cz v2.4 - Production Release
 
-Profesionální webová aplikace pro převod měřicích jednotek v českém jazyce.
+🚀 **Cache-optimized version with advanced browser caching**
 
-## 🎯 Funkcionalita
-- 8 kategorií převodů (délka, hmotnost, objem, teplota, rychlost, tlak, plocha, energie)
-- 70+ jednotek včetně českých historických
-- Mobilní optimalizace (PWA)
-- Google AdSense monetizace
-- SEO optimalizované pro české vyhledávání
+## 📦 Production Files
 
-## 🚀 Deployment
-- **Doména:** konvertor.cz (registrováno)
-- **Hosting:** GitHub Pages (zdarma)
-- **SSL:** Automaticky přes GitHub
-- **CDN:** GitHub globální síť
+✅ **Core Application:**
+- `index.html` - Main page with cache-busting
+- `converter.js` - Main conversion logic
+- `converter-en.js` - English version
+- `language-switcher.js` - Language switching
 
-## 📊 Business model
-- **Monetizace:** Jedna nenápadná Google AdSense reklama
-- **Target:** 30,000+ návštěv/měsíc
-- **Potenciální příjem:** 300-6,000 Kč/měsíc
+✅ **Cache & Performance:**
+- `cache-buster.js` - Cache management utility
+- `sw.js` - Service Worker for PWA
+- `.htaccess` - Server cache configuration
 
-## 🛠️ Technologie
-- Vanilla JavaScript (žádné závislosti)
-- CSS Grid/Flexbox (responzivní design)
-- PWA Manifest (instalace na mobil)
-- Optimalizované pro rychlost
+✅ **Assets & Config:**
+- `Lyra.png` - Logo with version parameter
+- `manifest.json` - PWA configuration
 
-## 📈 SEO Keywords
-- "převod jednotek" - 2000+ hledání/měsíc
-- "palce na centimetry" - 3000+ hledání/měsíc  
-- "libry na kilogramy" - 1500+ hledání/měsíc
-- "konvertor jednotek" - 800+ hledání/měsíc
+✅ **SEO & Legal:**
+- `robots.txt` - Search engine directives
+- `sitemap.xml` - Site structure
+- `404.html` - Error page
+- `privacy-policy.html` - GDPR compliance
+- `cookie-policy.html` - Cookie policy
+- `ads.txt` - AdSense verification
+
+## 🎯 Version 2.4 Features
+
+### ✨ Cache Optimization
+- **Version parameters** on all assets (`?v=20250920`)
+- **Smart caching** - HTML always fresh, assets cached long-term
+- **Service Worker** with network-first/cache-first strategies
+- **Auto cache cleanup** for old versions
+
+### 🎨 UI Improvements
+- **Lyra logo** integration with hover effects
+- **Compact header** design
+- **Quick conversions** section above ads
+- **Mobile optimization** with responsive design
+- **Dark mode** support for all elements
+
+### 🔧 Technical Enhancements
+- **AdSense integration** with Google CMP
+- **PWA support** with offline capability
+- **SEO optimization** with structured data
+- **GDPR compliance** with consent management
+
+## 🚀 Deploy Instructions
+
+1. **Upload all files** to web server root
+2. **Verify .htaccess** is applied
+3. **Test in incognito** mode for cache verification
+4. **Check AdSense** functionality
+5. **Validate PWA** installation
+
+## 📊 Cache Strategy
+
+- **HTML**: No cache (always fresh)
+- **JS/CSS with ?v=**: 1 year cache + immutable
+- **Images with ?v=**: 1 year cache
+- **Service Worker**: No cache
+- **API calls**: Network-first
+
+*Built: 2025-09-20 | Version: 2.4*

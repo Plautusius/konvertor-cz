@@ -3,7 +3,32 @@
     <url>
         <loc>https://konvertor.cz/</loc>
         <lastmod>2025-09-06</lastmod>
-        <changefreq>weekly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://konvertor.cz/contact.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://konvertor.cz/about.html</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://konvertor.cz/privacy-policy.html</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://konvertor.cz/cookie-policy.html</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://konvertor.cz/404.html</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.1</priority>
     </url>
 </urlset>

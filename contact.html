@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kontakt | Konvertor.cz</title>
+  <meta name="description" content="Kontaktujte nás: podpora, zpětná vazba a nahlášení chyby na Konvertor.cz." />
+  <meta name="robots" content="index,follow" />
+
+  <!-- Consent Mode v2 (default deny) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent','default',{
+      ad_storage:'denied',
+      analytics_storage:'denied',
+      ad_user_data:'denied',
+      ad_personalization:'denied',
+      wait_for_update:500
+    });
+  </script>
+  <!-- Google Funding Choices (CMP) -->
+  <script async src="https://fundingchoicesmessages.google.com/i/pub-4014521280729531?ers=1"></script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4014521280729531" crossorigin="anonymous"></script>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-61KMPVHQ8L"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-61KMPVHQ8L', {
+      page_title: 'Kontakt | Konvertor.cz',
+      custom_map: { 'custom_parameter_1': 'contact_page' },
+      send_page_view: true
+    });
+  </script>
+
+  <meta name="color-scheme" content="light dark" />
+  <link rel="manifest" href="manifest.json" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;line-height:1.7;color:#333;
+         background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:20px}
+    .container{max-width:900px;margin:0 auto;background:#fff;border-radius:15px;
+               box-shadow:0 20px 40px rgba(0,0,0,.1);overflow:hidden}
+    .header{background:linear-gradient(135deg,#6c7b8a 0%,#8a9ba8 100%);color:#fff;padding:30px;text-align:center}
+    .header h1{font-weight:300;font-size:2.2rem;margin-bottom:6px}
+    .content{padding:34px}
+    .content h2{color:#2c3e50;margin:22px 0 10px;border-bottom:2px solid #3498db;padding-bottom:6px;font-size:1.3rem}
+    .content p{margin:10px 0;color:#555}
+    .card{background:#f8f9fa;border:1px solid #e9ecef;border-radius:10px;padding:18px;margin:14px 0}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    label{font-weight:600;color:#2c3e50}
+    input,textarea{width:100%;padding:12px;border:1px solid #d7dde3;border-radius:10px;font-size:1rem}
+    textarea{min-height:120px;resize:vertical}
+    .btn{display:inline-block;background:linear-gradient(135deg,#3498db 0%,#2980b9 100%);color:#fff;
+         padding:12px 20px;border-radius:999px;border:none;cursor:pointer;font-weight:600}
+    .btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(52,152,219,.35)}
+    .muted{color:#6c757d;font-size:.95rem}
+    .links{margin-top:14px}
+    .links a{color:#3498db;text-decoration:none;margin-right:16px}
+    .links a:hover{text-decoration:underline}
+    .footer{background:#f8f9fa;padding:18px 34px;border-top:1px solid #e9ecef;color:#6c757d;font-size:.95rem}
+    @media (max-width:768px){.content{padding:24px}.row{grid-template-columns:1fr}}
+  </style>
+
+  <!-- Strukturovaná data: ContactPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Kontakt – Konvertor.cz",
+    "url": "https://konvertor.cz/contact.html",
+    "about": {
+      "@type": "WebApplication",
+      "name": "Konvertor.cz",
+      "url": "https://konvertor.cz/"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "email": "konvertorcz@gmail.com",
+      "areaServed": "CZ",
+      "availableLanguage": ["cs","en"]
+    }
+  }
+  </script>
+
+  <script>
+    // Bezpečný wrapper pro otevření preference centra CMP
+    window.openConsentCenter = function(){
+      try{
+        if (window.googlefc && typeof window.googlefc.showPreferenceCenter === 'function'){
+          window.googlefc.showPreferenceCenter();
+        } else {
+          alert('Panel pro správu souhlasů bude dostupný po načtení CMP. Zkuste to za chvíli.');
+        }
+      } catch(e){ console.warn(e); }
+    };
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Kontakt</h1>
+      <p>Máte tip, dotaz nebo jste našli chybu? Napište nám.</p>
+    </div>
+
+    <div class="content">
+      <div class="card">
+        <h2>E-mail</h2>
+        <p>
+          Náš kontakt: <strong><span id="e"></span></strong><br/>
+          <span class="muted">E-mail zobrazujeme až v prohlížeči kvůli spamu.</span>
+        </p>
+        <div class="links">
+          <a href="/" aria-label="Zpět na hlavní stránku">← Hlavní stránka</a>
+          <a href="privacy-policy.html">Zásady soukromí</a>
+          <a href="cookie-policy.html">Zásady cookies</a>
+          <button class="btn" onclick="openConsentCenter()">Spravovat souhlasy</button>
+        </div>
+      </div>
+
+      <h2>Kontaktní formulář</h2>
+      <form id="contact-form" class="card" autocomplete="on" novalidate>
+        <div class="row">
+          <div>
+            <label for="name">Jméno</label>
+            <input id="name" name="name" type="text" placeholder="Vaše jméno" required />
+          </div>
+          <div>
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" placeholder="vas@email.cz" required />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="topic">Předmět</label>
+            <input id="topic" name="topic" type="text" placeholder="Např. Námět na vylepšení" required />
+          </div>
+          <div style="display:none">
+            <!-- honeypot (antispam) -->
+            <label>Nechte prázdné</label>
+            <input name="company" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+        </div>
+        <div style="margin-top:10px">
+          <label for="message">Zpráva</label>
+          <textarea id="message" name="message" placeholder="Vaše zpráva…" required></textarea>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:10px;align-items:center">
+          <button type="submit" class="btn">Odeslat</button>
+          <span id="status" class="muted" role="status"></span>
+        </div>
+        <p class="muted" style="margin-top:10px">
+          Odesláním zprávy souhlasíte se zpracováním údajů pro účely vyřízení dotazu. Podrobnosti viz
+          <a href="privacy-policy.html">Zásady soukromí</a>.
+        </p>
+      </form>
+
+      <h2>Provozovatel</h2>
+      <div class="card">
+        <p><strong>Konvertor.cz</strong> – nezávislý převodník jednotek zdarma.</p>
+        <p class="muted">Na tomto webu nepřijímáme citlivá osobní data. V případě žádosti o výmaz nebo
+          námitku nás kontaktujte na uvedeném e-mailu.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      © 2025 Konvertor.cz – Rychlý převod jednotek
+    </div>
+  </div>
+
+  <script>
+    // Jednoduchá obfuska e-mailu
+    (function(){
+      const m = ['konvertorcz','@','gmail','.','com'];
+      const t = m.join('');
+      const el = document.getElementById('e');
+      el.textContent = t;
+      el.innerHTML = '<a href="mailto:'+t+'">'+t+'</a>';
+    })();
+
+    // Form – odeslání přes Formspree / vlastní endpoint (TODO: doplň URL)
+    const FORM_ENDPOINT = ""; // např. "https://formspree.io/f/xxxxxxxx"
+    const form = document.getElementById('contact-form');
+    const statusEl = document.getElementById('status');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      statusEl.textContent = 'Odesílám…';
+      const data = new FormData(form);
+      // antispam
+      if ((data.get('company')||'').trim() !== '') { statusEl.textContent = 'Zpráva zablokována (spam).'; return; }
+
+      if (!FORM_ENDPOINT) {
+        // fallback – otevřít mailto s předvyplněním
+        const to = document.getElementById('e').innerText.trim();
+        const subj = encodeURIComponent('[Kontakt] ' + (data.get('topic')||''));
+        const body = encodeURIComponent(`Jméno: ${data.get('name')||''}\nE-mail: ${data.get('email')||''}\n\n${data.get('message')||''}`);
+        window.location.href = `mailto:${to}?subject=${subj}&body=${body}`;
+        statusEl.textContent = 'Otevřel se e-mailový klient.';
+        return;
+      }
+
+      try{
+        const res = await fetch(FORM_ENDPOINT, { method:'POST', body:data, headers:{ 'Accept':'application/json' }});
+        if (res.ok){
+          form.reset();
+          statusEl.textContent = 'Děkujeme, zpráva byla odeslána.';
+          if (typeof gtag==='function'){ gtag('event','contact_message_sent'); }
+        } else {
+          statusEl.textContent = 'Nepodařilo se odeslat. Zkuste e-mail.';
+        }
+      } catch{
+        statusEl.textContent = 'Chyba připojení. Zkuste e-mail.';
+      }
+    });
+  </script>
+</body>
+</html>
