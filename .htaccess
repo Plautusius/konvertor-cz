@@ -1,5 +1,5 @@
 # Cache-busting strategie pro Konvertor.cz
-# Aktualizováno: 2025-09-20
+# Aktualizováno: 2025-09-21
 
 # ===== GZIP KOMPRESE =====
 <IfModule mod_deflate.c>
@@ -69,13 +69,13 @@ RewriteEngine On
 
 # Redirect starých JS/CSS bez version na nové s version
 RewriteCond %{QUERY_STRING} !v=
-RewriteRule ^converter\.js$ /converter.js?v=20250920 [R=301,L]
+RewriteRule ^converter\.js$ /converter.js?v=20250921 [R=301,L]
 
 RewriteCond %{QUERY_STRING} !v=
-RewriteRule ^Lyra\.png$ /Lyra.png?v=20250920 [R=301,L]
+RewriteRule ^Lyra\.png$ /Lyra.png?v=20250921 [R=301,L]
 
 RewriteCond %{QUERY_STRING} !v=
-RewriteRule ^manifest\.json$ /manifest.json?v=20250920 [R=301,L]
+RewriteRule ^manifest\.json$ /manifest.json?v=20250921 [R=301,L]
 
 # ===== SECURITY HEADERS =====
 Header always set X-Content-Type-Options nosniff

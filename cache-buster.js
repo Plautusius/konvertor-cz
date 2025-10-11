@@ -4,7 +4,7 @@
 (function() {
     'use strict';
 
-    const VERSION = '20250920';
+    const VERSION = '20250921';
     const FORCE_RELOAD_ASSETS = [
         'converter.js',
         'Lyra.png',

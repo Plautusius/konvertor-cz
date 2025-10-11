@@ -47,7 +47,7 @@
     <!-- Color scheme -->
     <meta name="color-scheme" content="light dark">
 
-    <link rel="manifest" href="manifest.json?v=20250920">
+    <link rel="manifest" href="manifest.json?v=20250921">
     <meta name="theme-color" content="#3498db">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -140,6 +140,8 @@
             --button-bg: #3498db;
             --success-color: #27ae60;
             --error-color: #e74c3c;
+            --calculator-bg: #e8f4fd;
+            --calculator-border: #2196F3;
             --shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
@@ -156,6 +158,8 @@
             --button-bg: #3498db;
             --success-color: #2ecc71;
             --error-color: #e74c3c;
+            --calculator-bg: #1e3a5f;
+            --calculator-border: #64b5f6;
             --shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
@@ -253,20 +257,34 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             margin-right: 10px;
         }
-        
+
         .theme-toggle:hover {
             background: rgba(255,255,255,0.25);
             transform: translateY(-1px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
-        
+
         .theme-icon {
-            font-size: 18px;
             transition: transform 0.3s ease;
+            display: block;
         }
-        
-        .theme-toggle.active .theme-icon {
-            transform: rotate(180deg);
+
+        /* Light mode - show moon */
+        [data-theme="light"] .sun-icon {
+            display: none;
+        }
+
+        [data-theme="light"] .moon-icon {
+            display: block;
+        }
+
+        /* Dark mode - show sun */
+        [data-theme="dark"] .sun-icon {
+            display: block !important;
+        }
+
+        [data-theme="dark"] .moon-icon {
+            display: none;
         }
 
 
@@ -390,6 +408,163 @@
                 border-color: #3498db; /* zvýraznění při výběru */
             }
 
+        .unit-history-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            margin-left: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            vertical-align: middle;
+            flex-shrink: 0;
+            z-index: 10;
+            position: relative;
+        }
+
+        .unit-history-btn:hover {
+            transform: scale(1.2);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        .unit-history-btn:active {
+            transform: scale(0.9);
+        }
+
+        .unit-encyclopedia {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: none;
+            animation: fadeInUp 0.3s ease;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .unit-encyclopedia:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            border-color: #3498db;
+        }
+
+        .unit-encyclopedia.show {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .encyclopedia-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .encyclopedia-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .encyclopedia-close {
+            background: #e74c3c;
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .encyclopedia-close:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+
+        .encyclopedia-content {
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .encyclopedia-section {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .encyclopedia-section h4 {
+            color: #2c3e50;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0 0 10px 0;
+        }
+
+        .encyclopedia-section p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        .encyclopedia-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .encyclopedia-meta-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .encyclopedia-meta-item:hover {
+            background: #f8f9fa;
+            border-color: #3498db;
+        }
+
+        .encyclopedia-meta-item strong {
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
         .swap-btn {
             background: #3498db;
             color: white;
@@ -451,6 +626,35 @@
             background: var(--text-accent);
         }
 
+        .calc-add-btn {
+            position: absolute;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .calc-add-btn:hover {
+            background: var(--calculator-border);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .result-display:hover .calc-add-btn {
+            opacity: 1;
+        }
+
         .quick-converts {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -494,6 +698,8 @@
             border: 1px solid #dee2e6;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
+            max-width: 100%;
+            overflow: hidden;
         }
 
         .adsense-placeholder {
@@ -508,104 +714,17 @@
         }
 
         /* výběr varianty čistě přes CSS */
-        .ad-desktop{ display:none }
-        .ad-mobile{ display:block }
+        .ad-desktop{ display:none; max-width:100%; }
+        .ad-mobile{ display:block; margin:0 auto; max-width:100%; }
         @media (min-width: 769px){
-          .ad-desktop{ display:inline-block }
+          .ad-desktop{ display:block; margin:0 auto; max-width:100%; }
           .ad-mobile{ display:none }
         }
 
-        /* Historie převodů */
-        .history-section {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            border: 1px solid #e9ecef;
-        }
-
-        .history-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .history-item {
-            background: white;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .history-item:hover {
-            background: #f1f3f4;
-            border-color: #3498db;
-            transform: translateY(-1px);
-        }
-
-        .history-conversion {
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .history-time {
-            font-size: 12px;
-            color: #6c757d;
-        }
-
-        .clear-history-btn:hover {
-            background: #c0392b !important;
-        }
-
-        /* Rychlé převody sekce */
-        .quick-conversions-section {
-            background: var(--bg-section);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            transition: all 0.3s ease;
-        }
-
-        .quick-conversions-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin: 20px 0 15px 0;
-            color: #222;
-        }
-
-        .quick-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        /* Chip komponenty pro rychlé převody */
-        .chip {
-            display: inline-block;
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: 1px solid #2563eb;
-            background: linear-gradient(135deg, #f0f7ff 0%, #e6f3ff 100%);
-            color: #1d4ed8;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.15);
-        }
-        
-        .chip:hover { 
-            background: #2563eb;
-            color: white;
-            border-color: #1d4ed8;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        /* AdSense responsive fix */
+        .adsbygoogle {
+            max-width: 100% !important;
+            overflow: hidden !important;
         }
 
         /* Zajistí konzistentní vzhled nativních prvků v dark režimu */
@@ -650,25 +769,65 @@
             border-left-color: #3498db !important;
         }
 
-        /* Dark mode pro rychlé převody */
-        [data-theme="dark"] .quick-conversions-section {
-            background: #34495e !important;
+        /* Dark mode - Encyclopedia panel */
+        [data-theme="dark"] .unit-encyclopedia {
+            background: #2c3e50;
+            border-color: #34495e;
+            border-left-color: #667eea;
         }
 
-        [data-theme="dark"] .quick-conversions-title {
-            color: #ecf0f1 !important;
+        [data-theme="dark"] .encyclopedia-header {
+            border-bottom-color: #34495e;
         }
 
-        [data-theme="dark"] .chip {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
-            color: #74b9ff !important;
-            border-color: #74b9ff !important;
+        [data-theme="dark"] .encyclopedia-title {
+            color: #ecf0f1;
         }
 
-        [data-theme="dark"] .chip:hover {
-            background: #0984e3 !important;
-            color: white !important;
-            border-color: #0984e3 !important;
+        [data-theme="dark"] .encyclopedia-section {
+            background: #2c3e50;
+            border-color: #34495e;
+        }
+
+        [data-theme="dark"] .encyclopedia-section h4 {
+            color: #ecf0f1;
+        }
+
+        [data-theme="dark"] .encyclopedia-section p {
+            color: #bdc3c7;
+        }
+
+        [data-theme="dark"] .encyclopedia-meta-item {
+            background: #2c3e50;
+            border-color: #34495e;
+            color: #bdc3c7;
+        }
+
+        [data-theme="dark"] .encyclopedia-meta-item:hover {
+            background: #34495e;
+            border-color: #3498db;
+        }
+
+        [data-theme="dark"] .encyclopedia-meta-item strong {
+            color: #ecf0f1;
+        }
+
+        [data-theme="dark"] .unit-info-card {
+            background: #2c3e50;
+            border-color: #34495e;
+            color: #bdc3c7;
+        }
+
+        [data-theme="dark"] .unit-info-card .unit-name {
+            color: #ecf0f1;
+        }
+
+        [data-theme="dark"] .unit-info-card .unit-description {
+            color: #bdc3c7;
+        }
+
+        [data-theme="dark"] .unit-info-card:hover {
+            background: #34495e;
         }
 
         .footer {
@@ -722,61 +881,6 @@
         @media (max-width: 600px) {
             .header-text p {
                 display: none;
-            }
-            
-            /* Mobilní optimalizace rychlých převodů */
-            .quick-conversions-section {
-                padding: 15px;
-                margin: 15px 0;
-            }
-            
-            .quick-conversions-title {
-                font-size: 1.1rem;
-                margin: 10px 0 12px 0;
-            }
-            
-            .quick-links {
-                gap: 8px;
-            }
-            
-            .chip {
-                padding: 6px 12px;
-                font-size: 0.85rem;
-                margin: 2px;
-            }
-        }
-
-        /* 💻 Desktop - obnovit původní chip styling */
-        @media (min-width: 769px) {
-            .quick-grid {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-            .quick-btn {
-                /* Vynulovat mobilní styl a použít původní chip styling */
-                display: inline-block !important;
-                padding: 8px 16px !important;
-                background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
-                color: white !important;
-                border: none !important;
-                border-radius: 25px !important;
-                font-size: 0.9rem !important;
-                font-weight: 500 !important;
-                text-decoration: none !important;
-                cursor: pointer !important;
-                transition: all 0.2s ease !important;
-                line-height: normal !important;
-                gap: 0 !important;
-            }
-            .quick-btn:hover {
-                background: linear-gradient(135deg, #2980b9 0%, #3498db 100%) !important;
-                color: white !important;
-                transform: translateY(-1px) !important;
-                box-shadow: 0 2px 8px rgba(52, 152, 219, 0.25) !important;
-            }
-            .quick-btn .icon {
-                display: none; /* Schovat emoji ikony na desktopu */
             }
         }
 
@@ -898,36 +1002,14 @@
                 line-height: 1.4;
             }
 
-            /* 5) Rychlé převody – grid 2 sloupce, větší tlačítka - POUZE MOBIL */
-            .quick-grid {
-                display: grid;
-                grid-template-columns: repeat(2, minmax(0,1fr));
-                gap: 12px;
-            }
-            .quick-btn {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 8px;
-                padding: 14px 10px;
-                border: 1px solid rgba(0,0,0,0.08);
-                border-radius: 14px;
-                background: #f7f8fb;
-                font-size: 15px;
-                line-height: 1.2;
-            }
-            .quick-btn .icon {
-                font-size: 18px;
-                opacity: .85;
-            }
-
-
-            /* 7) Reklama – placeholder a rozbití dlouhých řetězců */
+            /* 5) Reklama – placeholder a rozbití dlouhých řetězců */
             .ad-container {
                 border: 1px dashed rgba(0,0,0,0.08);
                 border-radius: 12px;
                 padding: 8px;
                 background: #fafbff;
+                overflow: hidden;
+                max-width: 100%;
             }
             .ad-placeholder {
                 display: grid;
@@ -941,6 +1023,230 @@
             }
 
         }
+        /* Kalkulačka styly */
+        .calc-btn {
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--input-bg);
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .calc-btn:hover {
+            background: var(--button-bg);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .calc-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 600px) {
+            .calc-buttons-compact {
+                gap: 1px !important;
+            }
+
+            .calc-btn-small {
+                font-size: 9px !important;
+                padding: 2px !important;
+                min-height: 24px !important;
+            }
+
+            #calc-display-compact {
+                font-size: 14px !important;
+                padding: 6px !important;
+            }
+        }
+
+        /* Kompaktní kalkulačka */
+        .calc-btn-small {
+            padding: 2px;
+            border: 1px solid var(--border-color);
+            border-radius: 2px;
+            background: var(--input-bg);
+            color: var(--text-primary);
+            font-size: 9px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            min-height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calc-btn-small:hover {
+            background: var(--button-bg);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .calc-btn-small:active {
+            transform: translateY(0);
+        }
+
+        /* Profesionální minimalistický design */
+        .calc-btn-num {
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            color: #2c3e50;
+            font-size: 16px;
+            font-weight: 500;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8);
+        }
+
+        .calc-btn-num:hover {
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            border-color: #6c757d;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8);
+        }
+
+        .calc-btn-num:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1), inset 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        /* Operátory - elegantní modrá */
+        .calc-btn-op {
+            padding: 10px;
+            border: 1px solid #4a90e2;
+            border-radius: 6px;
+            background: linear-gradient(145deg, #5a9bd4, #4a90e2);
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(74,144,226,0.2), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+
+        .calc-btn-op:hover {
+            background: linear-gradient(145deg, #4a90e2, #357abd);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(74,144,226,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+
+        .calc-btn-op:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 4px rgba(74,144,226,0.2), inset 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Rovnítko - elegantní zelená */
+        .calc-btn-equals {
+            padding: 10px;
+            border: 1px solid #27ae60;
+            border-radius: 6px;
+            background: linear-gradient(145deg, #2ecc71, #27ae60);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(39,174,96,0.2), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+
+        .calc-btn-equals:hover {
+            background: linear-gradient(145deg, #27ae60, #229954);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(39,174,96,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+
+        .calc-btn-equals:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 4px rgba(39,174,96,0.2), inset 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Vědecké funkce - diskrétní šedá */
+        .calc-btn-sci {
+            padding: 6px 4px;
+            border: 1px solid #95a5a6;
+            border-radius: 4px;
+            background: linear-gradient(145deg, #ecf0f1, #bdc3c7);
+            color: #34495e;
+            font-size: 10px;
+            font-weight: 500;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            min-height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.6);
+        }
+
+        .calc-btn-sci:hover {
+            background: linear-gradient(145deg, #bdc3c7, #95a5a6);
+            color: #2c3e50;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.6);
+        }
+
+        .calc-btn-sci:active {
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1), inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* Ovládací tlačítka - důležité oranžová/červená */
+        .calc-btn-control {
+            padding: 6px 4px;
+            border: 1px solid #e67e22;
+            border-radius: 4px;
+            background: linear-gradient(145deg, #f39c12, #e67e22);
+            color: white;
+            font-size: 10px;
+            font-weight: 500;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            min-height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 4px rgba(230,126,34,0.2), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+
+        .calc-btn-control:hover {
+            background: linear-gradient(145deg, #e67e22, #d35400);
+            box-shadow: 0 2px 6px rgba(230,126,34,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+
+        .calc-btn-control:active {
+            box-shadow: 0 1px 2px rgba(230,126,34,0.2), inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
     </style>
 
     <!-- Strukturovaná data -->
@@ -967,14 +1273,17 @@
     <div class="container">
         <div class="header">
             <div class="header-left">
-                <img src="Lyra.png?v=20250920" alt="Lyra Logo" class="site-logo">
+                <img src="Lyra.png?v=20250921" alt="Lyra Logo" class="site-logo">
                 <div class="header-text">
                     <h1>Konvertor.cz</h1>
                     <p>Rychlý převod jednotek</p>
                 </div>
             </div>
             <div class="theme-toggle" id="theme-toggle" title="Přepnout tmavý/světlý režim">
-                <span class="theme-icon">🌙</span>
+                <svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="white">
+                    <path class="sun-icon" d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" style="display:none;"/>
+                    <path class="moon-icon" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/>
+                </svg>
             </div>
         </div>
 
@@ -985,7 +1294,6 @@
                 <button type="button" class="category-btn" data-category="volume" aria-pressed="false" title="Převody objemu (l, ml, galony)">Objem</button>
                 <button type="button" class="category-btn" data-category="temperature" aria-pressed="false" title="Převody teploty (°C, °F, K)">Teplota</button>
                 <button type="button" class="category-btn" data-category="speed" aria-pressed="false" title="Převody rychlosti (km/h, m/s, mph)">Rychlost</button>
-                <button type="button" class="category-btn" data-category="pressure" aria-pressed="false" title="Převody tlaku (Pa, bar, psi)">Tlak</button>
                 <button type="button" class="category-btn" data-category="area" aria-pressed="false" title="Převody plochy (m², cm², ha)">Plocha</button>
                 <button type="button" class="category-btn" data-category="energy" aria-pressed="false" title="Převody energie (J, kWh, cal)">Energie</button>
                 <button type="button" class="category-btn" data-category="time" aria-pressed="false" title="Převody času (s, min, hod, dny)">Čas</button>
@@ -1000,6 +1308,12 @@
                 <button type="button" class="category-btn" data-category="electric_charge" aria-pressed="false" title="Převody náboje (C, mAh, Ah)">Náboj</button>
                 <button type="button" class="category-btn" data-category="fuel" aria-pressed="false" title="Převody spotřeby paliva (l/100km, mpg)">Palivo</button>
                 <button type="button" class="category-btn" data-category="currency" aria-pressed="false" title="Převody měn podle kurzů ČNB (EUR, USD, CZK)">Měna</button>
+                <button type="button" class="category-btn" data-category="wire_gauge" aria-pressed="false" title="Průřez vodičů (AWG ↔ mm²)">AWG/mm²</button>
+                <button type="button" class="category-btn" data-category="flow_rate" aria-pressed="false" title="Průtok (l/min, GPM, CFM)">Průtok</button>
+                <button type="button" class="category-btn" data-category="torque" aria-pressed="false" title="Krouticí moment (N⋅m, ft⋅lb)">Moment</button>
+                <button type="button" class="category-btn" data-category="cooking" aria-pressed="false" title="Kuchyňské míry (tsp, tbsp, cup, ml)">Kuchyně</button>
+                <button type="button" class="category-btn" data-category="pressure_general" aria-pressed="false" title="Tlak obecný (hPa, mmHg, bar, PSI)">Tlak</button>
+                <button type="button" class="category-btn" data-category="concentration" aria-pressed="false" title="Koncentrace roztoků (mg/L, ppm, %, g/L)">Chemie</button>
             </div>
 
             <div class="converter-section">
@@ -1009,6 +1323,7 @@
                         <div class="input-wrapper">
                             <input type="number" id="input-value" inputmode="decimal" placeholder="Zadejte číslo" step="any">
                             <select id="from-unit"></select>
+                            <button type="button" class="unit-history-btn" id="from-unit-history" title="Historie této jednotky">ℹ️</button>
                         </div>
                     </div>
 
@@ -1019,6 +1334,7 @@
                         <div class="input-wrapper">
                             <input type="text" id="output-value" placeholder="Výsledek převodu" readonly>
                             <select id="to-unit"></select>
+                            <button type="button" class="unit-history-btn" id="to-unit-history" title="Historie této jednotky">ℹ️</button>
                         </div>
                     </div>
                 </div>
@@ -1031,7 +1347,19 @@
                         </button>
                     </div>
                 </div>
-                
+
+            <div class="unit-encyclopedia" id="unit-encyclopedia">
+                <div class="encyclopedia-header">
+                    <h3 class="encyclopedia-title">
+                        📚 <span id="encyclopedia-unit-name">Historie jednotky</span>
+                    </h3>
+                    <button class="encyclopedia-close" id="encyclopedia-close">✕</button>
+                </div>
+                <div class="encyclopedia-content" id="encyclopedia-content">
+                    <!-- Content bude generován dynamicky -->
+                </div>
+            </div>
+
                 <!-- Info o kurzech - zobrazuje se jen pro měny -->
                 <div class="currency-info" id="currency-info" style="display: none; margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 6px; border-left: 3px solid #3498db; font-size: 12px; color: #6c757d;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -1042,37 +1370,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Rychlé převody -->
-            <section class="quick-conversions-section quick-conversions">
-              <h3 class="quick-conversions-title">⚡ Rychlé převody</h3>
-              <div class="quick-grid">
-                <a href="#" class="chip quick-link quick-btn" data-cat="length" data-from="in" data-to="cm">
-                    <span class="icon">📏</span> Palce ↔ cm
-                </a>
-                <a href="#" class="chip quick-link quick-btn" data-cat="weight" data-from="lb" data-to="kg">
-                    <span class="icon">⚖️</span> Libry ↔ kg
-                </a>
-                <a href="#" class="chip quick-link quick-btn" data-cat="volume" data-from="gal" data-to="l">
-                    <span class="icon">🛢️</span> Galony ↔ l
-                </a>
-                <a href="#" class="chip quick-link quick-btn" data-cat="speed" data-from="mph" data-to="kmh">
-                    <span class="icon">🚗</span> mph ↔ km/h
-                </a>
-                <a href="#" class="chip quick-link quick-btn" data-cat="temperature" data-from="f" data-to="c">
-                    <span class="icon">🌡️</span> °F ↔ °C
-                </a>
-                <a href="#" class="chip quick-link quick-btn" data-cat="fuel" data-from="l100" data-to="mpg_us">
-                    <span class="icon">⛽</span> l/100 km ↔ mpg
-                </a>
-                <a href="#" class="chip quick-link quick-btn" data-cat="currency" data-from="EUR" data-to="CZK">
-                    <span class="icon">💶</span> EUR ↔ CZK
-                </a>
-                <a href="#" class="chip quick-link quick-btn" data-cat="currency" data-from="USD" data-to="CZK">
-                    <span class="icon">💵</span> USD ↔ CZK
-                </a>
-              </div>
-            </section>
 
             <!-- 2) Reklama – jeden slot, přepínané varianty -->
             <div class="adsense-container">
@@ -1113,14 +1410,6 @@
                 -->
             </div>
 
-            <!-- Historie převodů -->
-            <div class="history-section" id="history-section" style="display: none;">
-                <h3 style="color: #2c3e50; margin-bottom: 15px; font-size: 18px;">📚 Nedávné převody</h3>
-                <div class="history-list" id="history-list"></div>
-                <button class="clear-history-btn" id="clear-history" style="margin-top: 10px; padding: 8px 15px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 12px;">
-                    🗑️ Vymazat historii
-                </button>
-            </div>
 
             <div class="quick-converts" id="unit-info"></div>
         </div>
@@ -1140,13 +1429,13 @@
             <p>Podporováno reklamou • Vytvořeno s láskou pro české uživatele</p>
             <p>📧 Připomínky a nápady: <a href="mailto:konvertorcz@gmail.com" style="color: #74b9ff; text-decoration: none;">konvertorcz@gmail.com</a></p>
             <p>
-              <a href="contact.html" style="color:#74b9ff;text-decoration:none">Kontakt</a>
+              <a href="/about.html" style="color:#74b9ff;text-decoration:none">O projektu</a>
               •
-              <a href="about.html" style="color:#74b9ff;text-decoration:none">O nás</a>
+              <a href="/contact.html" style="color:#74b9ff;text-decoration:none">Kontakt</a>
               •
-              <a href="privacy-policy.html" style="color:#74b9ff;text-decoration:none">Zásady soukromí</a>
+              <a href="/privacy-policy.html" style="color:#74b9ff;text-decoration:none">Zásady ochrany soukromí</a>
               •
-              <a href="cookie-policy.html" style="color:#74b9ff;text-decoration:none">Zásady cookies</a>
+              <a href="/cookie-policy.html" style="color:#74b9ff;text-decoration:none">Zásady cookies</a>
               •
               <a href="#" onclick="openConsentCenter(); return false;" style="color:#74b9ff;text-decoration:none">Nastavení cookies</a>
             </p>
@@ -1154,28 +1443,9 @@
     </div>
 
     <!-- Cache-buster utility -->
-    <script src="cache-buster.js?v=20250920"></script>
+    <script src="cache-buster.js?v=20250921"></script>
 
-    <script src="converter.js?v=20250920" defer></script>
-    
-    <!-- Rychlé převody - obsluha kliknutí -->
-    <script>
-        // Globální event listener pro rychlé odkazy
-        document.addEventListener('click', function(e) {
-            const a = e.target.closest('.quick-link');
-            if (!a) return;
-            e.preventDefault();
-            const { cat, from, to } = a.dataset;
-            const tryApply = () => {
-                if (window.converter?.applyQuickConversion) {
-                    window.converter.applyQuickConversion(cat, from, to);
-                } else {
-                    setTimeout(tryApply, 50);
-                }
-            };
-            tryApply();
-        });
-    </script>
+    <script src="converter.js?v=20250921" defer></script>
 
     <!-- AdSense placeholder skrýt po načtení + načítání pouze viditelného slotu -->
     <script>
