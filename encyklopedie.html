@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="Lyra.png">
+
+    <meta name="keywords" content="encyklopedie jednotek, definice jednotek, historie jednotek, metr, kilogram, litr, palec, libra, galon, celsius, fahrenheit">
+    <title>Encyklopedie jednotek (A–Z) | Konvertor.cz</title>
+    <meta name="description" content="Encyklopedie měřicích jednotek: definice, historie a použití. Přehled A–Z: délka, hmotnost, objem, teplota, tlak, čas, data a chemické koncentrace.">
+    <link rel="canonical" href="https://konvertor.cz/encyklopedie.html">
+    <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Encyklopedie jednotek | Konvertor.cz">
+    <meta property="og:description" content="Encyklopedie měřicích jednotek: definice, historie a použití jednotek délky, hmotnosti, objemu, teploty, tlaku, času a dat.">
+    <meta property="og:url" content="https://konvertor.cz/encyklopedie.html">
+    <meta property="og:image" content="https://konvertor.cz/og-image.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Encyklopedie jednotek | Konvertor.cz">
+    <meta name="twitter:description" content="Encyklopedie měřicích jednotek: definice, historie a použití jednotek délky, hmotnosti, objemu, teploty, tlaku, času a dat.">
+    <meta name="twitter:image" content="https://konvertor.cz/og-image.png">
+
+    <!-- Google Consent Mode v2 – defaults (must be FIRST in <head>) -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied',
+        'wait_for_update': 500
+      });
+    </script>
+
+    <!-- Funding Choices (Google CMP) -->
+    <script
+      async
+      src="https://fundingchoicesmessages.google.com/i/pub-4014521280729531?region=eea,uk&domain=konvertor.cz&ers=1">
+    </script>
+
+    <!-- Color scheme -->
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="manifest" href="manifest.json?v=20250921">
+    <meta name="theme-color" content="#3498db">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Konvertor.cz">
+
+    <script>
+      window.openConsentCenter = function () {
+        try {
+          if (window.googlefc && typeof window.googlefc.showPreferenceCenter === 'function') {
+            window.googlefc.showPreferenceCenter();
+          } else {
+            alert('Ovládací panel souhlasu bude dostupný po načtení CMP. Zkuste to prosím za chvíli.');
+          }
+        } catch (e) { console.warn(e); }
+      };
+    </script>
+
+    <!-- GA4 loader -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-61KMPVHQ8L"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+
+      gtag('js', new Date());
+      gtag('config', 'G-61KMPVHQ8L', {
+        page_title: 'Encyklopedie jednotek | Konvertor.cz',
+        send_page_view: true
+      });
+    </script>
+
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4014521280729531"
+         crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --bg-container: #ffffff;
+            --bg-section: #f8f9fa;
+            --text-primary: #333;
+            --text-secondary: #6c757d;
+            --text-accent: #2c3e50;
+            --border-color: #e9ecef;
+            --shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            --bg-container: #2c3e50;
+            --bg-section: #34495e;
+            --text-primary: #ecf0f1;
+            --text-secondary: #bdc3c7;
+            --text-accent: #ecf0f1;
+            --border-color: #5d6d7e;
+            --shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            min-height: 100vh;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--bg-container);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #6c7b8a 0%, #8a9ba8 100%);
+            color: white;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .site-logo {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .site-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .header-text h1 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.1;
+        }
+
+        .header-text h1 a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .header-text p {
+            color: #333;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 2px 0 0 0;
+            line-height: 1.2;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+        }
+
+        .theme-toggle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-right: 10px;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .theme-icon {
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        [data-theme="light"] .sun-icon {
+            display: none;
+        }
+
+        [data-theme="light"] .moon-icon {
+            display: block;
+        }
+
+        [data-theme="dark"] .sun-icon {
+            display: block !important;
+        }
+
+        [data-theme="dark"] .moon-icon {
+            display: none;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .intro {
+            margin-bottom: 30px;
+        }
+
+        .intro h1 {
+            font-size: 2rem;
+            color: var(--text-accent);
+            margin-bottom: 15px;
+        }
+
+        .intro p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .category-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 25px 0;
+            padding: 20px;
+            background: var(--bg-section);
+            border-radius: 10px;
+        }
+
+        .category-nav a {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .category-nav a:hover {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .category-section {
+            margin: 40px 0;
+            scroll-margin-top: 80px;
+        }
+
+        .category-section h2 {
+            font-size: 1.8rem;
+            color: var(--text-accent);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+        }
+
+        .unit-encyclopedia {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-left: 4px solid #3498db;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+        }
+
+        .unit-encyclopedia:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            border-left-color: #2980b9;
+        }
+
+        [data-theme="dark"] .unit-encyclopedia {
+            background: #34495e;
+            border-color: #5d6d7e;
+            border-left-color: #3498db;
+        }
+
+        .encyclopedia-header {
+            margin-bottom: 20px;
+        }
+
+        .encyclopedia-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-accent);
+            margin: 0 0 5px 0;
+        }
+
+        .unit-symbol {
+            font-size: 1rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .encyclopedia-section {
+            margin-bottom: 15px;
+        }
+
+        .encyclopedia-section h4 {
+            color: #2c3e50;
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin: 15px 0 10px 0;
+        }
+
+        [data-theme="dark"] .encyclopedia-section h4 {
+            color: #ecf0f1;
+        }
+
+        .encyclopedia-section p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .encyclopedia-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        [data-theme="dark"] .encyclopedia-meta {
+            border-top-color: #5d6d7e;
+        }
+
+        .encyclopedia-meta-item {
+            font-size: 0.9rem;
+        }
+
+        .encyclopedia-meta-item strong {
+            color: var(--text-accent);
+            display: block;
+            margin-bottom: 3px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .adsense-container {
+            text-align: center;
+            margin: 40px 0;
+            padding: 20px;
+            background: var(--bg-section);
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .footer a {
+            color: #74b9ff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .content {
+                padding: 25px 20px;
+            }
+
+            .intro h1 {
+                font-size: 1.5rem;
+            }
+
+            .category-section h2 {
+                font-size: 1.4rem;
+            }
+
+            .encyclopedia-title {
+                font-size: 1.2rem;
+            }
+
+            .category-nav {
+                gap: 6px;
+            }
+
+            .category-nav a {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+
+    <!-- Strukturovaná data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": ["CollectionPage", "WebPage"],
+      "name": "Encyklopedie jednotek",
+      "url": "https://konvertor.cz/encyklopedie.html",
+      "description": "Encyklopedie měřicích jednotek: definice, historie a použití jednotek délky, hmotnosti, objemu, teploty, tlaku, času, dat a chemických koncentrací. Kompletní informace o metrických i imperiálních jednotkách.",
+      "inLanguage": "cs",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Konvertor.cz",
+        "url": "https://konvertor.cz/"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Domů",
+          "item": "https://konvertor.cz/"
+        },{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Encyklopedie jednotek"
+        }]
+      }
+    }
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <a href="/"><img src="Lyra.png?v=20250921" alt="Lyra Logo" class="site-logo"></a>
+                <div class="header-text">
+                    <h1><a href="/">Konvertor.cz</a></h1>
+                    <p>Encyklopedie jednotek</p>
+                </div>
+            </div>
+            <div class="theme-toggle" id="theme-toggle" title="Přepnout tmavý/světlý režim">
+                <svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="white">
+                    <path class="sun-icon" d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" style="display:none;"/>
+                    <path class="moon-icon" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <h1>Encyklopedie jednotek (A–Z)</h1>
+                <p>
+                    Vítejte v encyklopedii měřicích jednotek. Tento přehled obsahuje definice, historii a praktické použití desítek nejdůležitějších
+                    jednotek z klíčových kategorií. Od základních SI jednotek jako metr a kilogram, přes tradiční jednotky jako palce a libry,
+                    až po specializované jednotky pro měření času, dat, teploty, tlaku a hmotnosti.
+                </p>
+                <p>
+                    Každá jednotka je doplněna o historický kontext, původ, vynálezce a moderní využití v praxi. Kategorie pokrývají
+                    nejčastěji používané oblasti měření v každodenním životě, vědě a průmyslu.
+                </p>
+            </div>
+
+            <!-- Reklama pod úvodem -->
+            <div class="adsense-container" style="margin: 30px 0;">
+                <div aria-hidden="true" style="font-size:12px;color:#6c757d;margin-bottom:6px;text-align:center;">Reklama</div>
+
+                <div class="ad-container" id="ad-encyclopedia-top">
+                    <div class="ad-placeholder">Načítám reklamu…</div>
+
+                    <!-- Desktop varianta (728x90) -->
+                    <ins class="adsbygoogle ad-desktop"
+                         style="display:none;width:728px;height:90px"
+                         data-ad-client="ca-pub-4014521280729531"
+                         data-ad-slot="8858744510"></ins>
+
+                    <!-- Mobilní varianta (responzivní) -->
+                    <ins class="adsbygoogle ad-mobile"
+                         style="display:none;"
+                         data-ad-client="ca-pub-4014521280729531"
+                         data-ad-slot="8858744510"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+
+            <nav class="category-nav" aria-label="Navigace po kategoriích">
+                <a href="#cas">Čas</a>
+                <a href="#chemie">Chemie</a>
+                <a href="#data">Data</a>
+                <a href="#delka">Délka</a>
+                <a href="#hmotnost">Hmotnost</a>
+                <a href="#objem">Objem</a>
+                <a href="#teplota">Teplota</a>
+                <a href="#tlak">Tlak</a>
+            </nav>
+
+            <!-- ========== ČAS ========== -->
+            <section id="cas" class="category-section">
+                <h2>Čas</h2>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Sekunda</h3>
+                        <span class="unit-symbol">s</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Sekunda je základní jednotka času v soustavě SI. Od roku 1967 je definována jako doba trvání 9 192 631 770 period záření odpovídajícího přechodu mezi dvěma hladinami základního stavu atomu cesia-133.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Sekunda má své kořeny v babylonské sexagesimální soustavě (základ 60). První mechanické hodiny s vteřinovou ručičkou byly vyrobeny v 15. století. Moderní atomová definice sekundy z roku 1967 je založena na záření atomů cesia-133, což umožňuje extrémně přesné měření času pro GPS satelity, vědecké výzkumy a synchronizaci globálních komunikačních sítí.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> s</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> SI (základní jednotka)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 min = 60 s, 1 h = 3600 s</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Minuta</h3>
+                        <span class="unit-symbol">min</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Minuta je jednotka času rovná 60 sekundám. Název pochází z latinského "minuta" znamenající "zmenšená" (část hodiny).</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Dělení hodiny na 60 minut má původ v babylónském sexagesimálním systému (základ 60) z doby kolem 1500 př. n. l. Babylóňané používali tento systém pro astronomické výpočty. Minuta se dnes používá globálně pro měření času v každodenním životě, dopravních jízdních řádech, sportu a všech oblastech lidské činnosti.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> min</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Čas (neodvozená jednotka)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 min = 60 s, 60 min = 1 h</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Hodina</h3>
+                        <span class="unit-symbol">h</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Hodina je jednotka času rovná 60 minutám nebo 3600 sekundám.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Rozdělení dne na 24 hodin má původ ve starověkém Egyptě kolem 1500 př. n. l., kde Egypťané rozdělili den a noc na 12 částí každou. Toto dělení přejali Řekové a Římané. Hodina je dnes základní jednotkou pro organizaci lidské společnosti, pracovní doby, dopravy a všech denních aktivit po celém světě.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> h</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Čas</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 h = 60 min = 3600 s</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Den</h3>
+                        <span class="unit-symbol">day</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Den je jednotka času odpovídající jedné rotaci Země kolem své osy, rovná 24 hodinám nebo 86 400 sekundám.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Den jako přirozená perioda rotace Země je nejstarší časovou jednotkou používanou lidstvem. Střídání dne a noci určuje biologické rytmy všech živých organismů. Moderní definice dne (86 400 sekund) je standardizována pro občanské účely. Den tvoří základ kalendářních systémů a organizace lidského života na celém světě.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> d, day</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Astronomický čas</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 den = 24 h = 86 400 s</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Týden</h3>
+                        <span class="unit-symbol">week</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Týden je jednotka času rovná sedmi dnům nebo 604 800 sekundám.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Sedmidenní cyklus má původ v Babylonu kolem 600 př. Kr., kde byl založen na sedmi pohyblivých nebeských tělesech viditelných pouhým okem (Slunce, Měsíc, Mars, Merkur, Jupiter, Venuše, Saturn). Konstantin Veliký uzákonil sedmidenní týden s nedělí jako dnem odpočinku v roce 321 n.l. Týden je dnes základem organizace práce, školní docházky a náboženských obřadů po celém světě.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> týd., week</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Kalendářní jednotka</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 týden = 7 dnů = 168 h</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Rok</h3>
+                        <span class="unit-symbol">year</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Rok je doba jednoho oběhu Země kolem Slunce. Tropický rok má průměrně 365,24219 dne. Gregoriánský kalendářní rok má průměrně 365,2425 dne.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Koncept roku vychází z astronomické periody oběhu Země kolem Slunce a střídání ročních období. Starověké civilizace vytvářely různé kalendáře. Gregoriánský kalendář zavedený papežem Řehořem XIII. v roce 1582 je dnes celosvětovým standardem. Rok je základem dlouhodobého plánování, zemědělství, ekonomiky a všech časových cyklů lidské společnosti.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> rok, year, a</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Astronomický čas</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 rok ≈ 365,25 dne = 8760 h</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== CHEMIE (Koncentrace) ========== -->
+            <section id="chemie" class="category-section">
+                <h2>Chemie – Koncentrace roztoků</h2>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Parts per million (ppm)</h3>
+                        <span class="unit-symbol">ppm</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Parts per million (ppm) je bezrozměrná jednotka koncentrace vyjadřující počet částic látky na milion částic celku. V vodných roztocích odpovídá 1 ppm přibližně 1 mg/L.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Jednotka ppm se rozšířila v 20. století s rozvojem analytické chemie umožňující měřit velmi malé koncentrace. Používá se pro vyjádření koncentrace znečišťujících látek v ovzduší, vodě a potravinách, pro mezní hodnoty pesticidů, těžkých kovů a dalších stopových prvků. Je standardem v environmentálním monitoringu, toxikologii a kontrole kvality.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> ppm</div>
+                        <div class="encyclopedia-meta-item"><strong>Typ:</strong> Bezrozměrná jednotka koncentrace</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 ppm ≈ 1 mg/L (ve vodě)</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Miligram na litr</h3>
+                        <span class="unit-symbol">mg/L</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Miligram na litr vyjadřuje hmotnostní koncentraci jako počet miligramů rozpuštěné látky v jednom litru roztoku.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Jednotka mg/L vznikla kombinací metrických jednotek hmotnosti a objemu. Je standardní jednotkou v chemické anal
+
+ytice, kontrole kvality vody, environmentálním monitoringu a lékařských laboratořích. Používá se pro vyjádření koncentrace minerálů v pitné vodě, znečišťujících látek v odpadních vodách a léčivých látek v biologických vzorcích.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> mg/L</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Metrická (odvozená)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 g/L = 1000 mg/L</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== DATA ========== -->
+            <section id="data" class="category-section">
+                <h2>Data – Datové jednotky</h2>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Bit</h3>
+                        <span class="unit-symbol">b</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Bit je základní jednotka informace v digitálních systémech, která může nabývat hodnoty 0 nebo 1.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Termín "bit" (binary digit) použil poprvé Claude E. Shannon v průkopnické práci o teorii informace z roku 1948, ačkoli autorství názvu je připisováno Johnu W. Tukeyovi (1947). Bit je fundamentální jednotkou pro všechny digitální technologie – počítače, internet, mobilní telefony a všechna digitální úložiště. Je základem kódování informací v binární soustavě.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> b, bit</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Binární (základní jednotka)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 8 bitů = 1 byte (B)</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Byte</h3>
+                        <span class="unit-symbol">B</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Byte je jednotka digitální informace skládající se z 8 bitů, schopná reprezentovat 256 různých hodnot (0-255).</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Termín "byte" vytvořil Werner Buchholz v IBM v roce 1956 pro nový počítač IBM 7030 Stretch. Osmibitový byte se stal průmyslovým standardem díky IBM System/360 (1964). Byte je základní jednotkou pro měření kapacity paměti, velikosti souborů a přenosové rychlosti. Jeden byte může reprezentovat jeden ASCII znak nebo jeden pixel s 256 barvami.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> B, byte</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Binární</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 B = 8 b, 1 kB = 1000 B</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Kilobajt</h3>
+                        <span class="unit-symbol">kB</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Kilobajt v dekadickém systému (kB) je jednotka rovná 1000 bajtům. V binárním systému existuje alternativní jednotka kibibyte (KiB) = 1024 bajtů.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Kilobajt se rozšířil v 60. letech 20. století s nástupem počítačů. Původně označoval 1024 bajtů (2^10), ale IEC standardizovala v roce 1998 dekadický kilobajt (1000 B) a zavedla kibibyte (KiB) pro binární hodnotu. Kilobajty se používají pro měření velikosti malých textových souborů, obrázků s nízk
+
+ým rozlišením a paměti starších zařízení.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> kB (dekadický)</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> SI (dekadická)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 kB = 1000 B, 1 KiB = 1024 B</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Megabajt</h3>
+                        <span class="unit-symbol">MB</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Megabajt (MB) je jednotka rovná 1 000 000 bajtům v dekadickém systému. V binárním systému je mebibyte (MiB) = 1 048 576 bajtů.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Megabajt se stal běžným v 70. a 80. letech s růstem kapacity pevných disků a paměti RAM. Používá se pro velikost fotografií, dokumentů, MP3 souborů a kapacitu starších paměťových médií. Moderní foto z mobilu má typicky 2-10 MB, MP3 píseň 3-5 MB. Výrobci disků používají dekadický MB, operační systémy často binární MiB.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> MB (dekadický)</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> SI (dekadická)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 MB = 1000 kB, 1 MiB = 1024 KiB</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Gigabajt</h3>
+                        <span class="unit-symbol">GB</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Gigabajt (GB) je jednotka rovná 1 000 000 000 bajtům v dekadickém systému. V binárním systému je gibibyte (GiB) = 1 073 741 824 bajtů.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Gigabajt se stal běžným v 90. letech s nástupem velkých pevných disků a CD médií. Dnes je standardní jednotkou pro kapacitu RAM (4-64 GB), velikost filmů (5-15 GB), her (20-100 GB) a datových tarifů mobilních operátorů. Moderní smartphony mají úložiště 64-512 GB, počítače 256 GB - 2 TB.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> GB (dekadický)</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> SI (dekadická)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 GB = 1000 MB, 1 GiB = 1024 MiB</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Terabajt</h3>
+                        <span class="unit-symbol">TB</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Terabajt (TB) je jednotka rovná 1 000 000 000 000 bajtům (1 bilion bajtů) v dekadickém systému.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Terabajt se stal běžným v 2000. letech s rozvojem velkých datových center a high-definition videa. Moderní pevné disky mají kapacitu 1-20 TB, cloudová úložiště nabízejí terabajty prostoru. Jeden TB může obsahovat přibližně 250 000 MP3 písní, 500 hodin HD videa nebo 310 000 fotografií. Datová centra pracují s petabajty (1000 TB).</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> TB (dekadický)</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> SI (dekadická)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 TB = 1000 GB = 10^12 B</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== DÉLKA ========== -->
+            <section id="delka" class="category-section">
+                <h2>Délka</h2>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Metr</h3>
+                        <span class="unit-symbol">m</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Metr je základní jednotka délky v soustavě SI. Od roku 1983 je definován jako délka dráhy, kterou urazí světlo ve vakuu za 1/299 792 458 sekundy.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Metr byl poprvé definován v roce 1791 ve Francii jako jedna desetimiliontina vzdálenosti od rovníku k severnímu pólu. Původní prototyp z platiny-iridia byl vytvořen v roce 1889. Moderní definice založená na rychlosti světla (1983) poskytuje nejvyšší přesnost. Metr je globálním standardem pro měření vzdáleností v architektuře, stavebnictví, zeměměřictví a běžném životě.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> m</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> SI (základní jednotka)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 m = 100 cm = 1000 mm</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Palec</h3>
+                        <span class="unit-symbol">in</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Palec (inch) je jednotka délky v imperiálním systému, přesně definovaná jako 25,4 milimetru nebo 1/12 stopy.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Palec má původ ve starověké jednotce založené na šířce palce. Byl standardizován králem Edwardem II. v roce 1324 jako délka tří suchých ječných zrn položených za sebou. Mezinárodní palec (25,4 mm přesně) byl definován v roce 1959. Dnes se používá v USA, UK a některých dalších zemích pro rozměry obrazovek, pneumatik, trubek a v mnoha průmyslových aplikacích.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> in, ″</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Imperiální</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 in = 25,4 mm = 2,54 cm</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Centimetr</h3>
+                        <span class="unit-symbol">cm</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Centimetr je jednotka délky rovná jedné setině metru (0,01 m).</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Centimetr vznikl spolu s metrickým systémem na konci 18. století jako praktická desetinná část metru. Je ideální pro měření běžných předmětů – výšky lidí (např. 175 cm), velikosti nábytku, oblečení a spotřebního zboží. V lékařství se používá pro měření tělesných rozměrů a růstu dětí. Je běžnou jednotkou v každodenním životě po celém světě.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> cm</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> SI (odvozená jednotka)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 cm = 10 mm = 0,01 m</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Kilometr</h3>
+                        <span class="unit-symbol">km</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Kilometr je jednotka délky rovná 1000 metrům.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Kilometr vznikl spolu s metrickým systémem ve Francii koncem 18. století jako tisícinásobek metru. Stal se standardní jednotkou pro měření delších vzdáleností po celém světě. Používá se pro vzdálenosti v dopravě (silniční síť, železnice), sportovní výkony (běh, cyklistika), zeměpisné vzdálenosti mezi městy a státy. Rychloměry automobilů zobrazují rychlost v km/h téměř všude kromě USA a UK.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> km</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> SI (odvozená jednotka)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 km = 1000 m = 0,621 mi</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Stopa</h3>
+                        <span class="unit-symbol">ft</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Stopa (foot) je jednotka délky v imperiálním systému, přesně definovaná jako 0,3048 metru nebo 12 palců.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Stopa má původ v délce lidské nohy a používala se již ve starověkém Egyptě, Řecku a Římě. Anglická stopa byla standardizována v různých variantách po staletí. Mezinárodní stopa (0,3048 m) byla definována v roce 1959. Dnes se používá především v USA pro měření výšky budov, leteckých výšek, hloubky vody a v architektuře. V UK je částečně nahrazena metrickým systémem.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> ft, ′</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Imperiální</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 ft = 12 in = 0,3048 m</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Míle</h3>
+                        <span class="unit-symbol">mi</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Míle (mile) je jednotka délky v imperiálním systému, přesně definovaná jako 1609,344 metru nebo 5280 stop.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Míle pochází z římské jednotky "mille passus" (tisíc kroků), která měřila přibližně 1480 metrů. Anglická statuta míle byla stanovena v roce 1593 na 5280 stop. Dnes se používá v USA, UK (částečně) a některých dalších zemích pro označení vzdáleností na silničních značkách, v letectví (námořní míle) a v běžečských závodech. Jedna míle odpovídá přibližně 1,6 kilometru.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> mi, mile</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Imperiální</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 mi = 5280 ft = 1,609 km</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== HMOTNOST ========== -->
+            <section id="hmotnost" class="category-section">
+                <h2>Hmotnost</h2>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Kilogram</h3>
+                        <span class="unit-symbol">kg</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Kilogram je základní jednotka hmotnosti v soustavě SI. Od roku 2019 je definován pomocí Planckovy konstanty (h = 6,62607015 × 10⁻³⁴ J·s).</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Kilogram byl původně definován v roce 1795 jako hmotnost jednoho litru vody při 4°C. Od roku 1889 do 2019 byl definován mezinárodním prototypem (válcem z platiny-iridia) uloženým v Paříži. Nová definice z roku 2019 založená na Planckově konstantě poskytuje nezávislost na fyzickém artefaktu. Kilogram je globálním standardem pro měření hmotnosti v obchodu, průmyslu, vědě a běžném životě.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> kg</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> SI (základní jednotka)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 kg = 1000 g = 2,205 lb</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Gram</h3>
+                        <span class="unit-symbol">g</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Gram je jednotka hmotnosti rovná jedné tisícině kilogramu (0,001 kg).</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Gram byl definován během Francouzské revoluce koncem 18. století jako hmotnost jednoho krychlového centimetru vody. Stal se praktickou jednotkou pro měření menších hmotností. Dnes se gramy používají v kuchyni pro recepty, v lékárenství pro dávkování léků, v klenotnictví pro vážení drahých kovů a ve všech oblastech kde je kilogram příliš velký. Běžně se používá také miligram (mg) pro velmi malé množství.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> g</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> SI (odvozená jednotka)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 g = 1000 mg = 0,001 kg</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Libra</h3>
+                        <span class="unit-symbol">lb</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Libra (pound) je jednotka hmotnosti v imperiálním systému, přesně definovaná jako 0,45359237 kilogramu nebo 16 uncí.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Libra má původ v římské jednotce "libra pondo" (váha libry), která měřila přibližně 327 gramů. Anglická libra (avoirdupois pound) byla standardizována v roce 1959 na přesně 0,45359237 kg. Dnes se používá především v USA, UK a některých dalších zemích pro měření tělesné hmotnosti lidí, balení potravin, zásilek a v některých průmyslových odvětvích. Zkratka "lb" pochází z latinského slova libra.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> lb, lbs</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Imperiální</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 lb = 16 oz = 0,454 kg</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Unce</h3>
+                        <span class="unit-symbol">oz</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Unce (ounce) je jednotka hmotnosti v imperiálním systému, rovná 1/16 libry nebo přibližně 28,35 gramům.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Unce pochází z římské jednotky "uncia" (jedna dvanáctina). Avoirdupois unce používaná v USA a UK má 28,35 g, zatímco trojská unce používaná pro drahé kovy má 31,10 g. Unce se používá pro balení potravin v USA (např. 16 oz = 1 pint tekutin), pro měření masa, sýrů a v klenotnictví. V České republice se občas objevuje na importovaných produktech.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> oz</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Imperiální</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 oz = 28,35 g, 16 oz = 1 lb</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Tuna</h3>
+                        <span class="unit-symbol">t</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Metrická tuna je jednotka hmotnosti rovná 1000 kilogramům.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Metrická tuna byla zavedena spolu s metrickým systémem jako tisícinásobek kilogramu. Používá se pro měření velkých hmotností v průmyslu, těžbě, zemědělství, lodní dopravě a obchodu. Výroba automobilů se měří v milionech tun, lodě mají nosnost v tunách, zemědělská produkce se uvádí v tunách na hektar. Existuje také britská tuna (long ton = 1016 kg) a americká tuna (short ton = 907 kg).</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> t</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> SI (odvozená jednotka)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 t = 1000 kg = 2205 lb</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Miligram</h3>
+                        <span class="unit-symbol">mg</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Miligram je jednotka hmotnosti rovná jedné tisícině gramu nebo jedné miliontině kilogramu (0,000001 kg).</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Miligram vznikl jako desetinná část gramu v metrickém systému. Je nezbytný pro přesné dávkování léčiv v lékařství a farmacii, kde jsou běžné dávky 5-500 mg. Používá se také v chemických laboratořích, výživě (obsah vitaminů a minerálů), toxikologii a všude, kde je potřeba měřit velmi malé hmotnosti s vysokou přesností. Menší jednotkou je mikrogram (μg).</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> mg</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> SI (odvozená jednotka)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 mg = 0,001 g, 1000 mg = 1 g</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== OBJEM ========== -->
+            <section id="objem" class="category-section">
+                <h2>Objem</h2>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Litr</h3>
+                        <span class="unit-symbol">l</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Litr je základní jednotka objemu používaná v metrickém systému. Je definován jako objem krychle o hraně 10 centimetrů, což odpovídá 1 kubickému decimetru (dm³). Litr je jedna z nejčastěji používaných jednotek pro měření tekutin v každodenním životě. V mezinárodním systému SI je litr přípustnou jednotkou, i když základní jednotkou objemu je kubický metr. Jeden litr odpovídá přesně 0,001 m³.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Litr byl poprvé zaveden ve Francii v roce 1795 během Velké francouzské revoluce jako součást metrického systému. Název pochází z francouzského slova "litron", což byla stará francouzská jednotka objemu. Původně byl litr definován jako objem 1 kilogramu destilované vody při teplotě 4°C. V roce 1964 byla definice změněna na dnešní podobu - 1 kubický decimetr. Litr se používá hlavně pro měření tekutin - vody, mléka, pohonných hmot, ale i pro sypké materiály. V obchodě se běžně setkáme s jednotkami jako mililitr (ml) pro menší objemy nebo hektolitr (hl) pro větší množství.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> l, L</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Metrická</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 l = 1 dm³ = 0,001 m³</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Galon</h3>
+                        <span class="unit-symbol">gal</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Galon je jednotka objemu používaná především v anglosaských zemích. Existují dva hlavní typy galonu: americký galon (US gallon) a britský imperiální galon (imperial gallon). Americký galon je menší a odpovídá přibližně 3,785 litrům, zatímco britský galon odpovídá asi 4,546 litrům. Tento rozdíl vznikl historickým vývojem a různými definicemi ve Velké Británii a Spojených státech. Pro převody je důležité vždy specifikovat, o který typ galonu se jedná, protože rozdíl mezi nimi je výrazný.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Galon jako jednotka objemu má své kořeny ve středověké Anglii, kde se používal pro obchod s vínem a pivem. V roce 1824 Velká Británie standardizovala imperiální galon jako objem 10 liber vody při teplotě 62°F. Spojené státy však zachovaly starší definici, známou jako "wine gallon" z roku 1707. Dnes se americký galon používá zejména pro pohonné hmoty v USA, zatímco britský galon je stále používán ve Spojeném království a některých zemích Commonwealthu. V automobilovém průmyslu se spotřeba paliva v USA uvádí v mílích na galon (mpg), což vytváří zmatek při porovnání s evropskými normami.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> gal</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Imperiální/Americká</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 US gal = 3,785 l; 1 UK gal = 4,546 l</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Mililitr</h3>
+                        <span class="unit-symbol">ml</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Mililitr je jednotka objemu v metrickém systému, která představuje tisícinu litru. Je to velmi praktická jednotka pro měření malých objemů tekutin. Jeden mililitr odpovídá také jednomu kubickému centimetru (cm³), což je objem krychle o hraně 1 centimetr. V lékařství a laboratorní praxi se často používá zkratka "cc" (cubic centimeter) jako synonymum pro mililitr. Mililitr je běžně používanou jednotkou v kuchařství, farmacii a chemii pro přesné dávkování látek.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Mililitr vznikl jako přirozený díl metrického systému, který byl zaveden na konci 18. století ve Francii. Předpona "mili-" znamená tisícinu a je standardní součástí metrického systému pro označení tisíciny základní jednotky. Mililitr se stal nepostradatelným v medicíně pro dávkování léků, v laboratořích pro přesné měření chemických roztoků a v každodenním životě pro měření tekutin v receptech. V kuchařských knihách se běžně setkáme s objemy uvedenými v mililitrech. Také v potravinářském průmyslu se používá pro označení obsahu tekutých produktů, zejména nápojů a přípravků v menších baleních.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> ml</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Metrická</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 ml = 0,001 l = 1 cm³</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Kubický metr</h3>
+                        <span class="unit-symbol">m³</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Kubický metr je základní jednotkou objemu v mezinárodním systému jednotek SI. Je definován jako objem krychle, která má všechny strany dlouhé jeden metr. Jeden kubický metr odpovídá 1000 litrům. Tato jednotka se používá zejména pro měření velkých objemů, jako jsou stavební materiály, objem místností, zásobníků nebo nádrží. V technické praxi je kubický metr standardní jednotkou pro vyjádření prostorového obsahu a kapacity. Je to odvozená jednotka od základní jednotky délky - metru.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Kubický metr byl zaveden jako součást metrického systému na konci 18. století ve Francii, společně s metrem jako základní jednotkou délky. Stal se mezinárodním standardem pro měření objemu v roce 1960, kdy byl přijat mezinárodní systém jednotek SI. Dnes se kubický metr používá ve stavebnictví pro výpočet objemu betonu, zeminy nebo štěrku, v plynárenství pro měření spotřeby plynu, ve vodárenství pro měření spotřeby vody a v dopravě pro určení nákladového prostoru. V průmyslu se také používá pro specifikaci objemových toků - například kubické metry za hodinu (m³/h) pro výkon čerpadel nebo ventilátorů.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> m³</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> SI (metrická)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 m³ = 1000 l = 1 000 000 cm³</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Pint</h3>
+                        <span class="unit-symbol">pt</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Pint je jednotka objemu používaná v anglosaských zemích, především pro tekutiny. Podobně jako u galonu existují dva hlavní typy: americký pint a britský imperiální pint. Americký pint odpovídá přibližně 0,473 litru (473 ml), zatímco britský imperiální pint je větší a odpovídá asi 0,568 litru (568 ml). Britský pint je přesně jedna osmina imperiálního galonu. Tato jednotka se běžně používá v hospodách a restauracích pro servírování piva a jiných nápojů.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Pint má své kořeny ve středověké Anglii a jeho název pochází z latinského "pincta", což znamená "namalováno" nebo "označeno". Historicky se používal jako standardní míra pro tekutiny, zejména mléko a pivo. V roce 1824 byl imperiální pint standardizován ve Velké Británii jako jedna osmina galonu. Ve Spojeném království je pint dodnes zákonnou jednotkou pro servírování točeného piva a cideru - hospody musí nabízet pivo v pintech nebo jejich polovinách. V USA se pint používá zejména v kuchařství a pro balení mléčných výrobků. Rozdíl mezi americkým a britským pintem je významný - britské pivo "pint" obsahuje o téměř 100 ml více než americké.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> pt</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Imperiální/Americká</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 US pt = 473 ml; 1 UK pt = 568 ml</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Fluid Ounce (Tekutá unce)</h3>
+                        <span class="unit-symbol">fl oz</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Fluid ounce, česky tekutá unce, je jednotka objemu používaná v USA a Velké Británii pro měření tekutin. Je důležité ji odlišit od běžné unce (ounce), která je jednotkou hmotnosti. Americká fluid ounce odpovídá přibližně 29,57 ml, zatímco britská imperiální fluid ounce je mírně větší a odpovídá asi 28,41 ml. Tekutá unce je definována jako určitý díl pintu - americká fluid ounce je 1/16 amerického pintu, britská je 1/20 imperiálního pintu. Tato jednotka se běžně používá na etiketách nápojů a v receptech.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Tekutá unce vznikla jako praktická jednotka pro měření tekutin v angloamerickém systému měr. Historicky byla odvozena od hmotnostní unce - původně byla definována jako objem unce vody. V průběhu času se definice v USA a Velké Británii rozešly, podobně jako u jiných jednotek. Dnes se fluid ounce běžně používá v USA na etiketách nápojů - například typická plechovka nápoje má 12 fl oz (355 ml). V kosmetickém průmyslu a při prodeji parfémů se také často uvádějí objemy v tekutých uncích. V kuchařských receptech, zejména amerických, se tekutá unce používá pro přesné dávkování tekutých ingrediencí. Ve Velké Británii se používá méně často, protože tam je preferován metrický systém.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> fl oz</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Imperiální/Americká</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 US fl oz = 29,57 ml; 1 UK fl oz = 28,41 ml</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== TEPLOTA ========== -->
+            <section id="teplota" class="category-section">
+                <h2>Teplota</h2>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Celsius</h3>
+                        <span class="unit-symbol">°C</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Celsius, také známý jako stupeň Celsia, je jednotka teploty v metrickém systému. Je pojmenován po švédském astronomovi Andersovi Celsiovi. Stupnice Celsia je definována dvěma referenčními body: 0°C je teplota tání ledu (bod mrazu vody) a 100°C je teplota varu vody za normálního atmosférického tlaku (101,325 kPa). Interval mezi těmito body je rozdělen na 100 stejných dílů, což z něj činí decimální stupnici. Celsius je standardní jednotkou teploty v mezinárodním systému SI a používá se ve většině zemí světa pro každodenní měření teploty.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Stupnice Celsia byla vytvořena v roce 1742 švédským astronomem Andersem Celsiusem. Zajímavostí je, že původní stupnice byla "obrácená" - 0° znamenalo bod varu a 100° bod mrazu vody. Krátce po Celsiově smrti byla stupnice otočena do dnešní podoby, pravděpodobně Carlem Linném nebo Danielem Ekströmem. V roce 1948 byla jednotka oficiálně přejmenována ze "stupeň Centigrade" na "stupeň Celsia". Dnes se Celsius používá po celém světě pro meteorologické předpovědi, lékařské měření tělesné teploty, vědecký výzkum a každodenní použití. V technické praxi se někdy používá Kelvin, který má stejnou velikost stupně jako Celsius, ale jiný nulový bod.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> °C</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Metrická (SI)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> °C = (°F - 32) × 5/9; K = °C + 273,15</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Fahrenheit</h3>
+                        <span class="unit-symbol">°F</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Fahrenheit je jednotka teploty používaná především ve Spojených státech a některých karibských zemích. Je pojmenován po německém fyzikovi Danielu Gabrielu Fahrenheitovi. Ve stupnici Fahrenheita je bod mrazu vody stanoven na 32°F a bod varu vody na 212°F za normálního atmosférického tlaku. Mezi těmito dvěma body je 180 stupňů, což znamená, že jeden stupeň Fahrenheita odpovídá 5/9 stupně Celsia. Fahrenheitova stupnice má menší jednotkové kroky než Celsius, což umožňuje jemnější rozlišení teplot bez použití desetinných míst.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Stupnice Fahrenheita byla vytvořena v roce 1724 německým fyzikem Danielem Gabrielem Fahrenheitem. Fahrenheit jako nulový bod zvolil teplotu směsi ledu, vody a chloridu amonného (nejnižší teplota, kterou dokázal reprodukovatelně vytvořit). Za 96° označil průměrnou tělesnou teplotu člověka. Později byla stupnice upravena tak, aby bod mrazu vody byl 32°F a bod varu 212°F. Ačkoli většina světa přešla na stupnici Celsia, USA a několik dalších zemí stále používají Fahrenheita pro každodenní měření teploty, meteorologické zprávy a v domácnostech. V medicíně se v USA běžně uvádí tělesná teplota ve Fahrenheitech (normální teplota je 98,6°F).</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> °F</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Imperiální</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> °F = (°C × 9/5) + 32</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Kelvin</h3>
+                        <span class="unit-symbol">K</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Kelvin je základní jednotkou teploty v mezinárodním systému jednotek SI. Je pojmenován po britském fyzikovi Williamu Thomsonovi, známém jako Lord Kelvin. Na rozdíl od Celsia a Fahrenheita se u Kelvina nepoužívá slovo "stupeň" ani symbol stupně (°). Kelvinova stupnice začíná na absolutní nule (-273,15°C), což je teoreticky nejnižší možná teplota, při které všechny částice přestanou mít kinetickou energii. Jeden kelvin má stejnou velikost jako jeden stupeň Celsia, takže změna o 1 K odpovídá změně o 1°C. Teplota 0 K = -273,15°C, teplota mrazu vody je 273,15 K.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Kelvinova stupnice byla navržena v roce 1848 Williamem Thomsonem (Lord Kelvin), který na základě práce francouzského fyzika Jacquese Charlese vypočítal absolutní nulovou teplotu. Kelvin je základní jednotkou teploty v SI od roku 1954. V roce 2019 byla redefinována na základě Boltzmannovy konstanty, což ji učinilo nezávislou na vlastnostech konkrétních materiálů. Kelvin se používá především ve fyzice a chemii pro vědecké výpočty, v astronomii pro měření teploty hvězd a planet, a v inženýrství pro termodynamické výpočty. Barevná teplota světla (například u LED žárovek) se také udává v kelvinech - teplé bílé světlo má kolem 2700-3000 K, studené bílé kolem 5000-6500 K.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> K</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> SI</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> K = °C + 273,15</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Rankine</h3>
+                        <span class="unit-symbol">°R</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Rankine je jednotka absolutní teploty pojmenovaná po skotském inženýrovi a fyzikovi Williamu Johnu Macquornovi Rankinovi. Je to imperiální ekvivalent Kelvinovy stupnice - používá stejné přírůstky jako Fahrenheitova stupnice, ale začíná na absolutní nule. Absolutní nula je 0°R, což odpovídá -459,67°F nebo -273,15°C. Bod mrazu vody je 491,67°R a bod varu vody je 671,67°R. Jeden stupeň Rankine má stejnou velikost jako jeden stupeň Fahrenheita, takže změna o 1°R odpovídá změně o 1°F. Rankine se používá především v americkém inženýrství.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Stupnice Rankine byla navržena v roce 1859 skotským fyzikem Williamem Johnem Macquornem Rankinem jako absolutní teplotní stupnice založená na Fahrenheitově stupnici, podobně jako Kelvin je založen na Celsiově stupnici. Rankine vytvořil tuto stupnici pro inženýrské aplikace ve Spojených státech, kde se používá Fahrenheit. Dnes se Rankine používá relativně vzácně, především v některých oblastech amerického inženýrství, zejména v termodynamice a aerospace inženýrství. V USA se někdy používá v klimatizačním a chladicím průmyslu. Většina světa a vědecká komunita preferuje Kelvin, ale Rankine zůstává užitečný v aplikacích, kde se pracuje s Fahrenheitovou stupnicí a je potřeba absolutní teplotní měřítko.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> °R, °Ra</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Imperiální (absolutní)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> °R = °F + 459,67; °R = K × 9/5</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==
+
+========== TLAK ========== -->
+            <section id="tlak" class="category-section">
+                <h2>Tlak</h2>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Pascal</h3>
+                        <span class="unit-symbol">Pa</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Pascal je základní jednotkou tlaku v mezinárodním systému jednotek SI. Je pojmenován po francouzském matematikovi, fyzikovi a filozofovi Blaise Pascalovi. Jeden pascal je definován jako síla jednoho newtonu působící kolmo na plochu jednoho čtverečního metru (1 Pa = 1 N/m²). Pascal je poměrně malá jednotka, proto se v praxi často používají jeho násobky: kilopascal (kPa), megapascal (MPa) nebo gigapascal (GPa). Atmosférický tlak na hladině moře je přibližně 101 325 Pa, což se obvykle zaokrouhluje na 101 kPa nebo 0,101 MPa.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Jednotka pascal byla pojmenována po Blaise Pascalovi (1623-1662), který významně přispěl k pochopení tlaku a vakua. Pascal byl oficiálně přijat jako jednotka tlaku v roce 1971 na 14. Generální konferenci pro váhy a míry. Předtím se používaly různé jednotky jako barye nebo torr. Dnes se pascal používá ve vědeckém výzkumu, meteorologii (tlak vzduchu), v lékařství (krevní tlak v moderních jednotkách), automobilovém průmyslu (tlak v pneumatikách, často v kPa) a stavebnictví (pevnost materiálů v MPa). V EU je pascal standardní jednotkou pro označení tlaku na většině technických zařízení a měřicích přístrojů.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> Pa</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> SI</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 Pa = 1 N/m² = 0,01 mbar</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Bar</h3>
+                        <span class="unit-symbol">bar</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Bar je jednotka tlaku, která není součástí systému SI, ale je široce používaná v technické praxi. Jeden bar je definován jako 100 000 pascalů (100 kPa) nebo 0,1 megapascalu (MPa). Bar byl původně zaveden proto, že je téměř identický s atmosférickým tlakem - standardní atmosférický tlak je 1,01325 baru. Tato blízkost k atmosférickému tlaku činí bar praktickou jednotkou pro mnoho aplikací. V technické praxi se často používá také milibar (mbar), což je tisícina baru, tedy 100 pascalů. Milibar se běžně používá v meteorologii.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Jednotka bar byla zavedena na začátku 20. století norským meteorologem Vilhelmem Bjerknesem. Název pochází z řeckého slova "baros" znamenající váha nebo tíha. Bar byl původně definován jako 1 000 000 dyn/cm² v systému CGS. V roce 1982 Mezinárodní úřad pro váhy a míry doporučil upustit od používání baru ve prospěch pascalu, ale bar zůstal populární v praxi. Dnes se bar široce používá v průmyslu pro měření tlaku v pneumatikách, hydraulických systémech, parních kotlích a kompresorech. Potápěči měří hloubku v barech - každých 10 metrů pod hladinou odpovídá přibližně 1 baru dodatečného tlaku. V meteorologii se používá milibar (nebo hektopascal, což je totéž) pro měření atmosférického tlaku.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> bar</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Metrická (mimo SI)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 bar = 100 000 Pa = 100 kPa</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">PSI (Pounds per Square Inch)</h3>
+                        <span class="unit-symbol">psi</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>PSI je zkratka z anglického "pounds per square inch", což znamená "libry na čtvereční palec". Je to jednotka tlaku používaná především v USA a dalších zemích s imperiálním systémem měr. Jeden PSI je definován jako tlak vyvolaný silou jedné libry působící kolmo na plochu jednoho čtverečního palce. PSI není součástí mezinárodního systému SI, ale je stále široce používán v anglosaském světě. Jeden PSI odpovídá přibližně 6894,76 pascalům nebo 0,069 baru. Pro konverzi: 1 psi ≈ 6,895 kPa. Atmosférický tlak na hladině moře je přibližně 14,7 psi.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>PSI jako jednotka tlaku vznikla přirozeným vývojem imperiálního systému měr ve Velké Británii a Spojených státech, kde se používaly libry a palce. Přesné datum jejího vzniku není známo, ale používá se již několik století. Dnes je PSI standardní jednotkou v USA pro měření tlaku v pneumatikách (typicky 30-35 psi pro osobní automobily), v klimatizačních systémech, hydraulických a pneumatických zařízeních. V průmyslu se PSI používá pro specifikaci tlaku v potrubích, nádržích a systémech stlačeného vzduchu. Potápěči v anglosaských zemích měří tlak ve výstroji v PSI. I v zemích používajících metrický systém se PSI občas vyskytuje na dovážených produktech, zejména z USA, proto je důležité znát převodní vztahy.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> psi, lbf/in²</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Imperiální</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 psi = 6894,76 Pa ≈ 0,069 bar</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Atmosféra</h3>
+                        <span class="unit-symbol">atm</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Atmosféra (atm) je jednotka tlaku původně založená na průměrném atmosférickém tlaku na hladině moře. Je definována jako přesně 101 325 pascalů nebo 1,01325 baru. Existují dva typy: standardní atmosféra (atm) a technická atmosféra (at). Standardní atmosféra odpovídá tlaku vzduchového sloupce nad hladinou moře za standardních podmínek. Technická atmosféra (1 at = 98 066,5 Pa) je definována jako 1 kilogram-síla na čtvereční centimetr (kgf/cm²). V praxi se nejčastěji používá standardní atmosféra. Ačkoli není součástí SI, atmosféra se stále běžně používá v mnoha oborech.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Koncept atmosférického tlaku objevil Evangelista Torricelli v roce 1643, když provedl svůj slavný experiment s rtuťovým barometrem. Jednotka atmosféra byla později standardizována pro vědecké a technické účely. V roce 1954 byla na 10. Generální konferenci pro váhy a míry definována přesná hodnota 101 325 Pa. Atmosféra se používá v chemii pro vyjádření tlaku plynů, ve fyzice pro standardní podmínky (STP = 1 atm, 0°C), v potápění pro měření tlaku vody (každých 10 m hloubky přidává přibližně 1 atm), v meteorologii a klimatologii. Technická atmosféra (at) se používala v inženýrství především v bývalém SSSR a východní Evropě, dnes je méně běžná. V ČR se starší generace může setkat s jednotkou "atmosféra" na starších přístrojích.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> atm, at (technická)</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Metrická (mimo SI)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 atm = 101 325 Pa = 1,01325 bar</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Milimetr rtuťového sloupce</h3>
+                        <span class="unit-symbol">mmHg</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Milimetr rtuťového sloupce (mmHg) je jednotka tlaku založená na výšce sloupce rtuti. Jeden mmHg je definován jako tlak vyvolaný sloupcem rtuti vysokým 1 milimetr při standardní tíhové gravitaci a teplotě 0°C. V moderní definici je 1 mmHg přesně roven 133,322 pascalům. Tato jednotka vznikla z principu rtuťového barometru, kde se tlak měřil podle výšky rtuti ve skleněné trubici. Standardní atmosférický tlak na hladině moře je 760 mmHg. Jednotka mmHg je téměř identická s jednotkou torr (1 torr = 1/760 atm), rozdíl je nepatrný a v praxi zanedbatelný.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Milimetr rtuťového sloupce má svůj původ v Torricelliho experimentu z roku 1643, kdy italský fyzik Evangelista Torricelli vytvořil první barometr. Zjistil, že atmosférický tlak udrží sloupec rtuti v zavřené trubici přibližně 760 mm vysoko. Tato metoda měření tlaku se stala standardem na staletí. Dnes se mmHg používá především v medicíně pro měření krevního tlaku - normální krevní tlak je kolem 120/80 mmHg (systolický/diastolický). V meteorologii se dříve běžně používal pro měření atmosférického tlaku, dnes je nahrazován hektopascaly (hPa). V laboratořích se mmHg používá při práci s vakuem a ve fyziologii pro měření plynných tlaků v lidském těle. Rtuťové barometry se stále vyrábějí pro přesná měření, ačkoli kvůli toxicitě rtuti se postupně nahrazují jinými typy.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> mmHg, mm Hg</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Metrická (mimo SI)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 mmHg = 133,322 Pa; 760 mmHg = 1 atm</div>
+                    </div>
+                </div>
+
+                <div class="unit-encyclopedia">
+                    <div class="encyclopedia-header">
+                        <h3 class="encyclopedia-title">Torr</h3>
+                        <span class="unit-symbol">Torr</span>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Definice</h4>
+                        <p>Torr je jednotka tlaku pojmenovaná po Evangelistovi Torricellim, italském fyzikovi a matematikovi, který vynalezl barometr. Torr je definován jako 1/760 standardní atmosféry, což odpovídá přibližně 133,322 pascalům. Prakticky je torr téměř identický s milimetrem rtuťového sloupce (mmHg) - rozdíl je nepatrný a způsobený různými definicemi. Zatímco mmHg závisí na hustotě rtuti a gravitaci, torr je definován čistě jako podíl atmosféry. V praxi se často používají jako zaměnitelné jednotky. Torr se používá především ve vědě a technice, zejména při práci s vakuem a nízkými tlaky.</p>
+                    </div>
+                    <div class="encyclopedia-section">
+                        <h4>Historie a použití</h4>
+                        <p>Jednotka torr byla pojmenována v roce 1913 na počest Evangelisty Torricelliho (1608-1647), který v roce 1643 demonstroval existenci atmosférického tlaku pomocí rtuťového barometru. Torr byl zaveden jako přesnější definice než mmHg, která závisela na fyzikálních vlastnostech rtuti. Definice torr je 1/760 standardní atmosféry, což odpovídá výšce rtuťového sloupce za standardních podmínek. Dnes se torr široce používá ve vakuové technice - například vysoké vakuum je typicky 10⁻³ až 10⁻⁹ torr. V chemii se používá pro tlak par a v laboratorní praxi pro kalibraci vakuových pump. V polovodičovém průmyslu se torr používá pro specifikaci tlaku v procesních komorách. Ačkoli SI doporučuje používat pascal, torr zůstává populární v technické literatuře a na vakuových zařízeních.</p>
+                    </div>
+                    <div class="encyclopedia-meta">
+                        <div class="encyclopedia-meta-item"><strong>Značka:</strong> Torr</div>
+                        <div class="encyclopedia-meta-item"><strong>Soustava:</strong> Metrická (mimo SI)</div>
+                        <div class="encyclopedia-meta-item"><strong>Přepočet:</strong> 1 Torr = 133,322 Pa; 1 Torr ≈ 1 mmHg</div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 Konvertor.cz | <a href="/">Domů</a> | <a href="/encyklopedie.html">Encyklopedie</a></p>
+            <p style="margin-top:8px;font-size:0.85em">Přesný převod měřicích jednotek online</p>
+        </div>
+    </div>
+
+    <!-- Theme toggle script -->
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const root = document.documentElement;
+
+        // Load saved theme (same key as main page for sync)
+        const savedTheme = localStorage.getItem('konvertor_theme') || 'light';
+        root.setAttribute('data-theme', savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = root.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            root.setAttribute('data-theme', newTheme);
+            localStorage.setItem('konvertor_theme', newTheme);
+        });
+    </script>
+
+    <!-- AdSense initialization with placeholder hiding -->
+    <script>
+        // Načíst pouze viditelný slot (desktop/mobil)
+        (function () {
+            const box = document.getElementById('ad-encyclopedia-top');
+            if (!box) return;
+
+            // Zjisti, který slot je viditelný
+            const desktopAd = box.querySelector('.ad-desktop');
+            const mobileAd = box.querySelector('.ad-mobile');
+            const isDesktop = window.innerWidth >= 769;
+
+            // Nastav display pro správný slot a "pushni" ho
+            if (isDesktop && desktopAd) {
+                desktopAd.style.display = 'inline-block';
+                if (mobileAd) mobileAd.style.display = 'none';
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            } else if (!isDesktop && mobileAd) {
+                mobileAd.style.display = 'block';
+                if (desktopAd) desktopAd.style.display = 'none';
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }
+
+            // Skryj placeholder, jakmile AdSense něco vykreslí
+            const obs = new MutationObserver(() => {
+                if (box.querySelector('ins.adsbygoogle iframe')) {
+                    box.classList.add('loaded');
+                    obs.disconnect();
+                }
+            });
+            obs.observe(box, { childList: true, subtree: true });
+        })();
+    </script>
+
+</body>
+</html>

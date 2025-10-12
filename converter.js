@@ -3608,6 +3608,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Malá pauza pro jistotu, že DOM je připraven
     setTimeout(() => {
         window.converter = new UnitConverter();
-        window.calculator = new Calculator();
+        // Kalkulačka odstraněna z projektu
+        // window.calculator = new Calculator();
     }, 10);
 });
