@@ -8,24 +8,43 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="Lyra.png">
 
-    <meta name="keywords" content="převod jednotek, převodník, délka, hmotnost, objem, teplota, palce na centimetry, libry na kilogramy, hektar na ary, kWh na jouly, rychlost světla">
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content="převod jednotek, převodník, kalkulačka jednotek, palce na centimetry, libry na kilogramy, fahrenheit celsius, galony na litry, hektar na ary, kWh na jouly, mph na km/h, PSI na bar, AWG vodič průřez, ČNB kurzy měn, převod měn online, konverze jednotek česky, jednotky délky hmotnosti objemu, online kalkulátor převodů">
+    <meta name="author" content="Konvertor.cz">
+    <meta name="publisher" content="Konvertor.cz">
+    <meta name="geo.region" content="CZ">
+    <meta name="geo.placename" content="Czech Republic">
+    <meta name="language" content="Czech">
+    <meta name="rating" content="General">
+    <meta name="distribution" content="Global">
+
     <title>Převodník jednotek – palce na cm, libry na kg, l/100 km | Konvertor.cz</title>
-    <meta name="description" content="Rychlý převod všech jednotek: délka (palce↔cm), hmotnost (lb↔kg), objem (galony↔l), teplota (°C↔°F), rychlost, tlak, plocha, energie, čas, data, výkon, úhel, spotřeba paliva.">
+    <meta name="description" content="Rychlý převod všech jednotek: délka (palce↔cm), hmotnost (lb↔kg), objem (galony↔l), teplota (°C↔°F), rychlost, tlak, plocha, energie, čas, data, výkon, úhel, spotřeba paliva. 25 kategorií, 200+ jednotek, aktuální kurzy ČNB.">
     <link rel="canonical" href="https://konvertor.cz/">
     <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
 
-    <!-- Open Graph -->
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="cs_CZ">
+    <meta property="og:site_name" content="Konvertor.cz">
     <meta property="og:title" content="Převodník jednotek | Konvertor.cz">
-    <meta property="og:description" content="Okamžitý převod: palce na cm, libry na kilogramy, galony na litry a víc.">
+    <meta property="og:description" content="Okamžitý převod: palce na cm, libry na kilogramy, galony na litry a víc. 25 kategorií převodů, aktuální měnové kurzy ČNB.">
     <meta property="og:url" content="https://konvertor.cz/">
     <meta property="og:image" content="https://konvertor.cz/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Konvertor.cz - Online převodník jednotek v češtině">
+    <meta property="article:published_time" content="2024-01-01T00:00:00+01:00">
+    <meta property="article:modified_time" content="2025-11-29T00:00:00+01:00">
 
-    <!-- Twitter -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Převodník jednotek | Konvertor.cz">
-    <meta name="twitter:description" content="Okamžitý převod: palce na cm, libry na kilogramy, galony na litry a víc.">
+    <meta name="twitter:description" content="Okamžitý převod: palce na cm, libry na kilogramy, galony na litry a víc. 25 kategorií převodů.">
     <meta name="twitter:image" content="https://konvertor.cz/og-image.png">
+    <meta name="twitter:image:alt" content="Konvertor.cz - Online převodník jednotek">
+    <meta name="twitter:creator" content="@konvertorcz">
+    <meta name="twitter:site" content="@konvertorcz">
     
     <!-- Google Consent Mode v2 – defaults (must be FIRST in <head>) -->
     <script>
@@ -1273,18 +1292,144 @@
     }
     </script>
 
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Jak převést palce na centimetry?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pro převod palců na centimetry vynásobte hodnotu v palcích číslem 2,54. Například 10 palců = 25,4 cm. Konvertor.cz tento převod provede automaticky."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Jak převést libry na kilogramy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pro převod liber na kilogramy vynásobte hodnotu v librách číslem 0,453592. Například 100 liber = 45,36 kg. Náš převodník vše vypočítá okamžitě."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Jak převést Fahrenheity na Celsia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vzorec pro převod °F na °C: (°F - 32) × 5/9. Například 100°F = 37,8°C. Konvertor.cz podporuje i další teplotní jednotky jako Kelvin."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kolik kategorií převodů Konvertor.cz nabízí?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Konvertor.cz pokrývá 25 kategorií včetně délky, hmotnosti, objemu, teploty, rychlosti, tlaku, plochy, energie, času, dat, výkonu, úhlu, frekvence, síly, elektrických veličin, spotřeby paliva, měn, průřezu vodičů, průtoku, krouticího momentu, kuchyňských měr a chemických koncentrací."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Jsou kurzy měn na Konvertor.cz aktuální?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ano, měnové kurzy jsou načítány přímo z České národní banky (ČNB) a aktualizovány denně. Podporujeme 33 světových měn včetně EUR, USD, GBP a dalších."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- HowTo Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Jak používat Konvertor.cz",
+      "description": "Návod na rychlý převod jednotek pomocí online převodníku Konvertor.cz",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Vyberte kategorii",
+          "text": "Klikněte na jednu z 25 kategorií převodů (Délka, Hmotnost, Objem, Teplota, atd.)",
+          "position": 1
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Zadejte hodnotu",
+          "text": "Do pole 'Hodnota' zadejte číslo, které chcete převést",
+          "position": 2
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Zvolte vstupní jednotku",
+          "text": "Z rozbalovacího menu vyberte jednotku, ze které chcete převádět (např. palce, libry, °F)",
+          "position": 3
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Zvolte výstupní jednotku",
+          "text": "Z druhého rozbalovacího menu vyberte cílovou jednotku (např. cm, kg, °C)",
+          "position": 4
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Zkopírujte výsledek",
+          "text": "Výsledek se zobrazí automaticky. Klikněte na ikonu 📋 pro zkopírování do schránky",
+          "position": 5
+        }
+      ]
+    }
+    </script>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Domů",
+          "item": "https://konvertor.cz/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Encyklopedie jednotek",
+          "item": "https://konvertor.cz/encyklopedie.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "O projektu",
+          "item": "https://konvertor.cz/about.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Kontakt",
+          "item": "https://konvertor.cz/contact.html"
+        }
+      ]
+    }
+    </script>
+
 </head>
 <body>
     <div class="container">
         <div class="header">
             <div class="header-left">
-                <img src="Lyra.png?v=20250921" alt="Lyra Logo" class="site-logo">
+                <img src="Lyra.png?v=20250921" alt="Konvertor.cz logo - Online převodník jednotek v češtině" class="site-logo">
                 <div class="header-text">
                     <h1>Konvertor.cz</h1>
                     <p>Rychlý převod jednotek</p>
                 </div>
             </div>
-            <div class="theme-toggle" id="theme-toggle" title="Přepnout tmavý/světlý režim">
+            <div class="theme-toggle" id="theme-toggle" title="Přepnout tmavý/světlý režim" aria-label="Přepnout mezi světlým a tmavým režimem">
                 <svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="white">
                     <path class="sun-icon" d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" style="display:none;"/>
                     <path class="moon-icon" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/>

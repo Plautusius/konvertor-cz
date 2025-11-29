@@ -1,4 +1,43 @@
+# Konvertor.cz - Robots.txt
+# Poslední aktualizace: 2025-11-29
+
+# Obecná pravidla pro všechny crawlery
 User-agent: *
 Allow: /
+Crawl-delay: 1
 
+# AI Search Crawlers - explicitně povoleno
+# ChatGPT (OpenAI)
+User-agent: GPTBot
+Allow: /
+
+# Claude (Anthropic)
+User-agent: Claude-Web
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Google AI (Bard/Gemini)
+User-agent: Google-Extended
+Allow: /
+
+# Common Crawl (AI training data)
+User-agent: CCBot
+Allow: /
+
+# Bing AI
+User-agent: Bingbot
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+# Yandex
+User-agent: YandexBot
+Allow: /
+
+# Sitemap
 Sitemap: https://konvertor.cz/sitemap.xml
