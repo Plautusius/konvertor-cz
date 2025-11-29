@@ -1400,20 +1400,7 @@
 
               <div class="ad-container" id="ad-1">
                 <div class="ad-placeholder">Načítám reklamu…</div>
-
-                <!-- Desktop varianta (728x90) -->
-                <ins class="adsbygoogle ad-desktop"
-                     style="display:none;width:728px;height:90px"
-                     data-ad-client="ca-pub-4014521280729531"
-                     data-ad-slot="8858744510"></ins>
-
-                <!-- Mobilní varianta (responzivní) -->
-                <ins class="adsbygoogle ad-mobile"
-                     style="display:none;"
-                     data-ad-client="ca-pub-4014521280729531"
-                     data-ad-slot="8858744510"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+                <!-- AdSense element bude vložen dynamicky pomocí JavaScriptu -->
               </div>
 
                 <!--
@@ -1483,37 +1470,47 @@
 
     <script src="converter.js?v=20250921" defer></script>
 
-    <!-- AdSense placeholder skrýt po načtení + načítání pouze viditelného slotu -->
+    <!-- AdSense dynamické načítání podle velikosti obrazovky -->
     <script>
-        // Načíst pouze viditelný slot (desktop/mobil)
+        // Dynamicky vytvoř správný AdSense element
         (function () {
-            const box = document.getElementById('ad-1');
-            if (!box) return;
+            const container = document.getElementById('ad-1');
+            if (!container) return;
 
-            // Zjisti, který slot je viditelný
-            const desktopAd = box.querySelector('.ad-desktop');
-            const mobileAd = box.querySelector('.ad-mobile');
             const isDesktop = window.innerWidth >= 769;
 
-            // Nastav display pro správný slot a "pushni" ho
-            if (isDesktop && desktopAd) {
-                desktopAd.style.display = 'inline-block';
-                mobileAd.style.display = 'none';
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            } else if (!isDesktop && mobileAd) {
-                mobileAd.style.display = 'block';
-                desktopAd.style.display = 'none';
-                (adsbygoogle = window.adsbygoogle || []).push({});
+            // Vytvoř nový <ins> element
+            const adElement = document.createElement('ins');
+            adElement.className = 'adsbygoogle';
+            adElement.setAttribute('data-ad-client', 'ca-pub-4014521280729531');
+            adElement.setAttribute('data-ad-slot', '8858744510');
+
+            if (isDesktop) {
+                // Desktop: fixní formát 728x90
+                adElement.style.display = 'inline-block';
+                adElement.style.width = '728px';
+                adElement.style.height = '90px';
+            } else {
+                // Mobile: responzivní formát
+                adElement.style.display = 'block';
+                adElement.setAttribute('data-ad-format', 'auto');
+                adElement.setAttribute('data-full-width-responsive', 'true');
             }
 
-            // Skryj placeholder, jakmile AdSense něco vykreslí
-            const obs = new MutationObserver(() => {
-                if (box.querySelector('ins.adsbygoogle iframe')) {
-                    box.classList.add('loaded');
-                    obs.disconnect();
+            // Vlož <ins> do containeru
+            container.appendChild(adElement);
+
+            // Načti reklamu
+            (adsbygoogle = window.adsbygoogle || []).push({});
+
+            // Skryj placeholder po načtení
+            const observer = new MutationObserver(() => {
+                if (container.querySelector('ins.adsbygoogle iframe')) {
+                    container.classList.add('loaded');
+                    observer.disconnect();
                 }
             });
-            obs.observe(box, { childList: true, subtree: true });
+            observer.observe(container, { childList: true, subtree: true });
         })();
     </script>
 
